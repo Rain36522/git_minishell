@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   cwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 10:22:50 by pudry            ###   ########.fr       */
+/*   Created: 2023/11/13 10:18:21 by pudry             #+#    #+#             */
+/*   Updated: 2023/11/13 10:23:12 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Includes/minishell.h"
 
-
-int	main(void)
+char	*cwd(void)
 {
-	int		i = 0;
-	char	*s;
+	char	str[1024];
+	char	*ptr;
 
-	while (i ++ < 5)
-	{
-		ft_printf("minishell@pudry : ");
-		s = get_next_line(1);
-		ft_printf("line : %s\n", s);
-	}
+	ptr = (str, 1024);
+	if (!ptr)
+		return (ft_error(2));
+	return (str);
 }
