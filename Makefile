@@ -6,13 +6,13 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/13 18:35:45 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/13 19:09:31 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -lreadline
 LIBFTPRINTF = ft_printf/libftprintf.a
 
 BLUE = \\033[1;34m
