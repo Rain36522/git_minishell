@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:32:55 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/13 12:47:02 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/13 13:35:35 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,3 @@ int	check_quotes(char *str)
 	return (0);
 }
 
-/*int		main(int argc, char **argv)
-{
-	(void) argc;
-	printf ("%d\n", check_quotes("lacaretta"della"""));
-	return (0);
-}*/

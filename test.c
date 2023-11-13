@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 10:49:05 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 13:23:43 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ int	main(int argc, char ** argv, char **env)
 	int		i = 0;
 	char	*s;
 
-	s = cwd();
-	ft_printf("%s\n", find_hostname(env));
-	ft_printf("%s\n", s);
+	while (i ++ < 5)
+	{
+		ft_putstr_fd(get_readline(1), 1);
+		ft_putstr_fd("\n--------\n", 1);
+	}
 }
