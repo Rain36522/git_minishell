@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:05:47 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 13:36:42 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 13:40:56 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_readline(int fd)
 	if (read(fd, buffer, 1) <= 0)
 		return (NULL);
 	ptr = ft_strdup(buffer);
-	while (ptr && !ft_strchr(ptr, '\n') && check_up_down_key(ptr))
+	while (ptr && !ft_strchr(ptr, '\n') && check_up_down_key(ptr) != 0)
 	{
 		i = read(fd, buffer, 1);
 		ft_printf("read : %s\n", buffer);
