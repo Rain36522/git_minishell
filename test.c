@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 16:49:26 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 18:29:46 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,23 @@
 
 int	main(int argc, char ** argv, char **env)
 {
-	int		i = 0;
-	char	*s;
-	char	**array;
+	int		i;
+	int		j;
+	char	*scmd;
+	char	**acmd;
 
-	while (i == 0)
+	j = 0;
+	while (1)
 	{
 		i ++;
-		s = get_readline(1);
-		ft_printf("salut");
-		sleep(2);
-		// if (check_up_down_key(s) != 0)
-		// 	ft_history();
-
-    	// Efface la ligne
-		ft_replace_line("pudry@pwd : ", "bonjour\n");
+		scmd = get_cmd(1);
+		if (!scmd)
+			return (0);
+		acmd = ft_split_quotes(scmd);
+		i = 0;
+		while (acmd[i] && j == 0)
+			j = ft_check_cmd(acmd[i]);
+		if (j != 0)
+			ft_error()
 	}
 }

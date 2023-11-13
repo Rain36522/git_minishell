@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_readline.c                                     :+:      :+:    :+:   */
+/*   get_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:05:47 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 14:43:17 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 18:22:32 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	disable_raw_mode(void)
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 }
 
-char	*get_readline(int fd)
+static char	*ft_readline(int fd)
 {
 	char		*ptr;
 	char		buffer[2];
@@ -57,4 +57,28 @@ char	*get_readline(int fd)
 	if (!ptr)
 		return (NULL);
 	return (ptr);
+}
+
+char	*get_cmd(int fd)
+{
+	char	*ptr;
+	char	*ptr2;
+	char	*scmd;
+	int		i;
+
+	scmd = ft_readline(fd);
+	i = ft_quotes(ptr, 0);
+	while (i != 0 && scmd)
+	{
+		ft_printf("=>");
+		ptr = scmd;
+		ptr2 = ft_readline(fd);
+		i = ft_quotes(ptr2, i);
+		scmd = ft_strjoin(ptr, ptr2);
+		free(ptr);
+		free(ptr2);
+	}
+	if (!scmd)
+		return (NULL);
+	return (scmd);
 }
