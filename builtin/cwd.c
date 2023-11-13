@@ -6,11 +6,11 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:18:21 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 10:23:12 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 10:55:07 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/minishell.h"
+#include "../Includes/minishell.h"
 
 char	*cwd(void)
 {
@@ -18,7 +18,7 @@ char	*cwd(void)
 	char	*ptr;
 
 	ptr = (str, 1024);
-	if (!ptr)
-		return (ft_error(2));
+	// if (!ptr)
+	// 	return (ft_error(2));
 	return (str);
 }

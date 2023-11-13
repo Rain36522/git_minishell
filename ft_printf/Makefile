@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 09:10:43 by pudry             #+#    #+#              #
-#    Updated: 2023/10/23 17:39:45 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/13 12:00:47 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ all : gen_obj $(NAME)
 
 clean :
 	rm -f $(OBJ)
+	make clean -C libft/
 
 fclean : clean
 	rm -f $(NAME)

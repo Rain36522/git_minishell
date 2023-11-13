@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/13 10:52:33 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/13 12:39:18 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,20 +23,24 @@ RED = \\033[1;31m
 GREEN = \\033[1;32m
 BRWN = \\033[0; 33m
 
+SRC_BUILT = builtin/cwd.c builtin/username.c
 SRC_UTILS = test.c
-SRC_BUILT = builtin/cwd.c builtin/find_hostname.c
 
 
-OBJ = $(SRC_UTILS:.c=.o) $(SRC_BUILT:.c=.o)
+OBJ_UTILS = $(SRC_UTILS:.c=.o)
+OBJ_BUILT = $(SRC_BUILT:.c=.o)
 
-all : header gen_obj
+all : header $(OBJ_UTILS) $(OBJ_BUILT)
 	@make -C ft_printf/
 	@make -C gnl/
-	@$(CC) $(FLAGS) $(OBJ) $(LIBFTPRINTF) $(GNL) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BUILT) $(LIBFTPRINTF) $(GNL) -o $(NAME)
 	./$(NAME)
 
+%.o%.c :
+	@$(CC) $(CFLAGS) -c -o $@ $^
+
 clean :
-	@rm -f $(OBJ)
+	@rm -f $(OBJ_UTILS) $(OBJ_BUILT)
 	@make clean -C gnl/
 	@make clean -C ft_printf/
 
@@ -47,8 +51,7 @@ fclean : clean
 
 re : fclean all
 
-gen_obj :
-	@$(CC) $(CFLAGS) -c $(SRC)
+
 
 push : fclean
 	git add *

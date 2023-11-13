@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_hostname.c                                    :+:      :+:    :+:   */
+/*   username.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:31:25 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/13 10:49:18 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 10:54:27 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include "libft/libft.h"
-#include "ft_printf/libft/libft.h"
-#include "gnl/get_next_line.h"
-#include <stdio.h>
-#include <readline/readline.h>
+#include "../Includes/minishell.h"
 
 //	1er error: login havn't been found
 //	2eme error: failed allocation with malloc
