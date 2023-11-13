@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/13 10:51:37 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/13 10:52:33 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ re : fclean all
 gen_obj :
 	@$(CC) $(CFLAGS) -c $(SRC)
 
-push :
+push : fclean
 	git add *
 	git commit -m "Auto push"
 	git push
