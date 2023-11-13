@@ -1,44 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_quotes.c                                     :+:      :+:    :+:   */
+/*   check_up_down_key.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 11:32:55 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/13 12:47:02 by cduffaut         ###   ########.fr       */
+/*   Created: 2023/11/13 12:48:15 by cduffaut          #+#    #+#             */
+/*   Updated: 2023/11/13 12:59:16 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "Includes/minishell.h"
 
-int	check_quotes(char *str)
+int	find_str(char *str, char *to_find)
 {
 	int		i;
-	int		i_double;
-	int		i_single;
 
-	i_double = 0;
-	i_single = 0;
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == 34)
-			i_double++;
-		else if (str[i] == 39)
-			i_single++;
+		if (str[i] == to_find[0])
+		{
+			if (strncmp(str + i, to_find, ft_strlen(to_find)) == 0)
+				return (1);
+		}
 		i++;
 	}
-	if ((i_double % 2) != 0)
-		return (1);
-	else if ((i_single % 2) != 0)
-		return (1);
 	return (0);
 }
 
-/*int		main(int argc, char **argv)
+int	check_up_down_key(char *str)
 {
-	(void) argc;
-	printf ("%d\n", check_quotes("lacaretta"della"""));
-	return (0);
-}*/
+	if (find_str(str, "\e[A") == 1)
+	   return (1);
+	else if (find_str(str, "\e[B") == 1)
+		return (1);
+	return (0);	
+}
