@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 09:44:13 by pudry            ###   ########.fr       */
+/*   Created: 2023/10/13 11:28:05 by pudry             #+#    #+#             */
+/*   Updated: 2023/10/13 11:28:08 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include "ft_printf/libft/libft.h"
-#include "gnl/get_next_line.h"
-#include <stdio.h>
-#include <readline/readline.h>
+#include "libft.h"
 
-int	main(void)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int		i = 0;
-	char	*s;
+	t_list	*ptr;
 
-	while (i ++ < 5)
+	ptr = lst;
+	while (ptr)
 	{
-		ft_printf("minishell@pudry : ");
-		s = get_next_line(1);
-		ft_printf("line : %s\n", s);
+		f(ptr->content);
+		ptr = ptr->next;
 	}
 }

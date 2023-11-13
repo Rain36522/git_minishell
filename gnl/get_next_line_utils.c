@@ -6,11 +6,12 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 14:22:12 by pudry             #+#    #+#             */
-/*   Updated: 2023/10/23 09:13:45 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 09:37:09 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "../ft_printf/ft_printf.h"
 
 char	*ft_strcat(char *s1, char *s2, int is2)
 {
@@ -50,9 +51,10 @@ char	*ft_get_ptr_line(char *ptr, char *file, int fd)
 		ptr = (char *) ft_calloc(1, sizeof(char));
 		ptr[0] = '\0';
 	}
-	while (i >= BUFFER_SIZE && !ft_strchr(file))
+	while (i >= BUFFER_SIZE && !ft_strchr_endl(file))
 	{
 		i = read(fd, file, BUFFER_SIZE);
+		ft_putstr_fd("read\n", 0);
 		if (i > 0)
 			ptr = ft_strcat(ptr, file, i);
 		if (!ptr)
@@ -62,6 +64,8 @@ char	*ft_get_ptr_line(char *ptr, char *file, int fd)
 			free(ptr);
 			return (NULL);
 		}
+		if (ft_strncmp(ptr, "^[[A", 4))
+			return(ptr);
 	}
 	return (ptr);
 }

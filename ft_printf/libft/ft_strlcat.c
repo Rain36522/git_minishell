@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 09:44:13 by pudry            ###   ########.fr       */
+/*   Created: 2023/10/03 18:33:07 by paul              #+#    #+#             */
+/*   Updated: 2023/10/12 12:40:24 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include "ft_printf/libft/libft.h"
-#include "gnl/get_next_line.h"
-#include <stdio.h>
-#include <readline/readline.h>
+#include "libft.h"
 
-int	main(void)
+unsigned int	ft_strlcat(char *dest, const char *src, size_t n)
 {
-	int		i = 0;
-	char	*s;
+	size_t	i;
 
-	while (i ++ < 5)
+	i = 0;
+	if ((!src && n == 0) || (!dest && n == 0))
+		return (0);
+	while (*dest != '\0' && i < n)
 	{
-		ft_printf("minishell@pudry : ");
-		s = get_next_line(1);
-		ft_printf("line : %s\n", s);
+		dest ++;
+		i ++;
 	}
+	while (*src != '\0' && i + 1 < n)
+	{
+		*dest ++ = *src ++;
+		i ++;
+	}	
+	if (i < n)
+		*dest = '\0';
+	while (*src ++ != '\0')
+		i ++;
+	return (i);
 }

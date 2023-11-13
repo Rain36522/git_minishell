@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 09:44:13 by pudry            ###   ########.fr       */
+/*   Created: 2023/10/09 15:05:36 by pudry             #+#    #+#             */
+/*   Updated: 2023/10/11 15:31:48 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include "ft_printf/libft/libft.h"
-#include "gnl/get_next_line.h"
-#include <stdio.h>
-#include <readline/readline.h>
+#include "libft.h"
 
-int	main(void)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		i = 0;
-	char	*s;
+	int		isize;
+	char	*mem_str;
+	char	*str;
 
-	while (i ++ < 5)
-	{
-		ft_printf("minishell@pudry : ");
-		s = get_next_line(1);
-		ft_printf("line : %s\n", s);
-	}
+	isize = ft_strlen(s1) + ft_strlen(s2);
+	str = (char *) malloc(isize + 1);
+	if (!str)
+		return (NULL);
+	str[isize] = '\0';
+	mem_str = str;
+	ft_strlcpy(str, s1, isize + 1);
+	ft_strlcat(str, s2, isize + 1);
+	return (mem_str);
 }

@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 09:44:13 by pudry            ###   ########.fr       */
+/*   Created: 2023/10/12 17:01:57 by paul              #+#    #+#             */
+/*   Updated: 2023/10/13 09:21:04 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include "ft_printf/libft/libft.h"
-#include "gnl/get_next_line.h"
-#include <stdio.h>
-#include <readline/readline.h>
+#include "libft.h"
 
-int	main(void)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	int		i = 0;
-	char	*s;
-
-	while (i ++ < 5)
-	{
-		ft_printf("minishell@pudry : ");
-		s = get_next_line(1);
-		ft_printf("line : %s\n", s);
-	}
+	del(lst->content);
+	free(lst);
 }

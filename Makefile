@@ -6,14 +6,16 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/12 17:29:04 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/13 09:44:02 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+NAME = minishell
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-LIBFT = libft/libft.a
+LIBFTPRINTF = ft_printf/libftprintf.a
+GNL = gnl/gnl.a
+
 BLUE = \\033[1;34m
 WHITE = \\033[0;37m
 YELLOW = \\033[0;33m
@@ -26,19 +28,20 @@ SRC = test.c
 OBJ = $(SRC:.c=.o)
 
 all : header gen_obj
-	@make -C libft/
+	@make -C ft_printf/
 	@make -C gnl/
-	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ) $(LIBFTPRINTF) $(GNL) -o $(NAME)
+	./$(NAME)
 
 clean :
 	@rm -f $(OBJ)
 	@make clean -C gnl/
-	@make clean -C libft/
+	@make clean -C ft_printf/
 
 fclean : clean
 	@rm -f $(NAME)
 	@make fclean -C gnl/
-	@make fclean -C libft/
+	@make fclean -C ft_printf/
 
 re : fclean all
 

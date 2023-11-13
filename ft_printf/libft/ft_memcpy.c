@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 09:44:13 by pudry            ###   ########.fr       */
+/*   Created: 2023/10/03 14:25:16 by paul              #+#    #+#             */
+/*   Updated: 2023/10/13 14:17:06 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include "ft_printf/libft/libft.h"
-#include "gnl/get_next_line.h"
-#include <stdio.h>
-#include <readline/readline.h>
+#include "libft.h"
 
-int	main(void)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int		i = 0;
-	char	*s;
+	char	*mem_dest;
 
-	while (i ++ < 5)
+	if (!dest && !src)
+		return (dest);
+	mem_dest = dest;
+	while (n > 0)
 	{
-		ft_printf("minishell@pudry : ");
-		s = get_next_line(1);
-		ft_printf("line : %s\n", s);
+		n --;
+		*(unsigned char *)dest = *(unsigned char *)src;
+		dest ++;
+		src ++;
 	}
+	return (mem_dest);
 }

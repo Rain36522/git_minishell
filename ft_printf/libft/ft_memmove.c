@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 09:44:13 by pudry            ###   ########.fr       */
+/*   Created: 2023/10/03 14:25:16 by paul              #+#    #+#             */
+/*   Updated: 2023/10/12 11:32:11 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include "ft_printf/libft/libft.h"
-#include "gnl/get_next_line.h"
-#include <stdio.h>
-#include <readline/readline.h>
+#include "libft.h"
 
-int	main(void)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	int		i = 0;
+	char	*d;
 	char	*s;
+	size_t	i;
 
-	while (i ++ < 5)
+	if (!dst && !src)
+		return (dst);
+	d = (char *)dst;
+	s = (char *)src;
+	i = 0;
+	if (d > s)
 	{
-		ft_printf("minishell@pudry : ");
-		s = get_next_line(1);
-		ft_printf("line : %s\n", s);
+		while (n -- > 0)
+			d[n] = s[n];
 	}
+	else
+	{
+		while (i < n)
+		{
+			d[i] = s[i];
+			i ++;
+		}
+	}
+	return (d);
 }

@@ -6,13 +6,13 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 14:01:18 by pudry             #+#    #+#             */
-/*   Updated: 2023/10/23 09:08:53 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 08:57:51 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strchr(char *ptr)
+int	ft_strchr_endl(char *ptr)
 {
 	while (*ptr)
 	{
@@ -77,7 +77,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_give_line(ptr);
 	ptr = ft_remove_line(ptr);
-	if (!ft_strchr(line))
+	if (!ft_strchr_endl(line))
 		free(ptr);
 	return (line);
 }
