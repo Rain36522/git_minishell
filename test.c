@@ -6,12 +6,11 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 13:23:43 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 13:46:57 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Includes/minishell.h"
-
 
 int	main(int argc, char ** argv, char **env)
 {
