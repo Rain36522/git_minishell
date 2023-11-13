@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 14:22:12 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 09:37:09 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 09:46:07 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*ft_get_ptr_line(char *ptr, char *file, int fd)
 	while (i >= BUFFER_SIZE && !ft_strchr_endl(file))
 	{
 		i = read(fd, file, BUFFER_SIZE);
-		ft_putstr_fd("read\n", 0);
 		if (i > 0)
 			ptr = ft_strcat(ptr, file, i);
 		if (!ptr)
@@ -64,8 +63,6 @@ char	*ft_get_ptr_line(char *ptr, char *file, int fd)
 			free(ptr);
 			return (NULL);
 		}
-		if (ft_strncmp(ptr, "^[[A", 4))
-			return(ptr);
 	}
 	return (ptr);
 }
