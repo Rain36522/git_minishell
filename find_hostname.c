@@ -6,16 +6,11 @@
 /*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:31:25 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/13 10:33:17 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:10:42 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include "libft/libft.h"
-#include "ft_printf/libft/libft.h"
-#include "gnl/get_next_line.h"
-#include <stdio.h>
-#include <readline/readline.h>
+#include "Includes/minishell.h"
 
 //	1er error: login havn't been found
 //	2eme error: failed allocation with malloc
