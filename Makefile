@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/13 16:47:33 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/13 18:35:45 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ GREEN = \\033[1;32m
 BRWN = \\033[0; 33m
 
 SRC_BUILT = builtin/cwd.c builtin/username.c
-SRC_UTILS = test.c utils/get_readline.c utils/check_up_down_key.c utils/ft_utils.c
+SRC_UTILS = test.c utils/get_cmd.c utils/check_up_down_key.c utils/ft_utils.c utils/ft_error.c
 
 
 OBJ_UTILS = $(SRC_UTILS:.c=.o)

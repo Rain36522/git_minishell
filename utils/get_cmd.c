@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:05:47 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 18:22:32 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 18:53:47 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,32 @@ static void	disable_raw_mode(void)
 	tcgetattr(STDIN_FILENO, &raw);
 	raw.c_lflag |= (ECHO | ICANON);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+}
+
+/*
+ *	Check if single or double quotes aren't close
+ *	return != 0 if quotes aren't closed
+ *	2 = double
+ *	1 = simple
+ */
+static int	ft_quotes(char *str, int istatus)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\"' && istatus == 2)
+			istatus = 0;
+		else if (str[i] == '\"' && istatus == 0)
+			istatus = 2;
+		else if (str[i] == '\'' && istatus == 1)
+			istatus = 0;
+		else if (str[i] == '\'' && istatus == 0)
+			istatus = 1;
+		i++;
+	}
+	return (istatus);
 }
 
 static char	*ft_readline(int fd)
@@ -67,10 +93,10 @@ char	*get_cmd(int fd)
 	int		i;
 
 	scmd = ft_readline(fd);
-	i = ft_quotes(ptr, 0);
-	while (i != 0 && scmd)
+	i = ft_quotes(scmd, 0);
+	while (i != 0 && scmd && check_up_down_key(scmd) == 0)
 	{
-		ft_printf("=>");
+		ft_printf("> ");
 		ptr = scmd;
 		ptr2 = ft_readline(fd);
 		i = ft_quotes(ptr2, i);

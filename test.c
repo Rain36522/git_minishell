@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 18:29:46 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/13 18:52:08 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ int	main(int argc, char ** argv, char **env)
 		scmd = get_cmd(1);
 		if (!scmd)
 			return (0);
-		acmd = ft_split_quotes(scmd);
-		i = 0;
-		while (acmd[i] && j == 0)
-			j = ft_check_cmd(acmd[i]);
-		if (j != 0)
-			ft_error()
+		// acmd = ft_split_quotes(scmd);
+		// i = 0;
+		// while (acmd[i] && j == 0)
+		// 	j = ft_check_cmd(acmd[i]);
+		// if (j != 0)
+		// 	return(ft_error_int(j));
+
 	}
 }
