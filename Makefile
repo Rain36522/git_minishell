@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/13 09:44:02 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/13 10:52:33 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,11 @@ RED = \\033[1;31m
 GREEN = \\033[1;32m
 BRWN = \\033[0; 33m
 
-SRC = test.c
+SRC_UTILS = test.c
+SRC_BUILT = builtin/cwd.c builtin/find_hostname.c
 
-OBJ = $(SRC:.c=.o)
+
+OBJ = $(SRC_UTILS:.c=.o) $(SRC_BUILT:.c=.o)
 
 all : header gen_obj
 	@make -C ft_printf/
@@ -47,6 +49,11 @@ re : fclean all
 
 gen_obj :
 	@$(CC) $(CFLAGS) -c $(SRC)
+
+push : fclean
+	git add *
+	git commit -m "Auto push"
+	git push
 
 header :
 	@echo "${GREEN}"
