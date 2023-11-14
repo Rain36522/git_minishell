@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/13 19:09:31 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/14 17:40:38 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ re : fclean all
 
 
 push : fclean
+	git add .
 	git add *
 	git commit -m "Auto push"
 	git push
