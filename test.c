@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 19:20:44 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/14 08:52:19 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int	main(int argc, char ** argv, char **env)
 		if (check_up_down_key(scmd) == 1)
 			ft_printf("\n");
 		if (check_up_down_key(scmd) != 0)
-			ft_printf("key pressed\n");
-		
+			ft_printf("key pressed\n");	
 		// acmd = ft_split_quotes(scmd);
 		// i = 0;
 		// while (acmd[i] && j == 0)
