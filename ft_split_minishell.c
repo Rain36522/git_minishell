@@ -109,7 +109,6 @@ int	dup_pip_dir(char **tab, const char *s, int i, char c)
 		str[j++] = s[i++];
 	str[j] = '\0';
 	*tab = str;
-	(*tab)++;
 	return (i);
 }
 // duplicate for double or single quotes
@@ -123,6 +122,7 @@ int	dup_quote(char **tab, const char *s, int i, char c)
 	str = malloc(sizeof(char) * len);
 	if (!str)
 		return (-1);
+	j = 0;
 	if (s[i] && s[i] == c)
 		str[j++] = s[i++];
 	while (s[i] && s[i] != c)
@@ -131,7 +131,6 @@ int	dup_quote(char **tab, const char *s, int i, char c)
 		str[j++] = s[i++];
 	str[j] = '\0';
 	*tab = str;
-	(*tab)++;
 	return (i);
 }
 int	dup_str(char **tab, const char *s, int i)
@@ -151,7 +150,6 @@ int	dup_str(char **tab, const char *s, int i)
 		str[j++] = s[i++];
 	str[j] = '\0';
 	*tab = str;
-	(*tab)++;
 	return (i);	
 }
 
@@ -182,12 +180,15 @@ char	**ft_split_minishell(char const *s)
 	}
 	return (first);
 }
-int	main(void)
+int	main(int arc, char **argv)
 {
-	char const 	s[] = "		ls -a | ouloulou >> zebi  ||| >>>> 	";
+	char  		*s;
 	char		c = ' ';
 	char		**tab = NULL;
-
+	
+	if (arc == 1)
+		return (0);
+	s = argv[1];
 	tab = ft_split_minishell(s);
 	int		i = 0;
 	while (tab[i])
