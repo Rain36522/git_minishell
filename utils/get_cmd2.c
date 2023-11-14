@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:09:46 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/14 17:35:24 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/14 18:28:16 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,14 @@ static t_incmd	*ft_add_end_lst(t_incmd *lst, char  *wrd)
 	lst_wrd = (t_incmd *) malloc(sizeof(t_incmd) * 1);
 	if (!lst_wrd)
 		return (ft_free_lst(lst));
+	lst_wrd->filename = (char *) malloc(sizeof(char) * 10);
+	if (lst_wrd->filename)
+		return (ft_free_lst(lst));
 	lst_wrd->next = NULL;
 	lst_wrd->wrd = wrd;
 	if (!lst)
 	{
-		lst_wrd->filename = "tmp_a.tmp";
+		lst_wrd->filename = "tmp_a.tmp\0";
 		lst = lst_wrd;
 		return (lst);
 	}
@@ -96,9 +99,12 @@ static int 	ft_cnt_new_cmd_size(char *scmd, t_incmd *lst)
 	while (ptr)
 	{
 		isize += ptr - scmd;
-		scmd = ptr;
-		while () 
+		scmd = ft_skip_word(ptr);
+		ptr = ft_dbl_redi_in(scmd);
+		if (!ptr)
+			isize += ft_strlen(scmd);
 	}
+	return (isize);
 }
 
 char	*ft_str_rplace_word(char *scmd, t_incmd *lst)
