@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/13 19:16:00 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/14 16:53:05 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ int		ft_error_int(int icode);
 char	*get_cmd(char *prompt);
 int		check_up_down_key(char *str);
 void	ft_replace_line(char *prompt, char *s2);
+int		find_str(char *str, char *to_find, int len);
+char	*ft_skip_space_quotes(char *str);
+char	**ft_lst_word(char *ptr, t_incmd *lst);
+t_incmd	*ft_lst_word(char *ptr, t_incmd *lst);
+char	*ft_dbl_redi_in(char *str);
 
-typedef struct s_history
+typedef struct s_incmd
 {
-	struct s_history	*next;
-	struct s_history	*before;
-	char	*cmd;
-}	t_history;
-
-typedef struct s_data
-{
-	struct  s_history	*hist_start;	
-}	t_data;
+	struct s_incmd	*next;
+	char	*wrd;
+	char	*filename;
+}	t_incmd;
 
 #endif

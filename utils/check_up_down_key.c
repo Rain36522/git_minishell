@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:48:15 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/13 14:37:49 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/14 11:37:58 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Recherche si to_find est present dans str
 // return (1) si present else return (0);
-static int	find_str(char *str, char *to_find, int len)
+int	find_str(char *str, char *to_find, int len)
 {
 	int		i;
 
