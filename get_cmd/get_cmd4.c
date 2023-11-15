@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 18:22:08 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/15 18:56:22 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,40 @@ char	*ft_name_file(char *str)
 	str[i + 1] ++;
 	return (str);
 }
-int	ft_create_file(char *filename)
+static int	ft_create_file(char *filename, char *wrd)
 {
+	int		fd;
+	char	*ptr;
+	int		isize;
+	char	*scmd;
+
+	fd = open(filename, O_CREAT | O_RDWR);
+	ft_printf("opening_file fd : %i\n", fd);
+	if (fd < 0)
+		return (fd);
+	ft_printf("file open\n");
+	isize = ft_strlen(wrd);
+	scmd = readline("$ > ");
+	while (ft_strncmp(scmd, wrd, isize) != 0)
+	{
+		ft_putstr_fd(scmd, fd);
+		ft_putstr_fd("\n", fd);
+		scmd = readline("$ > ");
+	}
+	return (close(fd));
 	
 }
 
 
 int	ft_write_file(t_incmd *lst)
 {
-	char *ptr;
+	int	i;
+
+	i = 0;
+	while (i >= 0 && lst)
+	{
+		i = ft_create_file(lst->filename, lst->wrd);
+		lst =lst->next;
+	}
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 18:21:05 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/15 18:37:23 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../ft_printf/libft/libft.h"
 # include <readline/readline.h>
 # include <termios.h>
+#include <fcntl.h>
 # include <signal.h>
 
 typedef struct s_incmd

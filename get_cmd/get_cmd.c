@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:05:47 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 18:20:18 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/15 18:52:09 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ char	*ft_dbl_redi_in(char *str)
 	quote = '0';
 	while (*str)
 	{
-		quote = ft_is_string(quote, *str);
-		if (str[1] == '<' && str[2] != '\0' && str[2] == '<' && quote == '0')
+		quote = ft_is_string(*str, quote);
+		if (str[0] == '<' && str[1] == '<' && str[2] == '<' && quote == '0')
 			str += 1;
-		else if (str[1] == '<' && str[2] != '\0' && str[2] != '<' && quote == '0')
+		else if (str[0] == '<' && str[1] == '<' && quote == '0')
 			return (str + 2);
 		str ++;
 	}
