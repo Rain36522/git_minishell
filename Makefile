@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/14 17:40:38 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/15 15:40:36 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,22 +23,24 @@ GREEN = \\033[1;32m
 BRWN = \\033[0; 33m
 
 SRC_BUILT = builtin/cwd.c builtin/username.c
-SRC_UTILS = test.c utils/get_cmd.c utils/check_up_down_key.c utils/ft_utils.c utils/ft_error.c
+SRC_UTILS = test.c utils/check_up_down_key.c utils/ft_utils.c utils/ft_error.c
+SRC_CMD = get_cmd/get_cmd.c get_cmd/get_cmd2.c get_cmd/get_cmd3.c get_cmd/get_cmd4.c
 
 
 OBJ_UTILS = $(SRC_UTILS:.c=.o)
 OBJ_BUILT = $(SRC_BUILT:.c=.o)
+OBJ_CMD = $(SRC_CMD:.c=.o)
 
-all : header $(OBJ_UTILS) $(OBJ_BUILT)
+all : header $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD)
 	@make -C ft_printf/
-	@$(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BUILT) $(LIBFTPRINTF) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(LIBFTPRINTF) -o $(NAME)
 	./$(NAME)
 
 %.o%.c :
 	$(CC) $(FLAGS) -c -o $@ $^
 
 clean :
-	@rm -f $(OBJ_UTILS) $(OBJ_BUILT)
+	@rm -f $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD)
 	@make clean -C ft_printf/
 
 fclean : clean
