@@ -12,6 +12,9 @@
 
 #include <stdio.h>
 
+/*
+	check number quotes number re even or odd
+*/
 int	check_quotes(char *str)
 {
 	int		i;
