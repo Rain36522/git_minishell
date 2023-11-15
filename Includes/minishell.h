@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 12:55:18 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/15 15:39:13 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*cwd(void);
 char	*find_hostname(char **env);
 char	*ft_error_str(int icode);
 int		ft_error_int(int icode);
+
+// This functions are for taking the input
 char	*get_cmd(char *prompt);
 int		check_up_down_key(char *str);
 void	ft_replace_line(char *prompt, char *s2);
@@ -41,5 +43,6 @@ char	ft_is_string(char  ptr, char quote);
 char	*ft_str_rplace_word(char *scmd, t_incmd *lst);
 t_incmd	*ft_free_lst(t_incmd *lst, char *scmd);
 int		ft_check_end_string(char ptr, char quote);
+char	*ft_name_file(char *str);
 
 #endif

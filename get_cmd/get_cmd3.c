@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 08:36:06 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 12:51:07 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/15 17:06:59 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_incmd	*ft_free_lst(t_incmd *lst, char *scmd)
 	return (NULL);
 }
 
+//The scmd -- is for this function : ft_str_rplace_word
 static char	*ft_skip_word(char *scmd)
 {
 	char	ptr;
@@ -42,6 +43,7 @@ static char	*ft_skip_word(char *scmd)
 		scmd ++;
 		ptr = ft_is_string(*scmd, ptr);
 	}
+	scmd --;
 	return (scmd);
 }
 
@@ -63,6 +65,7 @@ static int 	ft_cnt_new_cmd_size(char *scmd, t_incmd *lst)
 	{
 		isize += ptr - scmd;
 		scmd = ft_skip_word(ptr);
+		scmd ++;
 		ptr = ft_dbl_redi_in(scmd);
 		if (!ptr)
 			isize += ft_strlen(scmd);
@@ -83,7 +86,6 @@ static char	*ft_add_filename(char *ptr, char *filename)
 		ptr[i] = filename[i - 3];
 		i ++;
 	}
-	ft_printf("filename : %s\n", ptr);
 	ptr += i;
 	return (ptr);
 }
@@ -102,12 +104,10 @@ char	*ft_str_rplace_word(char *scmd, t_incmd *lst)
 	mem_ptr = ptr;
 	while (*scmd)
 	{
-		ft_printf("108 : %s\n", scmd);
-		if (*scmd == '<' && scmd[1] == '<')
+		if (*scmd == '<' && scmd[1] == '<' && scmd[2] != '<')
 		{
 			scmd += 2;
 			ptr = ft_add_filename(ptr, lst->filename);
-			ft_printf("ptr : %s\n", ptr);
 			lst = lst->next;
 			scmd = ft_skip_word(scmd);
 		}

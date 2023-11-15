@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:09:46 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 15:11:43 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/15 15:40:12 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,34 +37,6 @@ int	ft_check_end_string(char ptr, char quote)
 	return (0);
 }
 
-static char	*ft_name_file(char *str)
-{
-	char	*pid;
-	int		i;
-
-	pid  = ft_itoa(getpid());
-	if (!str)
-	{
-		pid  = ft_itoa(getpid());
-		str = ft_strjoin(pid, "_a.tmp");
-		free(pid);
-		return (NULL);
-	}
-	i = 0;
-	str = ft_strdup(str);
-	if (!str)
-		return (NULL);
-	while (str && str[i] && str[i] != '_')
-		i ++;
-	if (!str[i])
-	{
-		free(str);
-		return (NULL);
-	}
-	str[i + 1] ++;
-	return (str);
-}
-
 // This fonction save the word inside the list 
 // with the file name that will be given.
 static t_incmd	*ft_add_end_lst(t_incmd *lst, char  *wrd)
@@ -83,14 +55,13 @@ static t_incmd	*ft_add_end_lst(t_incmd *lst, char  *wrd)
 	lst_wrd->wrd = wrd;
 	if (!lst)
 	{
-		lst_wrd->filename = "tmp_a.tmp\0";
+		lst_wrd->filename = ft_name_file(NULL);
 		lst = lst_wrd;
 		return (lst);
 	}
 	while (lst->next)
 		lst = lst->next;
-	lst_wrd->filename = lst->filename;
-	//lst_wrd->filename[4] += 1;
+	lst_wrd->filename = ft_name_file(lst->filename);
 	lst->next = lst_wrd;
 	return (lst_start);
 }
