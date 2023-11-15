@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 15:40:53 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/15 18:22:08 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,14 @@ char	*ft_name_file(char *str)
 	}
 	str[i + 1] ++;
 	return (str);
+}
+int	ft_create_file(char *filename)
+{
+	
+}
+
+
+int	ft_write_file(t_incmd *lst)
+{
+	char *ptr;
 }

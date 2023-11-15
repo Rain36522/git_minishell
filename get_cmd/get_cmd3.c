@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 08:36:06 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 17:06:59 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/15 17:44:57 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,26 +94,27 @@ char	*ft_str_rplace_word(char *scmd, t_incmd *lst)
 {
 	int		isize;
 	char	*ptr;
-	char	*mem_ptr;
 
 	isize = ft_cnt_new_cmd_size(scmd, lst);
 	ptr = (char *) malloc(sizeof(char) * (isize + 1));
 	if (!ptr)
 		return (NULL);	
 	ptr[isize] = '\0';
-	mem_ptr = ptr;
 	while (*scmd)
 	{
-		if (*scmd == '<' && scmd[1] == '<' && scmd[2] != '<')
+		if (*scmd == '<' && scmd[1] == '<' && scmd[2]  && scmd [2] != '<')
 		{
-			scmd += 2;
 			ptr = ft_add_filename(ptr, lst->filename);
 			lst = lst->next;
-			scmd = ft_skip_word(scmd);
+			scmd = ft_skip_word(scmd + 2);
 		}
+		if (*scmd == '<' && scmd[1] == '<' && scmd[2]  && scmd [2] != '<')
+			ft_strjoin(ptr, "<<");
+		if (*scmd == '<' && scmd[1] == '<' && scmd[2]  && scmd [2] != '<')
+			scmd += 2;
 		*ptr = *scmd;
 		ptr ++;
 		scmd ++;
 	}
-	return (mem_ptr);
+	return (ptr - isize);
 }

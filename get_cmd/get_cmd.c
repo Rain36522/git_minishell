@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:05:47 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 17:01:54 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/15 18:20:18 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,17 @@
 */
 char	*ft_dbl_redi_in(char *str)
 {
+	char	quote;
+
+	quote = '0';
 	while (*str)
 	{
-		while (*str && *str != '\"' && *str != '\'' && *str != '<')
-			str ++;
-		if (*str == '\'')
-			while (*str && *str != '\'')
-				str ++;
-		else if (*str == '\"')
-			while (*str && *str != '\"')
-				str ++;
-		else if (str[1] == '<' && str[2] != '\0' && str[2] == '<')
-			str += 2;
-		else if (str[1] == '<' && str[2] != '\0' && str[2] != '<')
+		quote = ft_is_string(quote, *str);
+		if (str[1] == '<' && str[2] != '\0' && str[2] == '<' && quote == '0')
+			str += 1;
+		else if (str[1] == '<' && str[2] != '\0' && str[2] != '<' && quote == '0')
 			return (str + 2);
-		else
-			str ++;
+		str ++;
 	}
 	return (NULL);
 }
@@ -86,6 +81,8 @@ static char	*ft_redir_in_dbl(char *scmd)
 		ptr = ft_dbl_redi_in(ptr);
 	}
 	scmd = ft_str_rplace_word(scmd, lst);
+	if (scmd)
+		ft_write_file(lst);
 	return (scmd);
 }
 
@@ -95,12 +92,10 @@ char	*get_cmd(char *prompt)
 	int		i;
 
 	scmd = readline(prompt);
+	add_history(scmd);
 	ft_putstr_fd("READ\n", 1);
 	if (ft_dbl_redi_in(scmd))
-	{
-		ft_putstr_fd("redir\n", 1);
-		scmd = ft_redir_in_dbl(scmd);
-	}
+		return (ft_redir_in_dbl(scmd));
 	ft_putstr_fd("noredir\n", 1);
 	// else
 	// {
