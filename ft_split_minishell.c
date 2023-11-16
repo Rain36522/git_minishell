@@ -6,7 +6,7 @@
 /*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:31:26 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/16 09:54:55 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:38:18 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	**free_split(char **tab)
 	char  		*s;
 	char		**tab = NULL;
 	
-	s = "\'s\"a\'lut";
+	s = "<<<< a < << b < <c<<a<<<<<<<< <<<<<<< d";
 	tab = ft_split_minishell(s);
 	int		i = 0;
 	while (tab[i])
@@ -114,4 +114,4 @@ char	**free_split(char **tab)
 	free(tab[i]);
 	free(tab);
 	return (0);
-}*/
+}
