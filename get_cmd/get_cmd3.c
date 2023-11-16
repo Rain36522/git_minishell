@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 08:36:06 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 17:44:57 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/16 09:41:08 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static char	*ft_skip_word(char *scmd)
 		scmd ++;
 		ptr = ft_is_string(*scmd, ptr);
 	}
-	scmd --;
 	return (scmd);
 }
 
@@ -94,9 +93,13 @@ char	*ft_str_rplace_word(char *scmd, t_incmd *lst)
 {
 	int		isize;
 	char	*ptr;
+	char	*mem_scmd;
 
+	
 	isize = ft_cnt_new_cmd_size(scmd, lst);
+	ft_printf("isize : %i\n", isize);
 	ptr = (char *) malloc(sizeof(char) * (isize + 1));
+	mem_scmd = ptr;
 	if (!ptr)
 		return (NULL);	
 	ptr[isize] = '\0';
@@ -116,5 +119,6 @@ char	*ft_str_rplace_word(char *scmd, t_incmd *lst)
 		ptr ++;
 		scmd ++;
 	}
-	return (ptr - isize);
+	ft_printf("%s %i\n", mem_scmd, (int)(ptr - mem_scmd));
+	return (ptr);
 }

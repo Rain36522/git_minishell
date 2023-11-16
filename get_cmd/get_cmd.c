@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:05:47 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 18:52:09 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/16 09:04:10 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,12 @@ static char	*ft_redir_in_dbl(char *scmd)
 		}
 		ptr = ft_dbl_redi_in(ptr);
 	}
+	ptr = scmd;
 	scmd = ft_str_rplace_word(scmd, lst);
+	free(ptr);
 	if (scmd)
-		ft_write_file(lst);
+		if (ft_write_file(lst) < 0)
+			return (NULL);
 	return (scmd);
 }
 
@@ -93,10 +96,8 @@ char	*get_cmd(char *prompt)
 
 	scmd = readline(prompt);
 	add_history(scmd);
-	ft_putstr_fd("READ\n", 1);
 	if (ft_dbl_redi_in(scmd))
 		return (ft_redir_in_dbl(scmd));
-	ft_putstr_fd("noredir\n", 1);
 	// else
 	// {
 	// 	while (i != 0 && scmd)

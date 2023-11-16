@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:22:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 18:31:18 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/16 09:10:48 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 int	main(void)
 {
 	int	fd;
-	char *txt = "Bonjour tous le monde\nca va?";
+	char *txt = "Bonjour tous le mondeca va?";
 
-	fd = open("test.txt", O_CREAT | O_RDWR);
+	fd = open("a.txt", O_CREAT | O_RDWR | S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd < 0)
 		return (0);
 	write(fd, txt, 28);
+	write(fd, "\n", 1);
 	write(fd, txt, 28);
+	close(fd);
 	return (0);	
 }

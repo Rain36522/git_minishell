@@ -6,13 +6,13 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/15 18:44:35 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/16 09:30:01 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -lreadline
+FLAGS = -Wall -Wextra -Werror -lreadline -fsanitize=address
 LIBFTPRINTF = ft_printf/libftprintf.a
 
 BLUE = \\033[1;34m
@@ -34,7 +34,14 @@ OBJ_CMD = $(SRC_CMD:.c=.o)
 all : header $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD)
 	@make -C ft_printf/
 	@$(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(LIBFTPRINTF) -o $(NAME)
+	clear
 	./$(NAME)
+
+leaks : header $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD)
+	@make -C ft_printf/
+	@$(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(LIBFTPRINTF) -o $(NAME)
+	clear
+	leaks --atExit -- ./$(NAME)
 
 %.o%.c :
 	$(CC) $(FLAGS) -c -o $@ $^

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 18:56:22 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/16 09:17:48 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 static char *ft_first_filen_name(void)
 {
 	char	*str;
+	char	*pid;
 
-	str = ft_itoa(getpid());
-	if (!str)
+	pid = ft_itoa(getpid());
+	if (!pid)
 		return (NULL);
-	str = ft_strjoin(str, "_a.tmp");
+	str = ft_strjoin(pid, "_a.tmp");
+	free(pid);
 	return (str);
 }
 
@@ -51,33 +53,37 @@ static int	ft_create_file(char *filename, char *wrd)
 	int		isize;
 	char	*scmd;
 
-	fd = open(filename, O_CREAT | O_RDWR);
-	ft_printf("opening_file fd : %i\n", fd);
+	fd = open(filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd < 0)
 		return (fd);
-	ft_printf("file open\n");
-	isize = ft_strlen(wrd);
+	isize = ft_strlen(wrd) + 1;
 	scmd = readline("$ > ");
 	while (ft_strncmp(scmd, wrd, isize) != 0)
 	{
 		ft_putstr_fd(scmd, fd);
 		ft_putstr_fd("\n", fd);
+		free(scmd);
 		scmd = readline("$ > ");
 	}
-	return (close(fd));
+	free(scmd);
+	close(fd);
+	return (1);
 	
 }
 
 
 int	ft_write_file(t_incmd *lst)
 {
-	int	i;
+	int		i;
+	t_incmd	*mem_lst;
 
 	i = 0;
+	mem_lst = lst;
 	while (i >= 0 && lst)
 	{
 		i = ft_create_file(lst->filename, lst->wrd);
 		lst =lst->next;
 	}
+	ft_free_lst(mem_lst, NULL);
 	return (i);
 }
