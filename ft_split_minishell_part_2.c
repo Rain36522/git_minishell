@@ -6,7 +6,7 @@
 /*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:39:14 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/15 10:42:08 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:14:53 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	len_dup_str(const char *s, int i)
 	ilen = i;
 	while (s[ilen] && spe_case_out_quotes(s[ilen]) == 0)
 	{
-		while (s[ilen] && spe_case_out_quotes(s[ilen]) == 0)
+		while (s[ilen] && spe_case_out_quotes(s[ilen]) == 0
+			&& s[ilen] != '\'' && s[ilen] != '\"')
 			ilen++;
 		if (s[ilen] && (s[ilen] == '\'' || s[ilen] == '\"'))
 		{
