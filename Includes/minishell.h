@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 18:37:23 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/16 10:05:12 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,11 @@ t_incmd	*ft_free_lst(t_incmd *lst, char *scmd);
 int		ft_check_end_string(char ptr, char quote);
 char	*ft_name_file(char *str);
 int		ft_write_file(t_incmd *lst);
+// ft_split
+char	**ft_split_minishell(char const *s);
+int	dup_str(char **tab, const char *s, int i);
+int	len_dup_str(const char *s, int i);
+int	spe_case_out_quotes(char c);
+int	dup_pip_dir(char **tab, const char *s, int i, char c);
 
 #endif
