@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/16 10:05:12 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:09:09 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,10 @@ int	dup_str(char **tab, const char *s, int i);
 int	len_dup_str(const char *s, int i);
 int	spe_case_out_quotes(char c);
 int	dup_pip_dir(char **tab, const char *s, int i, char c);
+char	**free_split(char **tab);
+int	str_nbr(char const *s, int i, int j);
+int	skip_pipe_or_dir(const char *s, int i, char c);
+int	check_spe_case(char c);
+int	skip_until(const char *s, int i, char c);
 
 #endif
