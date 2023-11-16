@@ -6,7 +6,7 @@
 /*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:31:26 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/15 10:39:50 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/16 09:54:55 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	**free_split(char **tab)
 	return (tab);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	char  		*s;
 	char		**tab = NULL;
@@ -114,4 +114,4 @@ int	main(void)
 	free(tab[i]);
 	free(tab);
 	return (0);
-}
+}*/
