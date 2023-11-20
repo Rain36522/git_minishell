@@ -5,120 +5,85 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 08:36:06 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/16 09:41:08 by pudry            ###   ########.fr       */
+/*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
+/*   Updated: 2023/11/16 18:17:04 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-t_incmd	*ft_free_lst(t_incmd *lst, char *scmd)
+//This funtion generate a new file name or 
+//make a copy of the given file name and incrase
+char	*ft_name_file(char *str)
 {
-	t_incmd	*nxt_lst;
+	char	*pid;
+	int		i;
 
-	while (lst)
+	if (!str)
+		return (ft_strdup("tmp_a.tmp"));
+	i = 0;
+	str = ft_strdup(str);
+	if (!str)
+		return (NULL);
+	while (str[i] && str[i] != '_')
+		i ++;
+	if (!str[i])
 	{
-		free(lst->filename);
-		free(lst->wrd);
-		nxt_lst = lst->next;
-		free(lst);
-		lst = nxt_lst;
+		free(str);
+		return (NULL);
 	}
-	if (scmd)
-		free(scmd);
-	return (NULL);
+	str[i + 1] ++;
+	return (str);
 }
-
-//The scmd -- is for this function : ft_str_rplace_word
-static char	*ft_skip_word(char *scmd)
+static int	ft_create_file(char *filename, char *wrd)
 {
-	char	ptr;
-
-	ptr = '0';
-	while (*scmd && (*scmd == ' ' || *scmd == '\t'))
-		scmd ++;
-	ptr = ft_is_string(*scmd, ptr);
-	while (*scmd && ft_check_end_string(*scmd, ptr) == 0)
-	{
-		scmd ++;
-		ptr = ft_is_string(*scmd, ptr);
-	}
-	return (scmd);
-}
-
-static int 	ft_cnt_new_cmd_size(char *scmd, t_incmd *lst)
-{
-	int		isize;
-	int		ilstsize;
+	int		fd;
 	char	*ptr;
+	int		isize;
+	char	*scmd;
 
-	ilstsize = 0;
-	isize = 0;
+	ft_putstr_fd("57_3\n", 1);
+	fd = open(filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	ft_printf("58_3\n");
+	if (fd < 0)
+		return (fd);
+	isize = ft_strlen(wrd) + 1;
+	scmd = readline("$ > ");
+	while (ft_strncmp(scmd, wrd, isize) != 0)
+	{
+		ft_putstr_fd(scmd, fd);
+		ft_putstr_fd("\n", fd);
+		free(scmd);
+		scmd = readline("$ > ");
+	}
+	free(scmd);
+	close(fd);
+	return (1);
+	
+}
+
+
+int	ft_write_file(t_incmd *lst)
+{
+	int		i;
+	t_incmd	*mem_lst;
+
+	i = 0;
+	mem_lst = lst;
+	ft_printf(("write file\n"));
 	while (lst)
 	{
-		isize += ft_strlen(lst->filename) + 1;
+		ft_printf("filename : %s\n", lst->filename);
 		lst = lst->next;
 	}
-	ptr = ft_dbl_redi_in(scmd);
-	while (ptr)
+	while (i >= 0 && lst)
 	{
-		isize += ptr - scmd;
-		scmd = ft_skip_word(ptr);
-		scmd ++;
-		ptr = ft_dbl_redi_in(scmd);
-		if (!ptr)
-			isize += ft_strlen(scmd);
+		ft_printf("86_3\n");
+		i = ft_create_file(lst->filename, lst->wrd);
+		ft_printf("87\n");
+		lst =lst->next;
 	}
-	return (isize - ilstsize);
-}
-
-static char	*ft_add_filename(char *ptr, char *filename)
-{
-	int	i;
-
-	i = 3;
-	ptr[0] = ' ';
-	ptr[1] = '<';
-	ptr[2] = ' ';
-	while (filename[i - 3])
-	{
-		ptr[i] = filename[i - 3];
-		i ++;
-	}
-	ptr += i;
-	return (ptr);
-}
-
-char	*ft_str_rplace_word(char *scmd, t_incmd *lst)
-{
-	int		isize;
-	char	*ptr;
-	char	*mem_scmd;
-
-	
-	isize = ft_cnt_new_cmd_size(scmd, lst);
-	ft_printf("isize : %i\n", isize);
-	ptr = (char *) malloc(sizeof(char) * (isize + 1));
-	mem_scmd = ptr;
-	if (!ptr)
-		return (NULL);	
-	ptr[isize] = '\0';
-	while (*scmd)
-	{
-		if (*scmd == '<' && scmd[1] == '<' && scmd[2]  && scmd [2] != '<')
-		{
-			ptr = ft_add_filename(ptr, lst->filename);
-			lst = lst->next;
-			scmd = ft_skip_word(scmd + 2);
-		}
-		if (*scmd == '<' && scmd[1] == '<' && scmd[2]  && scmd [2] != '<')
-			ft_strjoin(ptr, "<<");
-		if (*scmd == '<' && scmd[1] == '<' && scmd[2]  && scmd [2] != '<')
-			scmd += 2;
-		*ptr = *scmd;
-		ptr ++;
-		scmd ++;
-	}
-	ft_printf("%s %i\n", mem_scmd, (int)(ptr - mem_scmd));
-	return (ptr);
+	ft_printf("89\n");
+	ft_free_lst(mem_lst, NULL);
+	return (i);
 }

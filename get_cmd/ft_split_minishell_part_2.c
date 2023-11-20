@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_minishell_part_2.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:39:14 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/15 14:14:53 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:49:50 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/minishell.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "../Includes/minishell.h"
 
 // duplicate for pipe or dir in tab
 int	dup_pip_dir(char **tab, const char *s, int i, char c)

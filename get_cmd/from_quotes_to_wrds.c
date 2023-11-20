@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   from_quotes_to_wrds.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:25:44 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/16 09:46:44 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:49:47 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/minishell.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "../Includes/minishell.h"
 
 // count the nbr of valid char that we want to dup
 int	len_delete_quotes(char *str, int len, int i)

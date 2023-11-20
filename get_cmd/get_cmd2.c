@@ -5,40 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:09:46 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/15 15:40:12 by pudry            ###   ########.fr       */
+/*   Created: 2023/11/16 10:48:32 by pudry             #+#    #+#             */
+/*   Updated: 2023/11/16 14:46:03 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-char	ft_is_string(char  ptr, char quote)
+t_incmd	*ft_free_lst(t_incmd *lst, char *scmd)
 {
-	if (ptr == '\'' && quote == '0')
-		quote = '\'';
-	else if (ptr == '\"' && quote == '0')
-		quote = '\"';
-	else if (ptr == '\'' && quote == '\'')
-		quote = '0';
-	else if (ptr == '\"' && quote == '\"')
-		quote = '0';
-	return (quote);
+	t_incmd	*nxt_lst;
+
+	while (lst)
+	{
+		free(lst->filename);
+		free(lst->wrd);
+		nxt_lst = lst->next;
+		free(lst);
+		lst = nxt_lst;
+	}
+	if (scmd)
+		free(scmd);
+	return (NULL);
 }
 
-// This function detect end of str if there is a | < > outside of quote.
-int	ft_check_end_string(char ptr, char quote)
-{
-	if (quote != '0')
-		return (0);
-	if (ptr == ' ' || ptr == '\t')
-		return (1);
-	else if (ptr == '<' || ptr == '>' || ptr == '|')
-		return (2);
-	return (0);
-}
-
-// This fonction save the word inside the list 
-// with the file name that will be given.
 static t_incmd	*ft_add_end_lst(t_incmd *lst, char  *wrd)
 {
 	t_incmd	*lst_wrd;
@@ -48,16 +38,12 @@ static t_incmd	*ft_add_end_lst(t_incmd *lst, char  *wrd)
 	lst_wrd = (t_incmd *) malloc(sizeof(t_incmd) * 1);
 	if (!lst_wrd)
 		return (ft_free_lst(lst, wrd));
-	lst_wrd->filename = (char *) malloc(sizeof(char) * 10);
-	if (!lst_wrd->filename)
-		return (ft_free_lst(lst, wrd));
 	lst_wrd->next = NULL;
 	lst_wrd->wrd = wrd;
 	if (!lst)
 	{
 		lst_wrd->filename = ft_name_file(NULL);
-		lst = lst_wrd;
-		return (lst);
+		return (lst_wrd);
 	}
 	while (lst->next)
 		lst = lst->next;
@@ -66,27 +52,62 @@ static t_incmd	*ft_add_end_lst(t_incmd *lst, char  *wrd)
 	return (lst_start);
 }
 
-// This fonction put in the list the word after the '<<'
-t_incmd	*ft_lst_word(char *ptr, t_incmd *lst)
+static char	**ft_replace_str_array(char **array, int ipos, char *new_str)
 {
-	int		isize;
-	char	quote;
-	char	*wrd;
-
-	isize = 0;
-	quote = '0';
-	while (*ptr && (*ptr == ' ' || *ptr == '\t'))
-		ptr ++;
-	while (ptr[isize] && ft_check_end_string(ptr[isize], quote) == 0)
-		quote = ft_is_string(ptr[isize ++], quote);
-	wrd = (char *) malloc(sizeof(char) * (isize + 1));
-	if (!wrd)
-		return (ft_free_lst(lst, NULL));
-	wrd[isize --] = '\0';
-	while (isize >= 0)
+	int	i;
+	free(array[ipos]);
+	array[ipos] = ft_strdup(new_str);
+	if (!array[ipos])
 	{
-		wrd[isize] = ptr[isize];
-		isize --;
+		i = 0;
+		while (array[i])
+		{
+			free(array[i]);
+			i ++;
+			if(i == ipos)
+				i ++;
+		}
+		free(array);
+		return (NULL);
 	}
-	return (ft_add_end_lst(lst, wrd));
+	return (array);
+}
+
+char	**ft_make_dbl_redir(char **array)
+{
+	int		i;
+	t_incmd	*lst;
+	t_incmd	*mem_lst;
+
+	lst = NULL;
+	i = 0;
+	ft_printf("84_2\n");
+	while (array[i + 1])
+	{
+		if (ft_strncmp("<<", array[i], 3) == 0)
+		{
+			lst = ft_add_end_lst(lst, array[i + 1]);
+			mem_lst = lst;
+			while (lst->next)
+				lst = lst->next;
+			array = ft_replace_str_array(array, i , "<");
+			if (array)
+				array = ft_replace_str_array(array, i + 1 , lst->filename);
+			if (!array)
+				return (NULL);
+			lst = mem_lst;
+		}
+		i ++;
+	}
+	while (lst)
+	{
+		ft_printf("filename : %s\n", lst->filename);
+		lst = lst->next;
+	}
+	if (!lst)
+		ft_printf("no_lst\n");
+	lst = mem_lst;
+	if (ft_write_file(mem_lst) < 0)
+		return (NULL);
+	return (array);
 }

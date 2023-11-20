@@ -5,12 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 10:48:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/16 14:32:03 by pudry            ###   ########.fr       */
+/*   Created: 2023/11/13 13:05:47 by pudry             #+#    #+#             */
+/*   Updated: 2023/11/16 09:04:10 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
+
+/*
+** This function return a pointer at the end of the redirection
+** If there is no redirection or the redirection is inside a string;
+** The function return NULL.
+*/
+char	*ft_dbl_redi_in(char *str)
+{
+	char	quote;
+
+	quote = '0';
+	while (*str)
+	{
+		quote = ft_is_string(*str, quote);
+		if (str[0] == '<' && str[1] == '<' && str[2] == '<' && quote == '0')
+			str += 1;
+		else if (str[0] == '<' && str[1] == '<' && quote == '0')
+			return (str + 2);
+		str ++;
+	}
+	return (NULL);
+}
 
 /*
  *	Check if single or double quotes aren't close
@@ -39,60 +61,43 @@ static int	ft_quotes(char *str, int istatus)
 	}
 	return (istatus);
 }
-
-static int	ft_check_dbl_redi(char **array)
+static char	*ft_redir_in_dbl(char *scmd)
 {
-	int	i;
+	char	*ptr;
+	t_incmd	*lst;
 
-	i = 0;
-	while (array[i])
+	lst = NULL;
+	ptr = ft_dbl_redi_in(scmd);
+	while (ptr)
 	{
-		if (ft_strncmp("<<", array[i], 3) == 0)
-			return (1);
-		i ++;
+		if (ft_quotes(ptr, 0) != 0)
+			return (NULL);
+		lst = ft_lst_word(ptr, lst);
+		if (!lst)
+		{
+			free(scmd);
+			return (NULL);
+		}
+		ptr = ft_dbl_redi_in(ptr);
 	}
-	return (0);
-}
-void	ft_put_array(char **a)
-{
-	int	i;
-
-	ft_printf("put array :\n");
-	i = 0;
-	while (a[i])
-	{
-		ft_printf("array : %s\n", a[i]);
-		i ++;
-	}
-	ft_printf("finish\n");
+	ptr = scmd;
+	scmd = ft_str_rplace_word(scmd, lst);
+	free(ptr);
+	if (scmd)
+		if (ft_write_file(lst) < 0)
+			return (NULL);
+	return (scmd);
 }
 
-
-char	**get_cmd(char *prompt)
+char	*get_cmd(char *prompt)
 {
 	char	*scmd;
 	int		i;
-	char	**array;
+
 	scmd = readline(prompt);
-	if (!scmd)
-		return (NULL);
-	else if (ft_quotes(scmd, 0) != 0)
-	{
-		// ft_error_char(scmd)
-		return (NULL);
-	}
-	ft_printf("scmd : %s\n", scmd);
 	add_history(scmd);
-	array = ft_split_minishell(scmd);
-	
-	if (!array)
-		return (NULL);
-	if (ft_check_dbl_redi(array) == 1 && ft_quotes(scmd, 0) == 0)
-	{
-		array = from_quotes_to_wrds(array);
-		ft_printf("start redir\n");
-		return (ft_make_dbl_redir(array));
-	}
+	if (ft_dbl_redi_in(scmd))
+		return (ft_redir_in_dbl(scmd));
 	// else
 	// {
 	// 	while (i != 0 && scmd)
@@ -107,9 +112,7 @@ char	**get_cmd(char *prompt)
 	// 		free(ptr2);
 	// 	}
 	// }
-	// if (!scmd)
-	// 	return (NULL);
-	// return (scmd);
-
-
+	if (!scmd)
+		return (NULL);
+	return (scmd);
 }

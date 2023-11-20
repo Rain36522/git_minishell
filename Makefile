@@ -6,13 +6,14 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/16 09:30:01 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/16 18:17:32 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -lreadline -fsanitize=address
+#FLAGS = -Wall -Wextra -Werror -lreadline -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -lreadline
 LIBFTPRINTF = ft_printf/libftprintf.a
 
 BLUE = \\033[1;34m
@@ -24,7 +25,8 @@ BRWN = \\033[0; 33m
 
 SRC_BUILT = builtin/cwd.c builtin/username.c
 SRC_UTILS = main.c utils/check_up_down_key.c utils/ft_utils.c utils/ft_error.c
-SRC_CMD = get_cmd/get_cmd.c get_cmd/get_cmd2.c get_cmd/get_cmd3.c get_cmd/get_cmd4.c
+SRC_CMD = get_cmd/get_cmd.c get_cmd/get_cmd2.c get_cmd/get_cmd3.c \
+	get_cmd/from_quotes_to_wrds.c get_cmd/ft_split_minishell.c get_cmd/ft_split_minishell_part_2.c
 
 
 OBJ_UTILS = $(SRC_UTILS:.c=.o)
