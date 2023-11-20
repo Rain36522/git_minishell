@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:48:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/16 14:32:03 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/20 16:38:58 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	ft_check_dbl_redi(char **array)
 	}
 	return (0);
 }
+
 void	ft_put_array(char **a)
 {
 	int	i;
@@ -67,32 +68,57 @@ void	ft_put_array(char **a)
 	ft_printf("finish\n");
 }
 
+char	**ft_make_cmd_quote(char *scmd)
+{
+	int		i;
+	char	*ptr;
+	char	*ptr2;
+	char	acmd;
+
+	if (ft_quotes)
+	while (i != 0 && scmd)
+	{
+		scmd = ft_strjoin(scmd, "\n");
+		ft_printf("%s", scmd);
+		ptr = scmd;
+		ptr2 = readline("> ");
+		i = ft_quotes(ptr2, i);
+		scmd = ft_strjoin(ptr, ptr2);
+		free(ptr);
+		free(ptr2);
+	}
+}
+	if (!scmd)
+		return (NULL);
+}
 
 char	**get_cmd(char *prompt)
 {
 	char	*scmd;
 	int		i;
 	char	**array;
+
 	scmd = readline(prompt);
 	if (!scmd)
 		return (NULL);
-	else if (ft_quotes(scmd, 0) != 0)
-	{
-		// ft_error_char(scmd)
-		return (NULL);
-	}
-	ft_printf("scmd : %s\n", scmd);
 	add_history(scmd);
 	array = ft_split_minishell(scmd);
-	
 	if (!array)
 		return (NULL);
 	if (ft_check_dbl_redi(array) == 1 && ft_quotes(scmd, 0) == 0)
 	{
 		array = from_quotes_to_wrds(array);
-		ft_printf("start redir\n");
+		free(scmd);
+		scmd = NULL;
 		return (ft_make_dbl_redir(array));
 	}
+	else
+		return (ft_make_cmd_quote(scmd));
+	if (scmd)
+		free(scmd);
+	return (NULL);
+}
+
 	// else
 	// {
 	// 	while (i != 0 && scmd)
@@ -110,6 +136,3 @@ char	**get_cmd(char *prompt)
 	// if (!scmd)
 	// 	return (NULL);
 	// return (scmd);
-
-
-}

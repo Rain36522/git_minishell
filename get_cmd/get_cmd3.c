@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/16 18:17:04 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/20 14:32:16 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ char	*ft_name_file(char *str)
 		free(str);
 		return (NULL);
 	}
-	str[i + 1] ++;
+	str[i + 1] += 1;
 	return (str);
 }
+
 static int	ft_create_file(char *filename, char *wrd)
 {
 	int		fd;
@@ -42,9 +43,8 @@ static int	ft_create_file(char *filename, char *wrd)
 	int		isize;
 	char	*scmd;
 
-	ft_putstr_fd("57_3\n", 1);
-	fd = open(filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	ft_printf("58_3\n");
+	fd = open(filename, \
+		O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd < 0)
 		return (fd);
 	isize = ft_strlen(wrd) + 1;
@@ -59,9 +59,7 @@ static int	ft_create_file(char *filename, char *wrd)
 	free(scmd);
 	close(fd);
 	return (1);
-	
 }
-
 
 int	ft_write_file(t_incmd *lst)
 {
@@ -70,20 +68,11 @@ int	ft_write_file(t_incmd *lst)
 
 	i = 0;
 	mem_lst = lst;
-	ft_printf(("write file\n"));
-	while (lst)
-	{
-		ft_printf("filename : %s\n", lst->filename);
-		lst = lst->next;
-	}
 	while (i >= 0 && lst)
 	{
-		ft_printf("86_3\n");
 		i = ft_create_file(lst->filename, lst->wrd);
-		ft_printf("87\n");
-		lst =lst->next;
+		lst = lst->next;
 	}
-	ft_printf("89\n");
 	ft_free_lst(mem_lst, NULL);
 	return (i);
 }

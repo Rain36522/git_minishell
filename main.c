@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/16 14:31:26 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/20 14:24:54 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,5 @@ int	main(int argc, char ** argv, char **env)
 		if (!acmd)
 			return (0);
 		i ++;
-		//free(scmd);
-		// while (acmd[i] && j == 0)
-		// 	j = ft_check_cmd(acmd[i]);
-		// if (j != 0)
-		// 	return(ft_error_int(j));
 	}
 }

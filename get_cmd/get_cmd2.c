@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:48:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/16 14:46:03 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/20 14:28:01 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_incmd	*ft_free_lst(t_incmd *lst, char *scmd)
 	return (NULL);
 }
 
-static t_incmd	*ft_add_end_lst(t_incmd *lst, char  *wrd)
+static t_incmd	*ft_add_end_lst(t_incmd *lst, char *wrd)
 {
 	t_incmd	*lst_wrd;
 	t_incmd	*lst_start;
@@ -55,6 +55,7 @@ static t_incmd	*ft_add_end_lst(t_incmd *lst, char  *wrd)
 static char	**ft_replace_str_array(char **array, int ipos, char *new_str)
 {
 	int	i;
+
 	free(array[ipos]);
 	array[ipos] = ft_strdup(new_str);
 	if (!array[ipos])
@@ -64,7 +65,7 @@ static char	**ft_replace_str_array(char **array, int ipos, char *new_str)
 		{
 			free(array[i]);
 			i ++;
-			if(i == ipos)
+			if (i == ipos)
 				i ++;
 		}
 		free(array);
@@ -81,7 +82,6 @@ char	**ft_make_dbl_redir(char **array)
 
 	lst = NULL;
 	i = 0;
-	ft_printf("84_2\n");
 	while (array[i + 1])
 	{
 		if (ft_strncmp("<<", array[i], 3) == 0)
@@ -90,23 +90,17 @@ char	**ft_make_dbl_redir(char **array)
 			mem_lst = lst;
 			while (lst->next)
 				lst = lst->next;
-			array = ft_replace_str_array(array, i , "<");
+			array = ft_replace_str_array(array, i, "<");
 			if (array)
-				array = ft_replace_str_array(array, i + 1 , lst->filename);
+				array = ft_replace_str_array(array, i + 1, lst->wrd);
 			if (!array)
 				return (NULL);
 			lst = mem_lst;
 		}
 		i ++;
 	}
-	while (lst)
-	{
-		ft_printf("filename : %s\n", lst->filename);
-		lst = lst->next;
-	}
 	if (!lst)
-		ft_printf("no_lst\n");
-	lst = mem_lst;
+		return (NULL);
 	if (ft_write_file(mem_lst) < 0)
 		return (NULL);
 	return (array);
