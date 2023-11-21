@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/21 12:17:55 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 15:03:18 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_put_array(char **a);
 
 // This funtion is for giving error message, exit programm
 // or return NULL value needed
-char	*ft_error_msg(int i);
+void	ft_error_msg(int i);
 int		ft_error_int(int icode, int iexit, char **array, char *str);
 char	*ft_error_str(int icode, int iexit, char **array, char *str);
 char	**ft_error_array(int icode, int iexit, char **array, char *str);

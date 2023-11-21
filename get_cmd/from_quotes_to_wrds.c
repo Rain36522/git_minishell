@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:25:44 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/16 10:49:47 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 15:37:21 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	len_delete_quotes(char *str, int len, int i)
 	quote = '0';
 	while (str[i])
 	{
-		if (str[i] == '\'' || str[i] == '\"' && quote == '0')
+		if ((str[i] == '\'' || str[i] == '\"') && quote == '0')
 		{
 			quote = str[i];
 			i++;
@@ -49,7 +49,7 @@ char	*cpy_pste_clean_line(char *str, char *dup, int i, int j)
 	quote = '0';
 	while (str[i])
 	{
-		if (str[i] == '\'' || str[i] == '\"' && quote == '0')
+		if ((str[i] == '\'' || str[i] == '\"') && quote == '0')
 		{
 			quote = str[i];
 			i++;
@@ -68,7 +68,7 @@ char	*cpy_pste_clean_line(char *str, char *dup, int i, int j)
 
 // supress all of the extra quotes
 // and return a clean string
-char	*delete_quotes(char *str, int i, int len, char quote)
+char	*delete_quotes(char *str, int len)
 {
 	char	*dup;
 
@@ -110,7 +110,7 @@ char	**from_quotes_to_wrds(char **tab)
 		if (there_is_quotes(tab[i]) == 1)
 		{
 			s_tmp = tab[i];
-			tab[i] = delete_quotes(tab[i], 0, 0, tmp);
+			tab[i] = delete_quotes(tab[i], 0);
 			free(s_tmp);
 		}
 		i++;

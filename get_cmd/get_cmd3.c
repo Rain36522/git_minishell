@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/21 10:40:04 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 15:34:47 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 //make a copy of the given file name and incrase
 char	*ft_name_file(char *str)
 {
-	char	*pid;
 	int		i;
 
 	if (!str)
@@ -36,7 +35,6 @@ char	*ft_name_file(char *str)
 static int	ft_create_file(char *filename, char *wrd)
 {
 	int		fd;
-	char	*ptr;
 	int		isize;
 	char	*scmd;
 

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:48:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/21 09:56:29 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 15:35:33 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ static t_incmd	*ft_add_end_lst(t_incmd *lst, char *wrd)
 
 static char	**ft_replace_str_array(char **array, int ipos, char *new_str)
 {
-	int	i;
-
 	free(array[ipos]);
 	array[ipos] = ft_strdup(new_str);
 	if (!array[ipos])

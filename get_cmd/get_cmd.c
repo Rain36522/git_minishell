@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:48:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/21 09:54:26 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 15:35:17 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,6 @@ static int	ft_quotes(char *str, int istatus)
 	return (istatus);
 }
 
-static int	ft_check_dbl_redi(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		if (ft_strncmp("<<", array[i], 3) == 0)
-			return (1);
-		i ++;
-	}
-	return (0);
-}
-
 static int	ft_check_dbl_redi_str(char *str)
 {
 	int	i;
@@ -71,7 +57,7 @@ static int	ft_check_dbl_redi_str(char *str)
 			i = 0;
 		else if (i == 0 && str[0] == '<' && str[1] == '<' && str[2] != '<')
 			return (1);
-		*str ++;
+		str ++;
 	}
 	return (0);
 }
@@ -95,7 +81,6 @@ char	**ft_make_cmd_quote(char *scmd)
 	int		i;
 	char	*ptr;
 	char	*ptr2;
-	char	acmd;
 
 	if (ft_quotes(scmd, 0) == 0)
 		return (ft_split_minishell(scmd));
@@ -120,7 +105,6 @@ char	**ft_make_cmd_quote(char *scmd)
 char	**get_cmd(char *prompt)
 {
 	char	*scmd;
-	int		i;
 	char	**array;
 
 	scmd = readline(prompt);

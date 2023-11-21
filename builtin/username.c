@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:31:25 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/13 10:54:27 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 15:33:50 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ char	*find_hostname(char **env)
 		i++;
 	if (env[i])
 		login = ft_strdup(env[i] + 8);
-	// if (!env[i])
-	// 	return (ft_error(101));
-	// if (!login)
-	// 	return (ft_error(10));
+	if (!env[i])
+		return (ft_error_str(203, 0, NULL, NULL));
+	if (!login)
+		return (ft_error_str(203, 0, NULL, NULL));
 	return (login);
 }

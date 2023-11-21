@@ -6,13 +6,13 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:30:23 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/21 11:37:30 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 15:03:10 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-char	*ft_error_msg(int i)
+void	ft_error_msg(int i)
 {
 	ft_printf("\033[0;31m");
 	if (i == 9)
@@ -24,4 +24,5 @@ char	*ft_error_msg(int i)
 	else if (i == 23)
 		ft_printf("Error : To many open files\n");
 	ft_printf("\033[0m");
+	
 }

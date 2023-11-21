@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:39:14 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/16 10:49:50 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 15:36:49 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	**ft_split_minishell(char const *s)
 	first = tab;
 	while (s[i])
 	{
-		while (s[i] && s[i] == 32 || s[i] == 9)
+		while (s[i] && (s[i] == 32 || s[i] == 9))
 			i++;
 		if (s[i] == '>' || s[i] == '<' || s[i] == '|')
 			i = dup_pip_dir(tab, s, i, s[i]);

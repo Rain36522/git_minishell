@@ -6,14 +6,13 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/21 11:21:18 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/21 17:14:04 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-#FLAGS = -Wall -Wextra -Werror -lreadline -fsanitize=address
-FLAGS = -Wall -Wextra -Werror -lreadline -g
+FLAGS = -Wall -Wextra -Werror -lreadline
 LIBFTPRINTF = ft_printf/libftprintf.a
 
 BLUE = \\033[1;34m
@@ -21,7 +20,19 @@ WHITE = \\033[0;37m
 YELLOW = \\033[0;33m
 RED = \\033[1;31m
 GREEN = \\033[1;32m
-BRWN = \\033[0; 33m
+BRWN = \\033[0;33m
+
+COMPIL_1 = "           |   |  ${GREEN}C:\\> Compilation 1 \ 10                ${WHITE}|    |"
+COMPIL_2 = "           |   |  ${GREEN}C:\\> Compilation 2 \ 10                ${WHITE}|    |"
+COMPIL_3 = "           |   |  ${GREEN}C:\\> Compilation 3 \ 10                ${WHITE}|    |"
+COMPIL_4 = "           |   |  ${GREEN}C:\\> Compilation 4 \ 10                ${WHITE}|    |"
+COMPIL_5 = "           |   |  ${GREEN}C:\\> Compilation 5 \ 10                ${WHITE}|    |"
+COMPIL_6 = "           |   |  ${GREEN}C:\\> Compilation 6 \ 10                ${WHITE}|    |"
+COMPIL_7 = "           |   |  ${GREEN}C:\\> Compilation 7 \ 10                ${WHITE}|    |"
+COMPIL_8 = "           |   |  ${GREEN}C:\\> Compilation 8 \ 10                ${WHITE}|    |"
+COMPIL_9 = "           |   |  ${GREEN}C:\\> Compilation 9 \ 10                ${WHITE}|    |"
+COMPIL_10 = "           |   |  ${GREEN}C:\\> ${RED}Segmentation fault                ${WHITE}|    |"
+
 
 SRC_BUILT = builtin/cwd.c builtin/username.c
 
@@ -33,34 +44,35 @@ SRC_CMD = get_cmd/get_cmd.c get_cmd/get_cmd2.c get_cmd/get_cmd3.c \
 	get_cmd/from_quotes_to_wrds.c get_cmd/ft_split_minishell.c get_cmd/ft_split_minishell_part_2.c
 
 
-OBJ_UTILS = $(SRC_UTILS:.c=.o)
-OBJ_BUILT = $(SRC_BUILT:.c=.o)
-OBJ_CMD = $(SRC_CMD:.c=.o)
-OBJ_ERROR = $(SRC_ERROR:.c=.o)
 
-all : header $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(OBJ_ERROR)
-	@make -C ft_printf/
-	@$(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(OBJ_ERROR) $(LIBFTPRINTF) -o $(NAME)
-	clear
+all : header compil
+	@echo $(COMPIL_2)
+	@echo $(COMPIL_3)
+	@make -s -C ft_printf/
+	@echo $(COMPIL_4)
+	@echo $(COMPIL_5)
+	@echo $(COMPIL_6)
+	@echo $(COMPIL_7)
+	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(LIBFTPRINTF) -o $(NAME)
+	@echo $(COMPIL_8)
+	@echo $(COMPIL_9)
+	@echo $(COMPIL_10)
+	@make go_down
 	./$(NAME)
 
-leaks : header $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(OBJ_ERROR)
-	@make -C ft_printf/
-	@$(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(OBJ_ERROR) $(LIBFTPRINTF) -o $(NAME)
+leaks : header
+	@make -s -C ft_printf/
+	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(LIBFTPRINTF) -o $(NAME)
 	clear
 	leaks --atExit -- ./$(NAME)
 
-%.o%.c :
-	@$(CC) $(FLAGS) -c -o $@ $^
-
 clean :
 	@rm -f $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(OBJ_ERROR)
-	@make clean -C ft_printf/
-	@rm *.tmp
+	@make clean -s -C ft_printf/
 
 fclean : clean
 	@rm -f $(NAME)
-	@make fclean -C ft_printf/
+	@make fclean -s -C ft_printf/
 
 re : fclean all
 
@@ -72,24 +84,60 @@ push : fclean
 	git commit -m "Auto push"
 	git push
 
+sep :
+	@echo "<============================================================================================================>"
+
 header :
+	@clear
 	@echo "${GREEN}"
-	@echo "		   __________"
-	@echo "		 . ---------- ."
-	@echo "		 | .--------. |"
-	@echo "		 | | ${RED} ERROR ${GREEN}| |       __________       ___"
-	@echo "		 | | ${RED} 402${GREEN}   | |      /__________\\    {~${RED}.${GREEN}_${RED}.${GREEN}~}"  
-	@echo "	.--------|  --------  |------|    --=-- |-----( Y )---."
-	@echo "	|         ----,-.-----       |o ======  |    ()~*~()  | "
-	@echo "	|       ______|_|_______     |__________|    (_)-(_)  | "
-	@echo "	|      /  %%%%%%%%%%%%  \\                             | "
-	@echo "	|     /  %%%%%%%%%%%%%%  \\                            | "
-	@echo "	|     ^^^^^^^^^^^^^^^^^^^^                            | "
-	@echo "	+-----------------------------------------------------+"
-	@echo "	^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ "
-	@echo "${BLUE}"
-	@echo "\n<------------COMPILING OBJECT------------>\n"
+	@echo "++----------------------------------------------------------------------------------++"
+	@echo "||                                                                                  ||"
+	@echo "||    ███    ███  ██  ███    ██  ██  ███████  ██   ██  ███████  ██       ██         ||"
+	@echo "||    ████  ████  ██  ████   ██  ██  ██       ██   ██  ██       ██       ██         ||"
+	@echo "||    ██ ████ ██  ██  ██ ██  ██  ██  ███████  ███████  █████    ██       ██         ||"
+	@echo "||    ██  ██  ██  ██  ██  ██ ██  ██       ██  ██   ██  ██       ██       ██         ||"
+	@echo "||    ██      ██  ██  ██   ████  ██  ███████  ██   ██  ███████  ███████  ███████    ||"
+	@echo "||                                                                                  ||"
+	@echo "++----------------------------------------------------------------------------------++"
 	@echo "${WHITE}"
+	
+compil:
+	@echo "             ________________________________________________"
+	@echo "            /                                                \\"
+	@echo "           |    _________________________________________     |"
+	@echo "           |   |                                         |    |"
+	@echo $(COMPIL_1)
+	@echo "           |   |                                         |    |"
+	@echo "           |   |                                         |    |"
+	@echo "           |   |                                         |    |"
+	@echo "           |   |                                         |    |"
+	@echo "           |   |                                         |    |"
+	@echo "           |   |                                         |    |"
+	@echo "           |   |                                         |    |"
+	@echo "           |   |                                         |    |"
+	@echo "           |   |                                         |    |"
+	@echo "           |   |                                         |    |"
+	@echo "           |   |_________________________________________|    |"
+	@echo "           |                                                  |"
+	@echo "            \\_________________________________________________/"
+	@echo "                   \\___________________________________/"
+	@echo "                ___________________________________________"
+	@echo "             _-'    .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.  --- \`-_"
+	@echo "          _-'.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.--.  .-.-.\`-_"
+	@echo "       _-'.-.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\`__\`. .-.-.-.\`-_"
+	@echo "    _-'.-.-.-.-. .-----.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-----. .-.-.-.-.\`-_"
+	@echo " _-'.-.-.-.-.-. .---.-. .-------------------------. .-.---. .---.-.-.-.\`-_"
+	@echo ":-------------------------------------------------------------------------:"
+	@echo "\`---._.-------------------------------------------------------------._.---'"
+	@echo ""
+	@make go_back
+
+go_back:
+	@echo "\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F"
+
+go_down:
+	@echo "\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E"
+
 
 
 
