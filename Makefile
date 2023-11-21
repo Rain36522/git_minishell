@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/21 17:14:04 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/21 19:02:48 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,18 +21,25 @@ YELLOW = \\033[0;33m
 RED = \\033[1;31m
 GREEN = \\033[1;32m
 BRWN = \\033[0;33m
+PINK = \\033[1;35m
 
-COMPIL_1 = "           |   |  ${GREEN}C:\\> Compilation 1 \ 10                ${WHITE}|    |"
-COMPIL_2 = "           |   |  ${GREEN}C:\\> Compilation 2 \ 10                ${WHITE}|    |"
-COMPIL_3 = "           |   |  ${GREEN}C:\\> Compilation 3 \ 10                ${WHITE}|    |"
-COMPIL_4 = "           |   |  ${GREEN}C:\\> Compilation 4 \ 10                ${WHITE}|    |"
-COMPIL_5 = "           |   |  ${GREEN}C:\\> Compilation 5 \ 10                ${WHITE}|    |"
-COMPIL_6 = "           |   |  ${GREEN}C:\\> Compilation 6 \ 10                ${WHITE}|    |"
-COMPIL_7 = "           |   |  ${GREEN}C:\\> Compilation 7 \ 10                ${WHITE}|    |"
-COMPIL_8 = "           |   |  ${GREEN}C:\\> Compilation 8 \ 10                ${WHITE}|    |"
-COMPIL_9 = "           |   |  ${GREEN}C:\\> Compilation 9 \ 10                ${WHITE}|    |"
-COMPIL_10 = "           |   |  ${GREEN}C:\\> ${RED}Segmentation fault                ${WHITE}|    |"
 
+TEXT_1   = "           |   |  ${GREEN}C:\\> Compilation minishell             ${WHITE}|    |"
+#COMPIL_1 = "           |   |  ${GREEN}C:\\>${BLUE} 10%  |██                  |100%   ${WHITE}|    |"
+#COMPIL_2 = "           |   |  ${GREEN}C:\\>${BLUE} 20%  |████                |100%   ${WHITE}|    |"
+COMPIL_3 = "           |   |  ${BLUE}C:\\>${BLUE} 30%  |██████              |100%   ${WHITE}|    |"
+COMPIL_4 = "           |   |  ${GREEN}C:\\>${BLUE} 40%  |████████            |100%   ${WHITE}|    |\033[F"
+COMPIL_5 = "           |   |  ${GREEN}C:\\>${BLUE} 50%  |██████████          |100%   ${WHITE}|    |\033[F"
+COMPIL_6 = "           |   |  ${GREEN}C:\\>${BLUE} 60%  |████████████        |100%   ${WHITE}|    |\033[F"
+COMPIL_7 = "           |   |  ${GREEN}C:\\>${BLUE} 70%  |██████████████      |100%   ${WHITE}|    |\033[F"
+COMPIL_8 = "           |   |  ${GREEN}C:\\>${BLUE} 80%  |████████████████    |100%   ${WHITE}|    |\033[F"
+COMPIL_9 = "           |   |  ${GREEN}C:\\>${BLUE} 90%  |██████████████████  |100%   ${WHITE}|    |\033[F"
+COMPIL_10 = "           |   |  ${GREEN}C:\\>${BLUE} 100% |████████████████████|100%   ${WHITE}|    |"
+TEXT_2   = "           |   |  ${GREEN}C:\\> Compilation SUCCESS               ${WHITE}|    |"
+TEXT_3   = "           |   |  ${GREEN}C:\\> Starting minishell in 3 seconds   ${WHITE}|    |\033[F"
+TEXT_4   = "           |   |  ${GREEN}C:\\> Starting minishell in 2 seconds   ${WHITE}|    |\033[F"
+TEXT_5   = "           |   |  ${GREEN}C:\\> Starting minishell in 1 seconds   ${WHITE}|    |\033[F"
+TEXT_6   = "           |   |  ${GREEN}C:\\> Starting minishell in 0 seconds   ${WHITE}|    |"
 
 SRC_BUILT = builtin/cwd.c builtin/username.c
 
@@ -46,17 +53,30 @@ SRC_CMD = get_cmd/get_cmd.c get_cmd/get_cmd2.c get_cmd/get_cmd3.c \
 
 
 all : header compil
-	@echo $(COMPIL_2)
-	@echo $(COMPIL_3)
 	@make -s -C ft_printf/
+	@sleep 0.5
 	@echo $(COMPIL_4)
+	@sleep 0.2
 	@echo $(COMPIL_5)
+	@sleep 0.2
 	@echo $(COMPIL_6)
+	@sleep 0.2
 	@echo $(COMPIL_7)
 	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(LIBFTPRINTF) -o $(NAME)
 	@echo $(COMPIL_8)
+	@sleep 0.2
 	@echo $(COMPIL_9)
+	@sleep 1.2
 	@echo $(COMPIL_10)
+	@echo $(TEXT_2)
+	@echo $(TEXT_3)
+	@sleep 1.0
+	@echo $(TEXT_4)
+	@sleep 1.0
+	@echo $(TEXT_5)
+	@sleep 1.0
+	@echo $(TEXT_6)
+	@sleep 0.3
 	@make go_down
 	./$(NAME)
 
@@ -99,6 +119,11 @@ header :
 	@echo "||    ██      ██  ██  ██   ████  ██  ███████  ██   ██  ███████  ███████  ███████    ||"
 	@echo "||                                                                                  ||"
 	@echo "++----------------------------------------------------------------------------------++"
+	@echo '   ____          _ _                                       ____             _ '
+	@echo '  / ___|___  ___(_) | ___                                 |  _ \ __ _ _   _| |'
+	@echo ' | |   / _ \/ __| | |/ _ \                                | |_) / _` | | | | |'
+	@echo ' | |__|  __/ (__| | |  __/                                |  __/ (_| | |_| | |'
+	@echo '  \____\___|\___|_|_|\___|                                |_|   \__,_|\__,_|_|'
 	@echo "${WHITE}"
 	
 compil:
@@ -106,8 +131,8 @@ compil:
 	@echo "            /                                                \\"
 	@echo "           |    _________________________________________     |"
 	@echo "           |   |                                         |    |"
-	@echo $(COMPIL_1)
-	@echo "           |   |                                         |    |"
+	@echo $(TEXT_1)
+	@echo $(COMPIL_3)
 	@echo "           |   |                                         |    |"
 	@echo "           |   |                                         |    |"
 	@echo "           |   |                                         |    |"
@@ -136,9 +161,11 @@ go_back:
 	@echo "\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F"
 
 go_down:
-	@echo "\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E"
+	@echo "\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E"
 
 
 
 
 .PHONY : fclean re all header clean cnt check leak
+
+
