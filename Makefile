@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/21 19:02:48 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/21 19:06:49 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,9 @@ PINK = \\033[1;35m
 
 
 TEXT_1   = "           |   |  ${GREEN}C:\\> Compilation minishell             ${WHITE}|    |"
-#COMPIL_1 = "           |   |  ${GREEN}C:\\>${BLUE} 10%  |██                  |100%   ${WHITE}|    |"
-#COMPIL_2 = "           |   |  ${GREEN}C:\\>${BLUE} 20%  |████                |100%   ${WHITE}|    |"
-COMPIL_3 = "           |   |  ${BLUE}C:\\>${BLUE} 30%  |██████              |100%   ${WHITE}|    |"
+COMPIL_1 = "           |   |  ${GREEN}C:\\>${BLUE} 10%  |██                  |100%   ${WHITE}|    |\033[F"
+COMPIL_2 = "           |   |  ${GREEN}C:\\>${BLUE} 20%  |████                |100%   ${WHITE}|    |\033[F"
+COMPIL_3 = "           |   |  ${GREEN}C:\\>${BLUE} 30%  |██████              |100%   ${WHITE}|    |\033[F"
 COMPIL_4 = "           |   |  ${GREEN}C:\\>${BLUE} 40%  |████████            |100%   ${WHITE}|    |\033[F"
 COMPIL_5 = "           |   |  ${GREEN}C:\\>${BLUE} 50%  |██████████          |100%   ${WHITE}|    |\033[F"
 COMPIL_6 = "           |   |  ${GREEN}C:\\>${BLUE} 60%  |████████████        |100%   ${WHITE}|    |\033[F"
@@ -55,6 +55,10 @@ SRC_CMD = get_cmd/get_cmd.c get_cmd/get_cmd2.c get_cmd/get_cmd3.c \
 all : header compil
 	@make -s -C ft_printf/
 	@sleep 0.5
+	@echo $(COMPIL_2)
+	@sleep 0.2
+	@echo $(COMPIL_3)
+	@sleep 0.2
 	@echo $(COMPIL_4)
 	@sleep 0.2
 	@echo $(COMPIL_5)
@@ -132,7 +136,7 @@ compil:
 	@echo "           |    _________________________________________     |"
 	@echo "           |   |                                         |    |"
 	@echo $(TEXT_1)
-	@echo $(COMPIL_3)
+	@echo $(COMPIL_1)
 	@echo "           |   |                                         |    |"
 	@echo "           |   |                                         |    |"
 	@echo "           |   |                                         |    |"
@@ -158,7 +162,7 @@ compil:
 	@make go_back
 
 go_back:
-	@echo "\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F"
+	@echo "\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F"
 
 go_down:
 	@echo "\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E"
