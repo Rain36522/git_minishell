@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/20 17:17:43 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/21 11:21:18 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,11 @@ GREEN = \\033[1;32m
 BRWN = \\033[0; 33m
 
 SRC_BUILT = builtin/cwd.c builtin/username.c
-SRC_UTILS = main.c utils/check_up_down_key.c utils/ft_utils.c utils/ft_error.c
+
+SRC_UTILS = main.c utils/check_up_down_key.c utils/ft_utils.c
+
+SRC_ERROR = error/ft_error.c error/ft_error_msg.c
+
 SRC_CMD = get_cmd/get_cmd.c get_cmd/get_cmd2.c get_cmd/get_cmd3.c \
 	get_cmd/from_quotes_to_wrds.c get_cmd/ft_split_minishell.c get_cmd/ft_split_minishell_part_2.c
 
@@ -32,24 +36,25 @@ SRC_CMD = get_cmd/get_cmd.c get_cmd/get_cmd2.c get_cmd/get_cmd3.c \
 OBJ_UTILS = $(SRC_UTILS:.c=.o)
 OBJ_BUILT = $(SRC_BUILT:.c=.o)
 OBJ_CMD = $(SRC_CMD:.c=.o)
+OBJ_ERROR = $(SRC_ERROR:.c=.o)
 
-all : header $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD)
+all : header $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(OBJ_ERROR)
 	@make -C ft_printf/
-	@$(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(LIBFTPRINTF) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(OBJ_ERROR) $(LIBFTPRINTF) -o $(NAME)
 	clear
 	./$(NAME)
 
-leaks : header $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD)
+leaks : header $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(OBJ_ERROR)
 	@make -C ft_printf/
-	@$(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(LIBFTPRINTF) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(OBJ_ERROR) $(LIBFTPRINTF) -o $(NAME)
 	clear
 	leaks --atExit -- ./$(NAME)
 
 %.o%.c :
-	$(CC) $(FLAGS) -c -o $@ $^
+	@$(CC) $(FLAGS) -c -o $@ $^
 
 clean :
-	@rm -f $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD)
+	@rm -f $(OBJ_UTILS) $(OBJ_BUILT) $(OBJ_CMD) $(OBJ_ERROR)
 	@make clean -C ft_printf/
 	@rm *.tmp
 

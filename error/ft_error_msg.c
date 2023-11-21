@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_error_msg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/21 11:38:30 by pudry            ###   ########.fr       */
+/*   Created: 2023/11/21 09:30:23 by pudry             #+#    #+#             */
+/*   Updated: 2023/11/21 11:37:30 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/minishell.h"
-#include <readline/history.h>
-#include <stdio.h>
+#include "../Includes/minishell.h"
 
-int	main(int argc, char ** argv, char **env)
+char	*ft_error_msg(int i)
 {
-	int		i;
-	int		j;
-	char	**acmd;
-	char	*prompt;
-
-	prompt = ft_give_prompte(env);
-	// j = 0;
-	// i = 0;
-	// while (i == 0)
-	// {
-	// 	acmd = get_cmd("pudry@42 : ");
-	// 	if (acmd)
-	// 	{
-	//  	}		
-	// }
-	// 	i ++;
-	// }
-	return (0);
+	ft_printf("\033[0;31m");
+	if (i == 9)
+		ft_printf("Error : Bad file descriptor\n");
+	else if (i == 10)
+		ft_printf("Error : No child process\n");
+	else if (i == 12)
+		ft_printf("Error : Cannot allocate memory\n");
+	else if (i == 23)
+		ft_printf("Error : To many open files\n");
+	ft_printf("\033[0m");
 }

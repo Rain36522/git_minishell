@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:48:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/20 17:16:22 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 09:54:26 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	**ft_make_cmd_quote(char *scmd)
 	if (ft_quotes(scmd, 0) == 0)
 		return (ft_split_minishell(scmd));
 	else if (ft_check_dbl_redi_str(scmd))
-		ft_error_str(1000);
+		return (ft_error_array(201, 0, NULL, scmd));
 	i = ft_quotes(scmd, 0);
 	while (i != 0 && scmd)
 	{
@@ -113,7 +113,7 @@ char	**ft_make_cmd_quote(char *scmd)
 		free(ptr2);
 	}
 	if (!scmd)
-		return (NULL);
+		return (ft_error_array(12, 1, NULL, NULL));
 	return (ft_split_minishell(scmd));
 }
 
@@ -125,20 +125,16 @@ char	**get_cmd(char *prompt)
 
 	scmd = readline(prompt);
 	if (!scmd)
-		return (NULL);
+		return (ft_error_array(12, 1, NULL, NULL));
 	add_history(scmd);
 	if (ft_check_dbl_redi_str(scmd) == 1 && ft_quotes(scmd, 0) == 0)
 	{
 		array = ft_split_minishell(scmd);
 		if (!array)
-			return (NULL);
+			return (ft_error_array(12, 1, NULL, scmd));
 		free(scmd);
 		scmd = NULL;
 		return (ft_make_dbl_redir(array));
 	}
-	else
-		return (ft_make_cmd_quote(scmd));
-	if (scmd)
-		free(scmd);
-	return (NULL);
+	return (ft_make_cmd_quote(scmd));
 }

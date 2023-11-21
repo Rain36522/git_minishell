@@ -6,43 +6,57 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:52:09 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/13 13:53:46 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/21 09:55:57 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-static void	ft_error_msg(int icode)
+static void	ft_free_array(char **array)
 {
-	if (icode == 1)
-		ft_printf("command not found\n");
-	else if (icode == 10)
-		ft_printf("username not found\n");
-	else if (icode == 11)
-		ft_printf("error cwd\n");
-	else if (icode == 101)
-		ft_printf("memory allocation failed\n");
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i ++]);
+	}
+	free(array);
 }
 
-static void	ft_quit(void)
+int	ft_error_int(int icode, int iexit, char **array, char *str)
 {
-	// command pour tout free
-	exit(1);
-}
-
-int	ft_error_int(int icode)
-{
+	if (array)
+		ft_free_array(array);
+	if (str)
+		free(str);
 	ft_error_msg(icode);
-	if (icode >= 100)
-		ft_quit();
+	if (iexit == 1)
+		exit(icode);
 	return (0);
 }
 
-char	*ft_error_str(int icode)
+char	*ft_error_str(int icode, int iexit, char **array, char *str)
 {
+	if (array)
+		ft_free_array(array);
+	if (str)
+		free(str);
 	ft_error_msg(icode);
-	if (icode >= 100)
-		ft_quit();
+	if (iexit == 1)
+		exit(icode);
+	return (NULL);
+}
+
+char	**ft_error_array(int icode, int iexit, char **array, char *str)
+{
+	if (array)
+		ft_free_array(array);
+	if (str)
+		free(str);
+	ft_error_msg(icode);
+	if (iexit == 1)
+		exit(icode);
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:44:46 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/14 14:09:45 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 12:18:02 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,46 @@ char	*ft_skip_space_quotes(char *str)
 		str ++;
 	}
 	return (str);
+}
+
+static char	*ft_strjoin_free(char *str1, char *str2)
+{
+	str2 =ft_strjoin(str1, str2);
+	free(str1);
+	return (str2);
+}
+
+char	*ft_give_prompte(char **env)
+{
+	char	*str;
+	char	*ptr;
+
+	str = find_hostname(env);
+	if (!str)
+		ft_error_str(12, 1, NULL, NULL);
+	str = ft_strjoin_free(str, "@");
+	if (!str)
+		ft_error_str(12, 1, NULL, NULL);
+	ptr = cwd();
+	if (!str)
+		ft_error_str(12, 1, NULL, NULL);
+	str = ft_strjoin_free(str, ft_strrchr(ptr, '/') + 1);
+	free(ptr);
+	if (!str)
+		ft_error_str(12, 1, NULL, NULL);
+	str = ft_strjoin_free(str, "/ : ");
+	if (!str)
+		ft_error_str(12, 1, NULL, NULL);
+	
+	return (str);
+}
+
+void	*ft_malloc(int isize, int ilength, char **array, char *str)
+{
+	void	*ptr;
+
+	ptr = (void *) malloc(isize * ilength);
+	if (!ptr)
+		ft_error_int(12, 1, array, str);
+	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/20 14:32:16 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 10:40:04 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,11 @@ char	*ft_name_file(char *str)
 	i = 0;
 	str = ft_strdup(str);
 	if (!str)
-		return (NULL);
+		return (ft_error_str(12, 1, NULL, NULL));
 	while (str[i] && str[i] != '_')
 		i ++;
 	if (!str[i])
-	{
-		free(str);
-		return (NULL);
-	}
+		return (ft_error_str(202, 0, NULL, str));
 	str[i + 1] += 1;
 	return (str);
 }

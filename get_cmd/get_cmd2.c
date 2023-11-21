@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:48:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/20 14:28:01 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 09:56:29 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static t_incmd	*ft_add_end_lst(t_incmd *lst, char *wrd)
 		lst = lst->next;
 	lst_wrd->filename = ft_name_file(lst->filename);
 	lst->next = lst_wrd;
+	if (!lst_wrd->filename)
+		return (ft_free_lst(lst_start, NULL));
 	return (lst_start);
 }
 
@@ -59,18 +61,7 @@ static char	**ft_replace_str_array(char **array, int ipos, char *new_str)
 	free(array[ipos]);
 	array[ipos] = ft_strdup(new_str);
 	if (!array[ipos])
-	{
-		i = 0;
-		while (array[i])
-		{
-			free(array[i]);
-			i ++;
-			if (i == ipos)
-				i ++;
-		}
-		free(array);
-		return (NULL);
-	}
+		return (ft_error_array(12, 1, array, NULL));
 	return (array);
 }
 
@@ -100,7 +91,7 @@ char	**ft_make_dbl_redir(char **array)
 		i ++;
 	}
 	if (!lst)
-		return (NULL);
+		return (ft_error_array(12, 1, array, NULL));
 	if (ft_write_file(mem_lst) < 0)
 		return (NULL);
 	return (array);

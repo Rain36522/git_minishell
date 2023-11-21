@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/16 11:55:26 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/21 12:17:55 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,25 @@ typedef struct s_incmd
 
 char	*cwd(void);
 char	*find_hostname(char **env);
-char	*ft_error_str(int icode);
-int		ft_error_int(int icode);
 
 // Function test
 void	ft_put_array(char **a);
+
+// This funtion is for giving error message, exit programm
+// or return NULL value needed
+char	*ft_error_msg(int i);
+int		ft_error_int(int icode, int iexit, char **array, char *str);
+char	*ft_error_str(int icode, int iexit, char **array, char *str);
+char	**ft_error_array(int icode, int iexit, char **array, char *str);
 
 
 // This functions are for taking the input
 char	**get_cmd(char *prompt);
 char	**ft_make_dbl_redir(char **array);
-// int		check_up_down_key(char *str);
-// void	ft_replace_line(char *prompt, char *s2);
-// int		find_str(char *str, char *to_find, int len);
-// char	*ft_skip_space_quotes(char *str);
-// t_incmd	*ft_lst_word(char *ptr, t_incmd *lst);
-// char	*ft_dbl_redi_in(char *str);
-// char	ft_is_string(char  ptr, char quote);
-// char	*ft_str_rplace_word(char *scmd, t_incmd *lst);
 t_incmd	*ft_free_lst(t_incmd *lst, char *scmd);
-// int		ft_check_end_string(char ptr, char quote);
 char	*ft_name_file(char *str);
 int		ft_write_file(t_incmd *lst);
+
 // ft_split
 char	**ft_split_minishell(char const *s);
 int		dup_str(char **tab, const char *s, int i);
@@ -63,5 +60,9 @@ int		skip_pipe_or_dir(const char *s, int i, char c);
 int		check_spe_case(char c);
 int		skip_until(const char *s, int i, char c);
 char	**from_quotes_to_wrds(char **tab);
+
+// utils
+char	*ft_give_prompte(char **env);
+void	*ft_malloc(int isize, int ilength, char **array, char *str);
 
 #endif
