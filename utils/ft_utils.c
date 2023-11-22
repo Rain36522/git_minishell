@@ -53,7 +53,7 @@ char	*ft_give_prompte(char **env)
 	str = find_hostname(env);
 	if (!str)
 		ft_error_str(12, 1, NULL, NULL);
-	str = ft_strjoin_free(str, "@");
+	str = ft_strjoin("\033[0;32m", str);
 	if (!str)
 		ft_error_str(12, 1, NULL, NULL);
 	ptr = cwd();
@@ -66,7 +66,9 @@ char	*ft_give_prompte(char **env)
 	str = ft_strjoin_free(str, "/ : ");
 	if (!str)
 		ft_error_str(12, 1, NULL, NULL);
-	
+	str = ft_strjoin_free(str, "\033[0m");
+	if (!str)
+		ft_error_str(12, 1, NULL, NULL);
 	return (str);
 }
 
