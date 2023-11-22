@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/21 15:03:18 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/22 20:01:50 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ typedef struct s_incmd
 char	*cwd(void);
 char	*find_hostname(char **env);
 
-// Function test
-void	ft_put_array(char **a);
 
 // This funtion is for giving error message, exit programm
 // or return NULL value needed
@@ -41,11 +39,14 @@ char	*ft_error_str(int icode, int iexit, char **array, char *str);
 char	**ft_error_array(int icode, int iexit, char **array, char *str);
 
 
+
 // This functions are for taking the input
 char	**get_cmd(char *prompt);
-char	**ft_make_dbl_redir(char **array);
 t_incmd	*ft_free_lst(t_incmd *lst, char *scmd);
-char	*ft_name_file(char *str);
+int		ft_check_syntax(char **array);
+void	write_cmd_in_file(char *scmd, int fd);
+t_incmd	*ft_make_lst(char **array);
+t_incmd	*ft_free_lst(t_incmd *lst, char *str);
 int		ft_write_file(t_incmd *lst);
 
 // ft_split
@@ -64,5 +65,7 @@ char	**from_quotes_to_wrds(char **tab);
 // utils
 char	*ft_give_prompte(char **env);
 void	*ft_malloc(int isize, int ilength, char **array, char *str);
+int		ft_check_is_quote(char c, int i);
+int		ft_str_end_quotes(char *str, int i);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:48:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/21 15:35:33 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/22 20:19:00 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,6 @@ static t_incmd	*ft_add_end_lst(t_incmd *lst, char *wrd)
 	if (!lst_wrd->filename)
 		return (ft_free_lst(lst_start, NULL));
 	return (lst_start);
-}
-
-static char	**ft_replace_str_array(char **array, int ipos, char *new_str)
-{
-	free(array[ipos]);
-	array[ipos] = ft_strdup(new_str);
-	if (!array[ipos])
-		return (ft_error_array(12, 1, array, NULL));
-	return (array);
 }
 
 char	**ft_make_dbl_redir(char **array)

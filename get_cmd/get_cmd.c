@@ -5,87 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 10:48:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/21 15:35:17 by pudry            ###   ########.fr       */
+/*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
+/*   Updated: 2023/11/22 20:24:39 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-/*
- *	Check if single or double quotes aren't close
- *	return != 0 if quotes aren't closed
- *	2 = double
- *	1 = simple
- */
-static int	ft_quotes(char *str, int istatus)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\"' && istatus == 2)
-			istatus = 0;
-		else if (str[i] == '\"' && istatus == 0)
-			istatus = 2;
-		else if (str[i] == '\'' && istatus == 1)
-			istatus = 0;
-		else if (str[i] == '\'' && istatus == 0)
-			istatus = 1;
-		if (str[i] == '|' && istatus == 0)
-			return (0);
-		i++;
-	}
-	return (istatus);
-}
-
-static int	ft_check_dbl_redi_str(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (*str)
-	{
-		if (i == 0 && *str == '\"')
-			i = 2;
-		else if (i == 2 && *str == '\"')
-			i = 0;
-		else if (i == 0 && *str == '\'')
-			i = 1;
-		else if (i == 1 && *str == '\'')
-			i = 0;
-		else if (i == 0 && str[0] == '<' && str[1] == '<' && str[2] != '<')
-			return (1);
-		str ++;
-	}
-	return (0);
-}
-
-void	ft_put_array(char **a)
-{
-	int	i;
-
-	ft_printf("put array :\n");
-	i = 0;
-	while (a[i])
-	{
-		ft_printf("array : %s\n", a[i]);
-		i ++;
-	}
-	ft_printf("finish\n");
-}
-
-char	**ft_make_cmd_quote(char *scmd)
+void	ft_open_quotes_cmd(int *fd, char *scmd)
 {
 	int		i;
 	char	*ptr;
 	char	*ptr2;
 
-	if (ft_quotes(scmd, 0) == 0)
-		return (ft_split_minishell(scmd));
-	else if (ft_check_dbl_redi_str(scmd))
-		return (ft_error_array(201, 0, NULL, scmd));
 	i = ft_quotes(scmd, 0);
 	while (i != 0 && scmd)
 	{
@@ -98,27 +30,32 @@ char	**ft_make_cmd_quote(char *scmd)
 		free(ptr2);
 	}
 	if (!scmd)
-		return (ft_error_array(12, 1, NULL, NULL));
-	return (ft_split_minishell(scmd));
+		ft_error_array(12, 1, NULL, NULL);
+	ft_put_cmd_in_file(scmd, fd[1]);
 }
 
-char	**get_cmd(char *prompt)
+void	ft_double_input_redir(int *fd, char *scmd)
 {
-	char	*scmd;
 	char	**array;
+	t_incmd	*lst;
 
-	scmd = readline(prompt);
-	if (!scmd)
-		return (ft_error_array(12, 1, NULL, NULL));
-	add_history(scmd);
-	if (ft_check_dbl_redi_str(scmd) == 1 && ft_quotes(scmd, 0) == 0)
-	{
-		array = ft_split_minishell(scmd);
-		if (!array)
-			return (ft_error_array(12, 1, NULL, scmd));
-		free(scmd);
-		scmd = NULL;
-		return (ft_make_dbl_redir(array));
-	}
-	return (ft_make_cmd_quote(scmd));
+	array = ft_split_minishell(array);
+	if (!array)
+		ft_error_int(12, 1, NULL, NULL);
+	if (ft_check_syntax(array) == 0)
+		exit(201);
+	array = from_quotes_to_wrds(array);
+	if (!array)
+		ft_error_int(12, 1, NULL, NULL);
+	lst = ft_make_lst(array);
+	if (!lst)
+		ft_error_int(12, 1, NULL, NULL);
+	array = ft_replace_redir(lst, array);
+	ft_write_file(lst);
+	if (!array)
+		ft_error_int(12, 1, NULL, NULL);
+	ft_put_cmd_in_file(scmd, fd[1]);		
 }
+
+
+char	**get_cmd(char *prompt);

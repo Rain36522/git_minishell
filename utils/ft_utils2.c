@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 18:22:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/22 15:25:50 by pudry            ###   ########.fr       */
+/*   Created: 2023/11/22 18:01:00 by pudry             #+#    #+#             */
+/*   Updated: 2023/11/22 18:05:57 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		i = 1;
+#include "../Includes/minishell.h"
 
-#include "Includes/minishell.h"
-#include <stdio.h>
-# include <signal.h>
-
-void	sig_ctrl_c()
+int	ft_check_is_quote(char c, int i)
 {
-	printf("signal\n");
-	write(0, "\n", 1);
-	i = 0;
+	if (c  == '\"' && i == 2)
+		i = 0;
+	else if (c == '\"' && i == 0)
+		i = 2;
+	else if (c == '\'' && i == 0)
+		i = 1;
+	else if (c == '\'' && i == 1)
+		i = 0;
+	return (i);		
 }
 
-
-int	main(void)
+int	ft_str_end_quotes(char *str, int i)
 {
-	char	*str;
-
-	signal(SIGINT, sig_ctrl_c);
-
-	while (i)
+	i = 0;
+	while (*str)
 	{
-		str = readline("> ");
-		printf("str : %s\n", str);
+		i = ft_check_is_quote(*str, i);
+		str ++;
 	}
-	printf("function exit\n");
-	return (0);	
+	return (i);
 }
