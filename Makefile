@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/22 08:33:38 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/23 12:41:44 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,12 +43,15 @@ TEXT_6   = "           |   |  ${GREEN}C:\\> Starting minishell in 0 seconds   ${
 
 SRC_BUILT = builtin/cwd.c builtin/username.c
 
-SRC_UTILS = main.c utils/check_up_down_key.c utils/ft_utils.c
+SRC_UTILS = main.c utils/check_up_down_key.c utils/ft_utils.c utils/ft_utils2.c
 
 SRC_ERROR = error/ft_error.c error/ft_error_msg.c
 
-SRC_CMD = get_cmd/get_cmd.c get_cmd/get_cmd2.c get_cmd/get_cmd3.c \
-	get_cmd/from_quotes_to_wrds.c get_cmd/ft_split_minishell.c get_cmd/ft_split_minishell_part_2.c
+SRC_CMD_2 = check_syntax.c double_input_redir2.c from_quotes_to_wrds.c ft_split_minishell_part_2.c write_cmd_in_file.c \
+			double_input_redir.c file_to_array.c ft_split_minishell.c get_cmd.c
+SRC_CMD = $(addprefix get_cmd/,$(SRC_CMD_2))
+
+SRC_GNL = gnl/get_next_line_utils.c gnl/get_next_line.c
 
 
 
@@ -66,7 +69,7 @@ all : header compil
 	@echo $(COMPIL_6)
 	@sleep 0.2
 	@echo $(COMPIL_7)
-	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(LIBFTPRINTF) -o $(NAME)
+	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_GNL) $(LIBFTPRINTF) -o $(NAME)
 	@echo $(COMPIL_8)
 	@sleep 0.2
 	@echo $(COMPIL_9)
@@ -86,7 +89,7 @@ all : header compil
 
 leaks : header
 	@make -s -C ft_printf/
-	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(LIBFTPRINTF) -o $(NAME)
+	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_GNL) $(LIBFTPRINTF) -o $(NAME)
 	clear
 	leaks --atExit -- ./$(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:10:29 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/22 19:09:38 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 12:30:57 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int	ft_check_redir_pipe(char *array)
 int	ft_check_syntax(char **array)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (array[i])

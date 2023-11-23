@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/22 20:01:50 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 12:29:30 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ typedef struct s_incmd
 	char	*filename;
 }	t_incmd;
 
+typedef struct s_lst
+{
+	struct s_lst	*next;
+	char	*str;
+}	t_lst;
+
 char	*cwd(void);
 char	*find_hostname(char **env);
 
@@ -38,7 +44,8 @@ int		ft_error_int(int icode, int iexit, char **array, char *str);
 char	*ft_error_str(int icode, int iexit, char **array, char *str);
 char	**ft_error_array(int icode, int iexit, char **array, char *str);
 
-
+// GNL
+char	*get_next_line(int fd);
 
 // This functions are for taking the input
 char	**get_cmd(char *prompt);
@@ -48,6 +55,8 @@ void	write_cmd_in_file(char *scmd, int fd);
 t_incmd	*ft_make_lst(char **array);
 t_incmd	*ft_free_lst(t_incmd *lst, char *str);
 int		ft_write_file(t_incmd *lst);
+char	**ft_file_to_array(int fd);
+char	**ft_replace_redir(t_incmd *lst, char **array);
 
 // ft_split
 char	**ft_split_minishell(char const *s);
@@ -67,5 +76,6 @@ char	*ft_give_prompte(char **env);
 void	*ft_malloc(int isize, int ilength, char **array, char *str);
 int		ft_check_is_quote(char c, int i);
 int		ft_str_end_quotes(char *str, int i);
+int		ft_quotes(char *str, int istatus);
 
 #endif

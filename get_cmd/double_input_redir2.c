@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_input_redir2.c.c                            :+:      :+:    :+:   */
+/*   double_input_redir2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/22 20:23:52 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 12:24:00 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**ft_replace_redir(t_incmd *lst, char **array)
 	mem_lst = lst;
 	if (ft_strncmp(array[0], "<<", 3) == 0)
 		array = ft_swap_str(array);
-	while(array[i]);
+	while(array[i])
 	{
 		if (ft_strncmp(array[i], "<<", 3) == 0)
 		{
@@ -102,4 +102,5 @@ char	**ft_replace_redir(t_incmd *lst, char **array)
 		}
 		i ++;
 	}
+	return (array);
 }
