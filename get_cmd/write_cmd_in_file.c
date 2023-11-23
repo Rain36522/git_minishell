@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 16:04:48 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 17:42:03 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ static void	ft_put_cmd_in_file(char **array, int i, int fd)
 	while (array[i] && !(array[i][0] == '|' && array[i][1] == '\0'))
 	{
 		while (ft_is_redir(array[i]) == 1)
-			i += 2;
+			i += 1;
 		if (!array[i])
 			break;
+		if (i > 0 && !(array[i - 1][0] = '|' && array[i - 1][0] == '\0'))
+			ft_putstr_fd(" ", fd);
 		ft_putstr_fd(array[i], fd);
-		ft_putstr_fd(" ", fd);
 		i ++;
 	}
 	ft_putstr_fd("\n", fd);
@@ -50,6 +51,7 @@ static void	ft_put_cmd_in_file(char **array, int i, int fd)
 		if (ft_is_redir(array[i]) == 1)
 		{
 			ft_putstr_fd(array[i ++], fd);
+			ft_putstr_fd(" ", fd);
 			ft_putstr_fd(array[i], fd);
 			ft_putstr_fd("\n", fd);
 			i -= 1;
@@ -62,7 +64,6 @@ static void	ft_put_data(char **array, int fd)
 	int		i;
 
 	i = 0;
-	ft_put_array(array);
 	while (array && array[i])
 	{
 		ft_put_cmd_in_file(array, i, fd);
@@ -78,6 +79,7 @@ static void	ft_put_data(char **array, int fd)
 	}
 	free(array);
 	close(fd);
+	ft_printf("as write data\n");
 	//exit(0);
 }
 

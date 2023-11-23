@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 17:28:40 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 17:31:41 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	ft_write_dat_in_file(t_incmd *lst)
 
 	str = readline("> ");
 	isize = ft_strlen(lst->wrd) + 1;
-	ft_printf("isize : %i\n", isize);
 	while (ft_strncmp(str, lst->wrd, isize))
 	{
 		ft_putstr_fd(str, lst->fd[1]);
