@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:44:46 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 17:20:24 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:30:29 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_give_prompte(char **env)
 	str = find_hostname(env);
 	if (!str)
 		ft_error_str(12, 1, NULL, NULL);
-	str = ft_strjoin("🖥  \033[1;31m", str);
+	str = ft_strjoin("🧑‍💻 \033[1;31m", str);
 	if (!str)
 		ft_error_str(12, 1, NULL, NULL);
 	ptr = cwd();
