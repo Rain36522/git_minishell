@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 16:52:04 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 17:20:09 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_check_syntax(char **array);
 void	write_cmd_in_file(char *scmd, int fd);
 t_incmd	*ft_make_lst(char **array);
 t_incmd	*ft_free_lst(t_incmd *lst, char *str);
-int		ft_write_file(t_incmd *lst);
+void	ft_write_file(t_incmd *lst);
 char	**ft_file_to_array(int fd);
 char	**ft_replace_redir(t_incmd *lst, char **array);
 

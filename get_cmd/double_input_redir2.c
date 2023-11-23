@@ -6,30 +6,11 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 16:49:12 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 17:28:40 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
-
-static char	**ft_swap_str(char **array)
-{
-	char	*ptr1;
-	char	*ptr2;
-	int		i;
-
-	ptr1 = array[0];
-	ptr2 = array[1];
-	i = 2;
-	while (array[i])
-	{
-		array[i - 2] = array[i];
-		i ++;
-	}
-	array[i - 1] = ptr2;
-	array[i - 2] = ptr1;
-	return (array);
-}
 
 char	**ft_replace_str_array(char **a, int ipos, char *new_str, t_incmd *lst)
 {
@@ -47,21 +28,44 @@ char	**ft_replace_str_array(char **a, int ipos, char *new_str, t_incmd *lst)
 char	**ft_replace_redir(t_incmd *lst, char **array)
 {
 	int		i;
-	t_incmd	*mem_lst;
 
-	i = 1;
-	mem_lst = lst;
-	if (ft_strncmp(array[0], "<<", 3) == 0)
-		array = ft_swap_str(array);
-	while(array[i])
+	i = 0;
+	while (array[i])
 	{
 		if (ft_strncmp(array[i], "<<", 3) == 0)
 		{
-			// ft_replace_str_array(array, i, lst->filename, lst);
-			ft_replace_str_array(array, i + 1, "", lst);
+			ft_replace_str_array(array, i, "<", lst);
+			ft_replace_str_array(array, i + 1, lst->read_fd ,lst);
 			i ++;
+			lst = lst->next;
 		}
 		i ++;
 	}
 	return (array);
+}
+
+static void	ft_write_dat_in_file(t_incmd *lst)
+{
+	char	*str;
+	int		isize;
+
+	str = readline("> ");
+	isize = ft_strlen(lst->wrd) + 1;
+	ft_printf("isize : %i\n", isize);
+	while (ft_strncmp(str, lst->wrd, isize))
+	{
+		ft_putstr_fd(str, lst->fd[1]);
+		ft_putstr_fd("\n", lst->fd[1]);
+		str = readline("> ");		
+	}
+	close(lst->fd[1]);
+}
+
+void	ft_write_file(t_incmd *lst)
+{
+	while (lst)
+	{
+		ft_write_dat_in_file(lst);
+		lst = lst->next;
+	}
 }

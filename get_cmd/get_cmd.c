@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 16:47:29 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 17:07:06 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	ft_double_input_redir(int *fd, char *scmd)
 	if (!array)
 		ft_error_int(12, 1, NULL, NULL);
 	lst = ft_make_lst(array);
-	if (!lst)
-		ft_error_int(12, 1, NULL, NULL);
 	array = ft_replace_redir(lst, array);
 	ft_write_file(lst);
 	if (!array)
