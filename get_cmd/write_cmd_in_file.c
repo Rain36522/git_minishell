@@ -6,60 +6,79 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 12:40:23 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 16:04:48 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-static void	ft_put_cmd_in_file(char **array, int fd)
+static int ft_is_redir(char *s)
 {
-	int		i;
+	if (s[0] == '>')
+	{
+		if (s[1] != '>')
+			return (1);
+		else if (s[2] != '>')
+			return (1);
+	}
+	else if (s[0] == '<')
+	{
+		if (s[1] != '<')
+			return (1);
+		else if (s[2] != '<')
+			return (1);
+	}
+	return (0);
+}
 
-	i = 0;
+static void	ft_put_cmd_in_file(char **array, int i, int fd)
+{
 	while (array[i] && !(array[i][0] == '|' && array[i][1] == '\0'))
 	{
-		if (ft_strncmp(array[i], ">>", 3) == 0 || \
-			(array[i][0] == '>' && array[i][1] == '\0'))
+		while (ft_is_redir(array[i]) == 1)
 			i += 2;
 		if (!array[i])
 			break;
 		ft_putstr_fd(array[i], fd);
-		ft_putstr_fd("\n", fd);
+		ft_putstr_fd(" ", fd);
+		i ++;
 	}
-	while (i >= 0)
+	ft_putstr_fd("\n", fd);
+	while (i > 0)
 	{
 		i --;
-		if (ft_strncmp(array[i], ">>", 3) == 0 || \
-			(array[i][0] == '>' && array[i][1] == '\0'))
+		if (ft_is_redir(array[i]) == 1)
 		{
 			ft_putstr_fd(array[i ++], fd);
-			ft_putstr_fd(array[i ++], fd);
+			ft_putstr_fd(array[i], fd);
 			ft_putstr_fd("\n", fd);
+			i -= 1;
 		}
 	}
 }
 
 static void	ft_put_data(char **array, int fd)
 {
-	char	**mem_array;
+	int		i;
 
-	mem_array = array;
-	while (array)
+	i = 0;
+	ft_put_array(array);
+	while (array && array[i])
 	{
-		ft_put_cmd_in_file(array, fd);
-		while (array && array[0][0] != '\n' && array[0][1] != '\0')
+		ft_put_cmd_in_file(array, i, fd);
+		while (array[i] && !(array[i][0] == '|' && array[i][1] == '\0'))
 		{
-			free(*array);
-			array ++;
+			free(array[i]);
+			i ++;
 		}
-		if (!array)
+		if (!array[i])
 			break;
-		free(*array);
-		array ++;
+		free(array[i]);
+		i ++;
 	}
-	free(mem_array);
-	exit(0);
+	free(array);
+	close(fd);
+	//exit(0);
 }
 
 void	write_cmd_in_file(char *scmd, int fd)
@@ -76,6 +95,6 @@ void	write_cmd_in_file(char *scmd, int fd)
 		exit(201);
 	array = from_quotes_to_wrds(array);
 	if (!array)
-		ft_error_int(12, 1, NULL, NULL);	
+		ft_error_int(12, 1, NULL, NULL);
 	ft_put_data(array, fd);
 }

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 12:39:00 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 15:46:44 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,20 @@ t_lst	*ft_read_file(int fd)
 	t_lst	*lst;
 	t_lst	*ptr;
 	char	*str;
-	t_lst	*mem_lst;
 
-	mem_lst = NULL;
+	lst = NULL;
 	str = get_next_line(fd);
 	while (str)
 	{
 		ptr = (t_lst *) malloc(sizeof(t_lst) * 1);
-		if (!lst)
+		if (!ptr)
 			ft_free_file_lst(lst, 12);
 		ptr->str = str;
 		ptr->next = NULL;
-		lst = mem_lst;
-		while (mem_lst)
-			mem_lst = mem_lst->next;
-		mem_lst = ptr;
-		if (lst)
-			mem_lst = lst;
+		lst = ft_add_end_lst_lst(lst, ptr);
 		str = get_next_line(fd);
 	}
+	close(fd);
 	return (lst);
 }
 
@@ -62,7 +57,7 @@ static char	**ft_put_in_array(char **array, t_lst *lst)
 
 	i = 0;
 	mem_lst = lst;
-	while (i < 0)
+	while (lst)
 	{
 		array[i] = lst->str;
 		lst = lst->next;

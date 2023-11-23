@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 12:29:30 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 16:52:04 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef struct s_incmd
 {
 	struct s_incmd	*next;
 	char	*wrd;
-	char	*filename;
+	int		fd[2];
+	char	*read_fd;
 }	t_incmd;
 
 typedef struct s_lst
@@ -77,5 +78,9 @@ void	*ft_malloc(int isize, int ilength, char **array, char *str);
 int		ft_check_is_quote(char c, int i);
 int		ft_str_end_quotes(char *str, int i);
 int		ft_quotes(char *str, int istatus);
+t_lst	*ft_add_end_lst_lst(t_lst *lst, t_lst *ptr);
+
+// Temp
+void	ft_put_array(char **array);
 
 #endif

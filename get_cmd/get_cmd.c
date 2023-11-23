@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 12:39:41 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 16:47:29 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	ft_cmd_type(char *scmd, int *fd)
 {
 	if (!scmd || !*scmd)
 		exit(0);
-	else if (ft_quotes(scmd, 0) != 0 && ft_check_dbl_redi_str(scmd) == 1)
+	else if (ft_str_end_quotes(scmd, 0) == 0 && ft_check_dbl_redi_str(scmd) == 1)
 		ft_double_input_redir(fd, scmd);
 	else if (ft_check_dbl_redi_str(scmd) == 1)
 		ft_error_int(201, 1, NULL, scmd);
@@ -98,23 +98,31 @@ char	**get_cmd(char *prompt)
 	pid_t	pid;
 	int		fd[2];
 	char	**array;
-	int		istatus;
+	// int		istatus;
 	char	*scmd;
 	
 	scmd = readline(prompt);
 	if (pipe(fd) == -1)
 		return (ft_error_array(32, 1, NULL, prompt));
-	pid = fork();
+	//pid = fork();
+	pid = 0;
 	if (pid < 0)
 		return (ft_error_array(10, 1, NULL, prompt));
-	else if (pid != 0)
-	{
-		waitpid(pid, &istatus, 0);
-		if (istatus != 0)
-			return (ft_error_array(150, 1, NULL, prompt));
-		return (array = ft_file_to_array(fd[0]));
-	}
-	else
-		ft_cmd_type(scmd, fd);
+	// else if (pid == 0)
+	// 	ft_cmd_type(scmd, fd);
+	// else
+	// {
+	// 	waitpid(pid, &istatus, 0);
+	// 	ft_printf("child end\n");
+	// 	if (istatus != 0)
+	// 		return (ft_error_array(150, 1, NULL, prompt));
+	// 	return (array = ft_file_to_array(fd[0]));
+	// }
+	ft_cmd_type(scmd, fd);
+	ft_printf("child end\n");
+	array = ft_file_to_array(fd[0]);
+	ft_printf("124_get_cmd\n");
+	ft_put_array(array);
+	ft_printf("126\n");
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:10:29 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 12:30:57 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 16:07:11 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	ft_check_syntax(char **array)
 	i = 0;
 	while (array[i])
 	{
+		ft_printf("array : %s\n", array[i]);
 		if (ft_check_redir_pipe(array[i]) == 1)
 		{
 			if (ft_check_redir_pipe(array[i + 1]) == 1)

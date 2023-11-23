@@ -6,51 +6,11 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 12:24:00 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 16:49:12 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
-
-static int	ft_create_file(char *filename, char *wrd)
-{
-	int		fd;
-	int		isize;
-	char	*scmd;
-
-	fd = open(filename, \
-		O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	if (fd < 0)
-		return (fd);
-	isize = ft_strlen(wrd) + 1;
-	scmd = readline("$ > ");
-	while (ft_strncmp(scmd, wrd, isize) != 0)
-	{
-		ft_putstr_fd(scmd, fd);
-		ft_putstr_fd("\n", fd);
-		free(scmd);
-		scmd = readline("$ > ");
-	}
-	free(scmd);
-	close(fd);
-	return (1);
-}
-
-int	ft_write_file(t_incmd *lst)
-{
-	int		i;
-	t_incmd	*mem_lst;
-
-	i = 0;
-	mem_lst = lst;
-	while (i >= 0 && lst)
-	{
-		i = ft_create_file(lst->filename, lst->wrd);
-		lst = lst->next;
-	}
-	ft_free_lst(mem_lst, NULL);
-	return (i);
-}
 
 static char	**ft_swap_str(char **array)
 {
@@ -97,8 +57,9 @@ char	**ft_replace_redir(t_incmd *lst, char **array)
 	{
 		if (ft_strncmp(array[i], "<<", 3) == 0)
 		{
-			ft_replace_str_array(array, i ++, lst->filename, lst);
-			ft_replace_str_array(array, i, "", lst);
+			// ft_replace_str_array(array, i, lst->filename, lst);
+			ft_replace_str_array(array, i + 1, "", lst);
+			i ++;
 		}
 		i ++;
 	}

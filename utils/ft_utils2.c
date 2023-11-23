@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:01:00 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 12:27:43 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/23 15:44:52 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,34 @@ int	ft_str_end_quotes(char *str, int i)
 		str ++;
 	}
 	return (i);
+}
+
+void	ft_put_array(char **array)
+{
+	int		i;
+
+	i = 0;
+	ft_putstr_fd("put array\n", 1);
+	if (!array)
+		exit(0);
+	while (array[i])
+	{
+		ft_printf("%s", array[i]);
+		i ++;
+	}
+	ft_printf("finish\n");
+}
+
+t_lst	*ft_add_end_lst_lst(t_lst *lst, t_lst *ptr)
+{
+	t_lst	*mem_lst;
+
+	if (!lst)
+		return (ptr);
+	mem_lst = lst;
+	while (lst->next)
+		lst = lst->next;
+	lst->next = ptr;
+	
+	return (mem_lst);
 }
