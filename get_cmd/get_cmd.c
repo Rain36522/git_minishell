@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/24 14:12:28 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/24 15:39:20 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,20 @@ void	ft_double_input_redir(int *fd, char *scmd)
 void	ft_open_quotes_cmd(int *fd, char *scmd)
 {
 	int		i;
-	char	*ptr;
 	char	*ptr2;
 
 	i = ft_quotes(scmd, 0);
 	while (i != 0 && scmd)
 	{
-		ptr = scmd;
-		scmd = ft_strjoin(scmd, "\n");
-		free(ptr);
-		ptr = scmd;
+		scmd = ft_strjoin_free(scmd, "\n");
 		ptr2 = readline("> ");
 		i = ft_quotes(ptr2, i);
-		scmd = ft_strjoin(ptr, ptr2);
-		free(ptr);
+		scmd = ft_strjoin_free(scmd, ptr2);
 		free(ptr2);
 	}
 	if (!scmd)
 		ft_error_int(12, 1, NULL, NULL);
+	add_history(scmd);
 	if (ft_str_end_quotes(scmd, 0) == 0 && ft_check_dbl_redi_str(scmd) == 1)
 		ft_double_input_redir(fd, scmd);
 	else if (ft_check_dbl_redi_str(scmd) == 1)
@@ -89,6 +85,8 @@ void	ft_open_quotes_cmd(int *fd, char *scmd)
 
 static void	ft_cmd_type(char *scmd, int *fd)
 {
+	if (ft_str_end_quotes(scmd, 0) == 0)
+		add_history(scmd);
 	if (!scmd || !*scmd)
 		exit(0);
 	else if (ft_str_end_quotes(scmd, 0) == 0 && ft_check_dbl_redi_str(scmd) == 1)

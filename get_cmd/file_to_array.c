@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/24 13:00:16 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/24 14:55:18 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,15 @@ char	**ft_file_to_array(int fd)
 {
 	t_lst	*lst;
 	char	**array;
+	int		i;
 
+	i = 0;
 	lst = ft_read_file(fd);
 	array = ft_put_lst_array(lst);
+	while (array[i])
+	{
+		array[i] = ft_strdup_remov(array[i]);
+		i++;
+	}
 	return (array);
 }

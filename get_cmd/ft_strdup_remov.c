@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup_remov.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:51:41 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/23 16:05:57 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:21:29 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/minishell.h"
+#include "../Includes/minishell.h"
 #include <stdio.h>
 
 // attention return error malloc

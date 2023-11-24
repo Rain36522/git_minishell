@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/24 11:17:07 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/24 15:20:53 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	**ft_replace_redir(t_incmd *lst, char **array);
 void	ft_put_data(char **array, int fd);
 t_lst	*ft_utils_open_quotes(t_lst *ptr, t_lst *lst, int fd);
 void	ft_free_file_lst(t_lst *lst, int ierror, char **array);
+char	*ft_strdup_remov(char *str);
 
 // ft_split
 char	**ft_split_minishell(char const *s);
