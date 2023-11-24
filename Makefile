@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/24 15:21:13 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/24 17:12:54 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,46 +54,46 @@ SRC_CMD = $(addprefix get_cmd/,$(SRC_CMD_2))
 SRC_GNL = gnl/get_next_line_utils.c gnl/get_next_line.c
 
 
-all : header
+# all : header
+# 	@make -s -C ft_printf/
+# 	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_GNL) $(LIBFTPRINTF) -o $(NAME)
+# 	./$(NAME)
+
+all : header compil
 	@make -s -C ft_printf/
+	@sleep 0.5
+	@echo $(COMPIL_2)
+	@sleep 0.2
+	@echo $(COMPIL_3)
+	@sleep 0.2
+	@echo $(COMPIL_4)
+	@sleep 0.2
+	@echo $(COMPIL_5)
+	@echo $(COMPIL_6)
+	@sleep 0.2
+	@echo $(COMPIL_7)
 	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_GNL) $(LIBFTPRINTF) -o $(NAME)
+	@echo $(COMPIL_8)
+	@sleep 0.2
+	@echo $(COMPIL_9)
+	@sleep 1.2
+	@echo $(COMPIL_10)
+	@echo $(TEXT_2)
+	@echo $(TEXT_3)
+	@sleep 1.0
+	@echo $(TEXT_4)
+	@sleep 1.0
+	@echo $(TEXT_5)
+	@sleep 1.0
+	@echo $(TEXT_6)
+	@sleep 0.3
+	@make go_down
 	./$(NAME)
 
 lldb : header
 	@make -s -C ft_printf/
 	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_GNL) $(LIBFTPRINTF) -o $(NAME) -g
 	lldb ./$(NAME)
-
-# all : header compil
-# 	@make -s -C ft_printf/
-# 	@sleep 0.5
-# 	@echo $(COMPIL_2)
-# 	@sleep 0.2
-# 	@echo $(COMPIL_3)
-# 	@sleep 0.2
-# 	@echo $(COMPIL_4)
-# 	@sleep 0.2
-# 	@echo $(COMPIL_5)
-# 	@echo $(COMPIL_6)
-# 	@sleep 0.2
-# 	@echo $(COMPIL_7)
-# 	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_GNL) $(LIBFTPRINTF) -o $(NAME)
-# 	@echo $(COMPIL_8)
-# 	@sleep 0.2
-# 	@echo $(COMPIL_9)
-# 	@sleep 1.2
-# 	@echo $(COMPIL_10)
-# 	@echo $(TEXT_2)
-# 	@echo $(TEXT_3)
-# 	@sleep 1.0
-# 	@echo $(TEXT_4)
-# 	@sleep 1.0
-# 	@echo $(TEXT_5)
-# 	@sleep 1.0
-# 	@echo $(TEXT_6)
-# 	@sleep 0.3
-# 	@make go_down
-# 	./$(NAME)
 
 leaks : header
 	@make -s -C ft_printf/

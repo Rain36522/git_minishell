@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:52:09 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/24 15:49:22 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/24 16:52:00 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ char	**ft_error_array(int icode, int iexit, char **array, char *str)
 	ft_error_msg(icode);
 	if (iexit == 1)
 	{
-		rl_clear_history();
 		exit(icode);
 	}
 	return (NULL);

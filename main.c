@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/24 15:49:06 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/24 16:52:03 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int	main(int argc, char ** argv, char **env)
 		acmd = get_cmd(prompt);
 	}
 	free(prompt);
-	rl_clear_history();
 	return (0);
 }
