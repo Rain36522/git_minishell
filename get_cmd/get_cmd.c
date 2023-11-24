@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/24 15:39:20 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/24 15:47:45 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,12 @@ void	ft_open_quotes_cmd(int *fd, char *scmd)
 
 static void	ft_cmd_type(char *scmd, int *fd)
 {
+	if (!scmd)
+	{
+		
+	}
 	if (ft_str_end_quotes(scmd, 0) == 0)
 		add_history(scmd);
-	if (!scmd || !*scmd)
-		exit(0);
 	else if (ft_str_end_quotes(scmd, 0) == 0 && ft_check_dbl_redi_str(scmd) == 1)
 		ft_double_input_redir(fd, scmd);
 	else if (ft_check_dbl_redi_str(scmd) == 1)
