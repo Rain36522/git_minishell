@@ -6,13 +6,13 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/23 14:07:38 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/24 08:55:49 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -lreadline
+FLAGS = -lreadline
 LIBFTPRINTF = ft_printf/libftprintf.a
 
 BLUE = \\033[1;34m
@@ -59,6 +59,10 @@ all : header
 	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_GNL) $(LIBFTPRINTF) -o $(NAME)
 	./$(NAME)
 
+lldb : header
+	@make -s -C ft_printf/
+	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_GNL) $(LIBFTPRINTF) -o $(NAME) -g
+	lldb ./$(NAME)
 
 # all : header compil
 # 	@make -s -C ft_printf/
@@ -94,7 +98,6 @@ all : header
 leaks : header
 	@make -s -C ft_printf/
 	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_GNL) $(LIBFTPRINTF) -o $(NAME)
-	clear
 	leaks --atExit -- ./$(NAME)
 
 clean :

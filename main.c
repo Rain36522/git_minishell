@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/22 11:48:57 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/24 13:37:23 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ int	main(int argc, char ** argv, char **env)
 	prompt = ft_give_prompte(env);
 	j = 0;
 	i = 0;
-	while (i == 0)
+	while (i < 1)
 	{
 		acmd = get_cmd(prompt);
-		i ++;
+		// i ++;
 	}
+	free(prompt);
 	return (0);
 }

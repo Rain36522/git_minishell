@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:41:45 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 17:07:33 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/24 07:45:58 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_incmd	*ft_add_end_lstincmd(t_incmd *lst, t_incmd *ptr)
 	mem_lst = lst;
 	while (lst->next)
 		lst = lst->next;
-	ptr = lst->next;
+	lst->next = ptr;
 	return (mem_lst);
 }
 
@@ -84,7 +84,9 @@ t_incmd	*ft_make_lst(char **array)
 	while (array[i])
 	{
 		if (ft_strncmp(array[i], "<<", 3) == 0)
+		{
 			lst = ft_create_lst(lst, array[i + 1], array);
+		}
 		i ++;
 	}
 	return (lst);	

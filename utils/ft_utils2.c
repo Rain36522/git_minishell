@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:01:00 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 15:44:52 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/24 11:16:20 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,15 @@ void	ft_put_array(char **array)
 	int		i;
 
 	i = 0;
-	ft_putstr_fd("put array\n", 1);
+	ft_putstr_fd("--------------------------------------------------------------\n", 1);
 	if (!array)
 		exit(0);
 	while (array[i])
 	{
 		ft_printf("%s", array[i]);
+		ft_putstr_fd("--------------------------------------------------------------\n", 1);
 		i ++;
 	}
-	ft_printf("finish\n");
 }
 
 t_lst	*ft_add_end_lst_lst(t_lst *lst, t_lst *ptr)
@@ -86,4 +86,30 @@ t_lst	*ft_add_end_lst_lst(t_lst *lst, t_lst *ptr)
 	lst->next = ptr;
 	
 	return (mem_lst);
+}
+
+t_lst	*ft_utils_open_quotes(t_lst *ptr, t_lst *lst, int fd)
+{
+	char	*scmd;
+
+	while (ft_str_end_quotes(ptr->str, 0) != 0)
+	{
+		scmd = get_next_line(fd);
+		if (!scmd)
+		{
+			ft_free_file_lst(lst, 0, NULL);
+			ft_error_int(201, 0, NULL, ptr->str);
+			free(ptr);
+			return (NULL);
+		}
+		ptr->str = ft_strjoin_free(ptr->str, scmd);
+		free(scmd);
+		if (!ptr->str)
+		{
+			free(ptr);
+			ft_free_file_lst(lst, 12, NULL);
+			return (NULL);
+		}
+	}
+	return (ptr);
 }

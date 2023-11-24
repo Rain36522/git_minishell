@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:44:46 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 17:34:30 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/24 10:44:19 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_skip_space_quotes(char *str)
 	return (str);
 }
 
-static char	*ft_strjoin_free(char *str1, char *str2)
+char	*ft_strjoin_free(char *str1, char *str2)
 {
 	str2 =ft_strjoin(str1, str2);
 	free(str1);
@@ -50,10 +50,11 @@ char	*ft_give_prompte(char **env)
 	char	*str;
 	char	*ptr;
 
-	str = find_hostname(env);
-	if (!str)
+	ptr = find_hostname(env);
+	if (!ptr)
 		ft_error_str(12, 1, NULL, NULL);
-	str = ft_strjoin("👤 \033[1;31m", str);
+	str = ft_strjoin("👤 \033[1;31m", ptr);
+	free(ptr);
 	if (!str)
 		ft_error_str(12, 1, NULL, NULL);
 	ptr = cwd();

@@ -6,54 +6,11 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 17:52:19 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/24 14:12:28 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
-
-void	ft_open_quotes_cmd(int *fd, char *scmd)
-{
-	int		i;
-	char	*ptr;
-	char	*ptr2;
-
-	i = ft_quotes(scmd, 0);
-	while (i != 0 && scmd)
-	{
-		scmd = ft_strjoin(scmd, "\n");
-		ptr = scmd;
-		ptr2 = readline("> ");
-		i = ft_quotes(ptr2, i);
-		scmd = ft_strjoin(ptr, ptr2);
-		free(ptr);
-		free(ptr2);
-	}
-	if (!scmd)
-		ft_error_int(12, 1, NULL, NULL);
-	write_cmd_in_file(scmd, fd[1]);
-}
-
-void	ft_double_input_redir(int *fd, char *scmd)
-{
-	char	**array;
-	t_incmd	*lst;
-
-	array = ft_split_minishell(scmd);
-	if (!array)
-		ft_error_int(12, 1, NULL, NULL);
-	if (ft_check_syntax(array) == 0)
-		exit(201);
-	array = from_quotes_to_wrds(array);
-	if (!array)
-		ft_error_int(12, 1, NULL, NULL);
-	lst = ft_make_lst(array);
-	array = ft_replace_redir(lst, array);
-	ft_write_file(lst);
-	if (!array)
-		ft_error_int(12, 1, NULL, NULL);
-	write_cmd_in_file(scmd, fd[1]);		
-}
 
 static int	ft_check_dbl_redi_str(char *str)
 {
@@ -77,6 +34,59 @@ static int	ft_check_dbl_redi_str(char *str)
 	return (0);
 }
 
+void	ft_double_input_redir(int *fd, char *scmd)
+{
+	char	**array;
+	t_incmd	*lst;
+	t_incmd	*mem;
+
+	array = ft_split_minishell(scmd);
+	free(scmd);
+	if (!array)
+		ft_error_int(12, 1, NULL, NULL);
+	if (ft_check_syntax(array) == 0)
+		exit(201);
+	if (!array)
+		ft_error_int(12, 1, NULL, NULL);
+	lst = ft_make_lst(array);
+	mem = lst;
+	array = ft_replace_redir(lst, array);
+	ft_put_array(array);
+	ft_write_file(lst);
+	if (!array)
+		ft_error_int(12, 1, NULL, NULL);
+	ft_put_data(array, fd[1]);
+}
+
+void	ft_open_quotes_cmd(int *fd, char *scmd)
+{
+	int		i;
+	char	*ptr;
+	char	*ptr2;
+
+	i = ft_quotes(scmd, 0);
+	while (i != 0 && scmd)
+	{
+		ptr = scmd;
+		scmd = ft_strjoin(scmd, "\n");
+		free(ptr);
+		ptr = scmd;
+		ptr2 = readline("> ");
+		i = ft_quotes(ptr2, i);
+		scmd = ft_strjoin(ptr, ptr2);
+		free(ptr);
+		free(ptr2);
+	}
+	if (!scmd)
+		ft_error_int(12, 1, NULL, NULL);
+	if (ft_str_end_quotes(scmd, 0) == 0 && ft_check_dbl_redi_str(scmd) == 1)
+		ft_double_input_redir(fd, scmd);
+	else if (ft_check_dbl_redi_str(scmd) == 1)
+		ft_error_int(201, 1, NULL, scmd);
+	else
+		write_cmd_in_file(scmd, fd[1]);
+}
+
 static void	ft_cmd_type(char *scmd, int *fd)
 {
 	if (!scmd || !*scmd)
@@ -85,7 +95,7 @@ static void	ft_cmd_type(char *scmd, int *fd)
 		ft_double_input_redir(fd, scmd);
 	else if (ft_check_dbl_redi_str(scmd) == 1)
 		ft_error_int(201, 1, NULL, scmd);
-	else if (ft_quotes(scmd, 0) != 0)
+	else if (ft_str_end_quotes(scmd, 0) != 0)
 		ft_open_quotes_cmd(fd, scmd);
 	else
 		write_cmd_in_file(scmd, fd[1]);
@@ -117,10 +127,8 @@ char	**get_cmd(char *prompt)
 	// 	return (array = ft_file_to_array(fd[0]));
 	// }
 	ft_cmd_type(scmd, fd);
-	ft_printf("child end\n");
 	array = ft_file_to_array(fd[0]);
-	ft_printf("124_get_cmd\n");
 	ft_put_array(array);
-	ft_printf("126\n");
+	ft_error_int(0, 0, array, NULL);
 	return (NULL);
 }

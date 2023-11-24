@@ -6,13 +6,13 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/23 15:46:44 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/24 13:00:16 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-static void	ft_free_file_lst(t_lst *lst, int ierror)
+void	ft_free_file_lst(t_lst *lst, int ierror, char **array)
 {
 	t_lst	*ptr;
 
@@ -23,7 +23,7 @@ static void	ft_free_file_lst(t_lst *lst, int ierror)
 		free(lst);
 		lst = ptr;
 	}
-	if (ierror)
+	if (ierror != 0)
 		ft_error_int(ierror, 1, NULL, NULL);
 }
 
@@ -37,11 +37,13 @@ t_lst	*ft_read_file(int fd)
 	str = get_next_line(fd);
 	while (str)
 	{
+		ft_printf("str ; %s\n", str);
 		ptr = (t_lst *) malloc(sizeof(t_lst) * 1);
 		if (!ptr)
-			ft_free_file_lst(lst, 12);
+			ft_free_file_lst(lst, 12, NULL);
 		ptr->str = str;
 		ptr->next = NULL;
+		ptr = ft_utils_open_quotes(ptr, lst, fd);
 		lst = ft_add_end_lst_lst(lst, ptr);
 		str = get_next_line(fd);
 	}
@@ -54,6 +56,7 @@ static char	**ft_put_in_array(char **array, t_lst *lst)
 	int		i;
 	t_lst	*mem_lst;
 	t_lst	*ptr;
+	char	*str;
 
 	i = 0;
 	mem_lst = lst;
@@ -65,9 +68,9 @@ static char	**ft_put_in_array(char **array, t_lst *lst)
 	}
 	while (mem_lst)
 	{
-		ptr = mem_lst->next;
+		lst = mem_lst->next;
 		free(mem_lst);
-		mem_lst = ptr;
+		mem_lst = lst;
 	}
 	return (array);
 }
@@ -87,7 +90,7 @@ static char	**ft_put_lst_array(t_lst *mem_lst)
 	}
 	array = (char **) malloc(sizeof(char *) * (isize + 1));
 	if (!array)
-		ft_free_file_lst(lst, 12);
+		ft_free_file_lst(lst, 12, NULL);
 	array[isize] = NULL;
 	array = ft_put_in_array(array, lst);
 	return (array);
