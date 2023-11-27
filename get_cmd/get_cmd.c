@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/24 17:33:05 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/25 20:49:16 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ char	**get_cmd(char *prompt)
 	pid_t	pid;
 	int		fd[2];
 	char	**array;
-	// int		istatus;
 	char	*scmd;
-	
+	// int		istatus;
+
 	scmd = readline(prompt);
 	if (pipe(fd) == -1)
 		return (ft_error_array(32, 1, NULL, prompt));

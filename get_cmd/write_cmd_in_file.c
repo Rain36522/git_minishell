@@ -6,13 +6,13 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/24 10:31:54 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/25 20:51:18 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-static int ft_is_redir(char *s)
+static int	ft_is_redir(char *s)
 {
 	if (s[0] == '>')
 	{
@@ -60,11 +60,11 @@ static void	ft_put_cmd_in_file(char **array, int i, int fd)
 	while (array[i] && !(array[i][0] == '|' && array[i][1] == '\0'))
 	{
 		if (ft_is_redir(array[i]) != 0)
-			i +=2;
+			i += 2;
 		else
 		{
 			if (!array[i])
-				break;
+				break ;
 			if (k != 0)
 				ft_putstr_fd(" ", fd);
 			ft_putstr_fd(array[i], fd);
@@ -90,7 +90,7 @@ void	ft_put_data(char **array, int fd)
 			i ++;
 		}
 		if (!array[i])
-			break;
+			break ;
 		free(array[i]);
 		i ++;
 	}
@@ -107,7 +107,7 @@ void	write_cmd_in_file(char *scmd, int fd)
 	array = ft_split_minishell(scmd);
 	free(scmd);
 	if (!array)
-		ft_error_int(12, 1, NULL, NULL);	
+		ft_error_int(12, 1, NULL, NULL);
 	i = ft_check_syntax(array);
 	if (i == 0)
 		exit(201);

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:51:41 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/24 15:21:29 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/25 20:47:01 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strdup_remov(char *str)
 	if (str[last - 1] == '\n')
 	{
 		dup = malloc(sizeof(char) * last);
-		if  (!dup)
+		if (!dup)
 			return (NULL);
 		i = 0;
 		while (str[i + 1])

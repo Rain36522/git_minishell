@@ -6,53 +6,14 @@
 /*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:19:01 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/24 15:15:02 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/25 20:38:05 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include "Includes/minishell.h"
-
-int	dollar_gestion(char *str, int i, char **envp)
-{
-	int		j;
-	int		k;
-	int		start;
-
-	start = i;
-	k = 0;
-	j = 0;
-	while (str[i] && str[i] != 32 && str[i] != '\'' && str[i] != '\"')
-		i++;
-	while (envp[j])
-	{
-		if (ft_strncmp(envp[j], str + start + 1, i - start - 1) == 0)
-		{
-			while (envp[j][k] && envp[j][k] != '=')
-				k++;
-			printf ("%s", envp[j] + k + 1);
-			return (i);
-		}
-		j++;
-		k = 0;
-	}
-	return (i);
-}
-
-int	print_until(char *str, int i, char c, char **envp)
-{
-	while (str[i] && str[i] != c)
-	{
-		if (str[i] == '$')
-			i = dollar_gestion(str, i, envp);
-		printf ("%c", str[i]);
-		i++;
-	}
-	if (str[i] && str[i] == c)
-		i++;
-	return (i);
-}
+#include "Includes/header_builtin.h"
 
 int	is_n(char *str, int i)
 {
@@ -138,11 +99,11 @@ int	echo_cmd(char *str, char **envp)
 	return (0);
 }
 
-int	main(int argc, char **argv, char **envp)
+/*int	main(int argc, char **argv, char **envp)
 {
 	(void) argc;
 
 	//echo_cmd("echo  coucou\"$OLDPWD\"greiohg \\nbangala", envp);
 	echo_cmd(argv[1], envp);
 	return (0);
-}
+}*/

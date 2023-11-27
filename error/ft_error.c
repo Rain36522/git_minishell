@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:52:09 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/24 16:52:00 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/25 20:54:55 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,3 @@ char	**ft_error_array(int icode, int iexit, char **array, char *str)
 	}
 	return (NULL);
 }
-

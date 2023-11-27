@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
+/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:36:58 by pudry             #+#    #+#             */
-/*   Updated: 2023/10/23 17:30:41 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:29:33 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_printf(const char *str, ...)
 	char	*s;
 	va_list	va_lst;
 
+	(void) i;
 	s = (char *)str;
 	i = ft_cntarg(s);
 	isize = 0;

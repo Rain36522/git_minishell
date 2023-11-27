@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:01:00 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/24 17:12:23 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/25 20:53:56 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_check_is_quote(char c, int i)
 {
-	if (c  == '\"' && i == 2)
+	if (c == '\"' && i == 2)
 		i = 0;
 	else if (c == '\"' && i == 0)
 		i = 2;
@@ -22,7 +22,7 @@ int	ft_check_is_quote(char c, int i)
 		i = 1;
 	else if (c == '\'' && i == 1)
 		i = 0;
-	return (i);		
+	return (i);
 }
 
 int	ft_quotes(char *str, int istatus)
@@ -84,7 +84,6 @@ t_lst	*ft_add_end_lst_lst(t_lst *lst, t_lst *ptr)
 	while (lst->next)
 		lst = lst->next;
 	lst->next = ptr;
-	
 	return (mem_lst);
 }
 

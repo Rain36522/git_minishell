@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:41:45 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/24 07:45:58 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/25 20:43:21 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static t_incmd	*ft_create_lst(t_incmd *lst, char *wrd, char **array)
 		ft_error_int(32, 1, array, wrd);
 		return (NULL);
 	}
-	return(ft_add_end_lstincmd(lst, ptr));
+	return (ft_add_end_lstincmd(lst, ptr));
 }
 
 t_incmd	*ft_make_lst(char **array)
@@ -89,6 +89,5 @@ t_incmd	*ft_make_lst(char **array)
 		}
 		i ++;
 	}
-	return (lst);	
+	return (lst);
 }
-

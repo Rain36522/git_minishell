@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_minishell.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:31:26 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/16 10:38:18 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/25 20:39:28 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,24 +94,4 @@ char	**free_split(char **tab)
 	free(tab);
 	tab = NULL;
 	return (tab);
-}
-
-/*int	main(void)
-{
-	char  		*s;
-	char		**tab = NULL;
-	
-	s = "<<<< a < << b < <c<<a<<<<<<<< <<<<<<< d";
-	tab = ft_split_minishell(s);
-	int		i = 0;
-	while (tab[i])
-	{
-	    printf("tab: %s\n", tab[i]);
-		free(tab[i]);
-	    i++;
-	}
-	printf("fin: %s\n", tab[i]);
-	free(tab[i]);
-	free(tab);
-	return (0);
 }

@@ -3,44 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pudry <pudry@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 07:56:05 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/27 07:56:05 by pudry            ###   ########.ch       */
+/*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
+/*   Updated: 2023/11/25 21:04:23 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
-
 # include "../ft_printf/ft_printf.h"
 # include "../ft_printf/libft/libft.h"
 # include <readline/readline.h>
 # include <termios.h>
-#include <fcntl.h>
+# include <errno.h>
+# include <fcntl.h>
 # include <signal.h>
 
 typedef struct s_incmd
 {
 	struct s_incmd	*next;
-	char	*wrd;
-	int		fd[2];
-	char	*read_fd;
-}	t_incmd;
+	char			*wrd;
+	int				fd[2];
+	char			*read_fd;
+}				t_incmd;
 
 typedef struct s_lst
 {
 	struct s_lst	*next;
-	char	*str;
+	char			*str;
 }	t_lst;
 
 char	*cwd(void);
 char	*find_hostname(char **env);
-
 
 // This funtion is for giving error message, exit programm
 // or return NULL value needed

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/24 14:12:35 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/25 20:44:55 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char	**ft_replace_redir(t_incmd *lst, char **array)
 	{
 		if (ft_strncmp(array[i], "<<", 3) == 0)
 		{
-			ft_replace_str_array(array, i ++, "<", lst);
-			ft_replace_str_array(array, i, lst->read_fd ,lst);
+			ft_replace_str_array(array, i++, "<", lst);
+			ft_replace_str_array(array, i, lst->read_fd, lst);
 			lst = lst->next;
 		}
 		i ++;
@@ -55,7 +55,7 @@ static void	ft_write_dat_in_file(t_incmd *lst)
 		ft_putstr_fd(str, lst->fd[1]);
 		free(str);
 		ft_putstr_fd("\n", lst->fd[1]);
-		str = readline(">> ");		
+		str = readline(">> ");
 	}
 	free(str);
 	close(lst->fd[1]);
@@ -65,7 +65,7 @@ void	ft_write_file(t_incmd *lst)
 {
 	t_incmd	*lst_next;
 
-while (lst)
+	while (lst)
 	{
 		lst_next = lst->next;
 		ft_write_dat_in_file(lst);

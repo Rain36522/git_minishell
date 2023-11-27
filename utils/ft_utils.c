@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:44:46 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/24 10:44:19 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/25 20:53:10 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_skip_space_quotes(char *str)
 
 char	*ft_strjoin_free(char *str1, char *str2)
 {
-	str2 =ft_strjoin(str1, str2);
+	str2 = ft_strjoin(str1, str2);
 	free(str1);
 	return (str2);
 }
