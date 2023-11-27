@@ -23,5 +23,7 @@ void	ft_error_msg(int i)
 		ft_printf("Error : Cannot allocate memory\n");
 	else if (i == 23)
 		ft_printf("Error : To many open files\n");
+	else if (i == 201)
+		ft_printf("Error : command not found\n");
 	ft_printf("\033[0m");
 }
