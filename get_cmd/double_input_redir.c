@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:41:45 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/25 20:43:21 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/28 12:34:07 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static t_incmd	*ft_add_end_lstincmd(t_incmd *lst, t_incmd *ptr)
 static t_incmd	*ft_create_lst(t_incmd *lst, char *wrd, char **array)
 {
 	t_incmd	*ptr;
+	int		i;
 
 	ptr = (t_incmd *) malloc(sizeof(t_incmd));
 	if (!ptr)

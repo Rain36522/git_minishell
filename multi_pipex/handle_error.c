@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 20:44:24 by csil              #+#    #+#             */
-/*   Updated: 2023/11/26 14:57:07 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/28 14:49:25 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,10 @@ void	close_all_pipes(t_pipex *list)
 void	free_all_exit(t_pipex *list, int nbr)
 {
 	close_all_pipes(list);
-	close(list->input);
 	close(list->output);
-	if (list->pipe)
-		free(list->pipe);
-	list->pipe = NULL;
+	// if (list->pipe)
+	// 	free(list->pipe);
+	// list->pipe = NULL;
 	if (list->pid_array)
 		free(list->pid_array);
 	list->pid_array = NULL;

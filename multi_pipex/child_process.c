@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:22:52 by csil              #+#    #+#             */
-/*   Updated: 2023/11/26 20:58:32 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/28 12:39:31 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,18 +86,19 @@ void	child_process(char **argv, char **envp, t_pipex l)
 			ft_dup2(&l, l.pipe[l.index * 2 - 2], l.output);
 		else
 			ft_dup2(&l, l.pipe[l.index * 2 - 2], l.pipe[l.index * 2 + 1]);
-		close_all_pipes(&l);
-		l.cmd_args = ft_split(argv[l.index + 1], ' ');
+		l.cmd_args = ft_split_minishell(argv[l.index + 1]);
 		if (!l.cmd_args)
 			free_all_exit(&l, 12);
+		close_all_pipes(&l);
 		l.cmd = create_final_path(&l, l.cmd_path, l.cmd_args[0]);
+		ft_make_redir(l.cmd_args);
 		if (!l.cmd)
 			cmd_not_found(&l);
 		//builtin_checker(&l, l.cmd_args[0], l.cmd_args);
-		//redirection_checker(&l, l.cmd_args[0], l.cmd_args);
 		if (execve(l.cmd, l.cmd_args, envp) == -1)
 		{
 			free_all_exit (&l, l.exit_value);
 		}
+		exit(0);
 	}
 }

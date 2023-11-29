@@ -3,18 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/25 21:04:23 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/28 16:45:05 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE (10)
+# endif
+
 # include "../ft_printf/ft_printf.h"
 # include "../ft_printf/libft/libft.h"
+# include "../multi_pipex/pipex.h"
 # include <readline/readline.h>
 # include <termios.h>
 # include <errno.h>
@@ -35,6 +40,13 @@ typedef struct s_lst
 	char			*str;
 }	t_lst;
 
+typedef struct s_acmds
+{
+	char	**array;
+	int		fd_pipe[2];
+	int		isize;
+}	t_acmd;
+
 char	*cwd(void);
 char	*find_hostname(char **env);
 
@@ -42,21 +54,21 @@ char	*find_hostname(char **env);
 // or return NULL value needed
 void	ft_error_msg(int i);
 int		ft_error_int(int icode, int iexit, char **array, char *str);
-char	*ft_error_str(int icode, int iexit, char **array, char *str);
-char	**ft_error_array(int icode, int iexit, char **array, char *str);
+void	*ft_error_ptr(int icode, int iexit, char **array, char *str);
+void	*ft_error_child(int icode, char **array, char *str, char *str2);
 
 // GNL
 char	*get_next_line(int fd);
 
 // This functions are for taking the input
-char	**get_cmd(char *prompt);
+t_acmd	*get_cmd(char *prompt);
 t_incmd	*ft_free_lst(t_incmd *lst, char *scmd);
 int		ft_check_syntax(char **array);
 void	write_cmd_in_file(char *scmd, int fd);
 t_incmd	*ft_make_lst(char **array);
 t_incmd	*ft_free_lst(t_incmd *lst, char *str);
 void	ft_write_file(t_incmd *lst);
-char	**ft_file_to_array(int fd);
+t_acmd	*ft_file_to_array(int fd);
 char	**ft_replace_redir(t_incmd *lst, char **array);
 void	ft_put_data(char **array, int fd);
 t_lst	*ft_utils_open_quotes(t_lst *ptr, t_lst *lst, int fd);
@@ -84,6 +96,13 @@ int		ft_str_end_quotes(char *str, int i);
 int		ft_quotes(char *str, int istatus);
 t_lst	*ft_add_end_lst_lst(t_lst *lst, t_lst *ptr);
 char	*ft_strjoin_free(char *str1, char *str2);
+int		ft_cnt_dbl_redir_str(char *str);
+void	ft_free_array(char ** array);
+void	ft_print_pipe_out(int fd_in, int fd_out);
+t_acmd	*ft_util_add_pipe(t_acmd *acmd_data);
+
+// pipex
+int		pipex(int argc, char **argv, char **envp);
 
 // Temp
 void	ft_put_array(char **array);

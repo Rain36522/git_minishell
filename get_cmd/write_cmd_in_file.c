@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/25 20:51:18 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/28 11:51:52 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ static void	ft_put_redir_in_file(char **array, int itype, int i, int fd)
 		if (ft_is_redir(array[i]) == itype)
 		{
 			ft_putstr_fd(array[i], fd);
-			ft_printf("write : %s\n", array[i]);
 			ft_putstr_fd(" ", fd);
 			ft_putstr_fd(array[i + 1], fd);
-			ft_printf("write : %s\n", array[i + 1]);
 			ft_putstr_fd("\n", fd);
 			i ++;
 		}
@@ -96,7 +94,7 @@ void	ft_put_data(char **array, int fd)
 	}
 	free(array);
 	close(fd);
-	//exit(0);
+	exit(0);
 }
 
 void	write_cmd_in_file(char *scmd, int fd)
@@ -110,8 +108,8 @@ void	write_cmd_in_file(char *scmd, int fd)
 		ft_error_int(12, 1, NULL, NULL);
 	i = ft_check_syntax(array);
 	if (i == 0)
-		exit(201);
+		ft_error_int(201, 1, array, NULL);
 	if (!array)
-		ft_error_int(12, 1, NULL, NULL);
+		ft_error_int(201, 1, array, NULL);
 	ft_put_data(array, fd);
 }

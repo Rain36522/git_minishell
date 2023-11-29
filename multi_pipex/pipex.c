@@ -3,24 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:15:58 by csil              #+#    #+#             */
-/*   Updated: 2023/11/26 21:09:33 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/28 14:49:46 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include <stdio.h>
 
-// open and check error for the input file
-void	set_infile(char **argv, t_pipex *list)
-{
-	int		infile;
-
-	infile = ft_atoi(argv[0]);
-	list->input = infile;
-}
 
 // open and check error for the output file
 // pour handle le cas output : >> file 
@@ -35,7 +27,6 @@ void	set_outfile(int argc, char **argv, t_pipex *list)
 
 void	init_multi_pipex(t_pipex *list, int argc, char **argv)
 {
-	set_infile(argv, list);
 	set_outfile(argc, argv, list);
 	list->cmd_nbr = argc - 2;
 	list->pipe_nbr = (2 * (list->cmd_nbr - 1));

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/25 20:45:59 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/28 14:43:08 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,9 @@ t_lst	*ft_read_file(int fd)
 	char	*str;
 
 	lst = NULL;
-	ft_printf("37 i : %i\n", fd);
 	str = get_next_line(fd);
-	ft_printf("39\n");
 	while (str)
 	{
-		ft_printf("str ; %s\n", str);
 		ptr = (t_lst *) malloc(sizeof(t_lst) * 1);
 		if (!ptr)
 			ft_free_file_lst(lst, 12, NULL);
@@ -53,14 +50,17 @@ t_lst	*ft_read_file(int fd)
 	return (lst);
 }
 
-static char	**ft_put_in_array(char **array, t_lst *lst)
+static char	**ft_put_in_array(char **array, t_lst *lst, int isize)
 {
 	int		i;
 	t_lst	*mem_lst;
 	t_lst	*ptr;
 	char	*str;
 
-	i = 0;
+	if (isize == 1)
+		i = 0;
+	else
+		i = 1;
 	mem_lst = lst;
 	while (lst)
 	{
@@ -77,7 +77,7 @@ static char	**ft_put_in_array(char **array, t_lst *lst)
 	return (array);
 }
 
-static char	**ft_put_lst_array(t_lst *mem_lst)
+static char	**ft_put_lst_array(t_lst *mem_lst, int *fd)
 {
 	int		isize;
 	t_lst	*lst;
@@ -90,32 +90,43 @@ static char	**ft_put_lst_array(t_lst *mem_lst)
 		isize ++;
 		mem_lst = mem_lst->next;
 	}
+	if (isize > 1)
+		isize += 2;
 	array = (char **) malloc(sizeof(char *) * (isize + 1));
 	if (!array)
 		ft_free_file_lst(lst, 12, NULL);
 	array[isize] = NULL;
-	array = ft_put_in_array(array, lst);
+	if (isize > 1)
+	{
+		array[0] = ft_itoa(fd[0]);
+		array[isize - 1] = ft_itoa(fd[1]);
+	}
+	array = ft_put_in_array(array, lst, isize);
 	return (array);
 }
 
-char	**ft_file_to_array(int fd)
+t_acmd	*ft_file_to_array(int fd)
 {
 	t_lst	*lst;
-	char	**array;
 	int		i;
+	int		*fd_pipex;
+	t_acmd	*acmd_data;
 
-	i = 0;
-	ft_printf("106\n");
+	acmd_data = (t_acmd *) malloc(sizeof(t_acmd) * 1);
+	if (!acmd_data)
+		ft_error_int(12, 1, NULL, NULL);
 	lst = ft_read_file(fd);
-	ft_printf("107\n");
-	array = ft_put_lst_array(lst);
-	ft_printf("109\n");
-	while (array[i])
+	acmd_data = ft_util_add_pipe(acmd_data);
+	acmd_data->array = ft_put_lst_array(lst, acmd_data->fd_pipe);
+	if (acmd_data->array[1])
+		i = 1;
+	while (acmd_data->array[i + 1] )
 	{
-		ft_printf("112\n");
-		array[i] = ft_strdup_remov(array[i]);
-		ft_printf("114\n");
+		acmd_data->array[i] = ft_strdup_remov(acmd_data->array[i]);
 		i++;
 	}
-	return (array);
+	acmd_data->isize = 0;
+	while (acmd_data->array[acmd_data->isize])
+		acmd_data->isize ++;
+	return (acmd_data);
 }

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:44:46 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/25 20:53:10 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/27 15:43:29 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,24 @@ char	*ft_give_prompte(char **env)
 
 	ptr = find_hostname(env);
 	if (!ptr)
-		ft_error_str(12, 1, NULL, NULL);
+		ft_error_ptr(12, 1, NULL, NULL);
 	str = ft_strjoin("👤 \033[1;31m", ptr);
 	free(ptr);
 	if (!str)
-		ft_error_str(12, 1, NULL, NULL);
+		ft_error_ptr(12, 1, NULL, NULL);
 	ptr = cwd();
 	if (!str)
-		ft_error_str(12, 1, NULL, NULL);
+		ft_error_ptr(12, 1, NULL, NULL);
 	str = ft_strjoin_free(str, " 📂 \033[0;37m");
 	if (!str)
-		ft_error_str(12, 1, NULL, NULL);
+		ft_error_ptr(12, 1, NULL, NULL);
 	str = ft_strjoin_free(str, ft_strrchr(ptr, '/') + 1);
 	free(ptr);
 	if (!str)
-		ft_error_str(12, 1, NULL, NULL);
+		ft_error_ptr(12, 1, NULL, NULL);
 	str = ft_strjoin_free(str, " \033[1;37m➤ $ \033[0m");
 	if (!str)
-		ft_error_str(12, 1, NULL, NULL);
+		ft_error_ptr(12, 1, NULL, NULL);
 	return (str);
 }
 

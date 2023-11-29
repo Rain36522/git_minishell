@@ -6,13 +6,13 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/25 20:44:55 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/28 16:45:00 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-char	**ft_replace_str_array(char **a, int ipos, char *new_str, t_incmd *lst)
+static char	**ft_replace_str_array(char **a, int ipos, char *new_str, t_incmd *lst)
 {
 	free(a[ipos]);
 	a[ipos] = ft_strdup(new_str);
@@ -20,7 +20,7 @@ char	**ft_replace_str_array(char **a, int ipos, char *new_str, t_incmd *lst)
 	{
 		ft_error_int(12, 0, a, NULL);
 		ft_free_lst(lst, NULL);
-		ft_error_array(12, 1, a + ipos + 1, NULL);
+		ft_error_ptr(12, 1, a + ipos + 1, NULL);
 	}
 	return (a);
 }

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:10:29 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/25 20:42:15 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/27 16:36:14 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,19 @@ int	ft_check_syntax(char **array)
 
 	i = 0;
 	if (array[0][0] == '|' || array[0][1] == '|')
-		return (ft_error_int(201, 0, array, NULL));
+		return (0);
 	while (array[i])
 	{
+		if (array[i][0] == '|' && array[i][1] == '|')
+			return (0);
 		j = ft_check_redir_pipe(array[i]);
 		if (j != 0)
 		{
 			k = ft_check_redir_pipe(array[i + 1]);
 			if (k != 0 && j == 5 && k == 5)
-				return (ft_error_int(201, 0, array, NULL));
+				return (0);
 			else if (array[i] + 1 == NULL)
-				return (ft_error_int(201, 0, array, NULL));
+				return (0);
 		}
 		i ++;
 	}

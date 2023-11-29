@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 22:31:10 by csil              #+#    #+#             */
-/*   Updated: 2023/11/26 20:30:15 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/28 12:40:19 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ void	free_all_exit(t_pipex *list, int nbr);
 char	*create_final_path(t_pipex *list, char **paths, char *arg);
 char	*env_path(char **envp);
 
+// REDIRECTIONS
+void	ft_make_redir(char **array);
 // if not execve
-void	builtin_checker(t_pipex *list, char *str, char **tab_cmd);
-void	redirection_checker(t_pipex *list, char *str, char **tab_cmd);
+// void	builtin_checker(t_pipex *list, char *str, char **tab_cmd);
 
 // Main process
 void	set_infile(char **argv, t_pipex *list);

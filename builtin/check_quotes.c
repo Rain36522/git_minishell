@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   username.c                                         :+:      :+:    :+:   */
+/*   check_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 10:31:25 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/27 15:43:38 by pudry            ###   ########.fr       */
+/*   Created: 2023/11/13 11:32:55 by cduffaut          #+#    #+#             */
+/*   Updated: 2023/11/13 14:24:27 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/minishell.h"
+#include <stdio.h>
 
-//	1er error: login havn't been found
-//	2eme error: failed allocation with malloc
-char	*find_hostname(char **env)
+/*
+	check number quotes number re even or odd
+*/
+int	check_quotes(char *str)
 {
 	int		i;
-	char	*login;
+	int		i_double;
+	int		i_single;
 
+	i_double = 0;
+	i_single = 0;
 	i = 0;
-	while (env[i] && strncmp(env[i], "LOGNAME=", 8) != 0)
+	while (str[i])
+	{
+		if (str[i] == 34)
+			i_double++;
+		else if (str[i] == 39)
+			i_single++;
 		i++;
-	if (env[i])
-		login = ft_strdup(env[i] + 8);
-	if (!env[i])
-		return (ft_error_ptr(203, 0, NULL, NULL));
-	if (!login)
-		return (ft_error_ptr(203, 0, NULL, NULL));
-	return (login);
+	}
+	if ((i_double % 2) != 0)
+		return (1);
+	else if ((i_single % 2) != 0)
+		return (1);
+	return (0);
 }
