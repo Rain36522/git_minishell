@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/28 14:43:08 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/29 16:35:06 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,15 @@ static char	**ft_put_lst_array(t_lst *mem_lst, int *fd)
 
 	lst = mem_lst;
 	isize = 0;
-	while (mem_lst)
+	while (mem_lst->next)
 	{
 		isize ++;
 		mem_lst = mem_lst->next;
 	}
+	ft_printf("lst size : %i,", isize);
 	if (isize > 1)
 		isize += 2;
+	ft_printf("isize : %i\n", isize);
 	array = (char **) malloc(sizeof(char *) * (isize + 1));
 	if (!array)
 		ft_free_file_lst(lst, 12, NULL);

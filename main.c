@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/29 16:17:41 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/29 16:25:06 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv, char **env)
 		cmd_data = get_cmd(prompt);
 		if (cmd_data)
 		{
+			ft_put_array(cmd_data->array);
 			pipex(cmd_data->isize, cmd_data->array, env);
 			ft_print_pipe_out(cmd_data->fd_pipe[0], cmd_data->fd_pipe[1]);
 		}

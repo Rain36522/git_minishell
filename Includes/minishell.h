@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/29 16:18:48 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/29 16:22:52 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,8 @@ int		pipex(int argc, char **argv, char **envp);
 
 // Temp
 void	ft_put_array(char **array);
+
+// readline
+void    rl_replace_line(const char *c, int d);
 
 #endif
