@@ -34,6 +34,15 @@ typedef struct s_incmd
 	char			*read_fd;
 }				t_incmd;
 
+typedef struct s_dlist
+{
+	char			*input;
+	char			*str;
+	int				i;
+	int				qdouble;
+	int				state;
+}				t_dlist;
+
 typedef struct s_lst
 {
 	struct s_lst	*next;
@@ -106,5 +115,18 @@ int		pipex(int argc, char **argv, char **envp);
 
 // Temp
 void	ft_put_array(char **array);
+
+// Dollar gestion
+void	replace_dollar(char *str, int state, char **env);
+void	finish_dollar(t_dlist *l, char **env);
+void	relais_state_1(t_dlist *l);
+int		print_dollar(char c);
+void	state_2(t_dlist *l, char **env);
+void	join_dollar(t_dlist *l, char **env);
+void	join_var_to_str(t_dlist *l, char **env, int equal, int i);
+void	state_1(t_dlist *l);
+void	list_init(t_dlist *list, char *str, int state);
+void	check_join(t_dlist *list, char *str);
+void	join_char(t_dlist *l, char c);
 
 #endif

@@ -86,7 +86,6 @@ void	join_dollar(t_dlist *l, char **env)
 		}
 		i++;
 	}
-	printf ("i : %d\n", l->i);
 	while (l->input[l->i] && print_dollar(l->input[l->i]) == 0)
 		l->i++;
 }
