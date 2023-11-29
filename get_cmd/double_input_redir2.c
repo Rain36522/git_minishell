@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/28 16:45:00 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/29 14:42:50 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,17 @@ char	**ft_replace_redir(t_incmd *lst, char **array)
 	return (array);
 }
 
-static void	ft_write_dat_in_file(t_incmd *lst)
+static void	ft_write_dat_in_file(t_incmd *lst, char **array)
 {
 	char	*str;
 	int		isize;
 
 	str = readline(">> ");
+	if (!str)
+	{
+		ft_free_lst(lst, NULL);
+		ft_error_int(4, 1, array, NULL);
+	}
 	isize = ft_strlen(lst->wrd) + 1;
 	while (ft_strncmp(str, lst->wrd, isize))
 	{
@@ -61,14 +66,14 @@ static void	ft_write_dat_in_file(t_incmd *lst)
 	close(lst->fd[1]);
 }
 
-void	ft_write_file(t_incmd *lst)
+void	ft_write_file(t_incmd *lst, char **array)
 {
 	t_incmd	*lst_next;
 
 	while (lst)
 	{
 		lst_next = lst->next;
-		ft_write_dat_in_file(lst);
+		ft_write_dat_in_file(lst, array);
 		free(lst->read_fd);
 		free(lst->wrd);
 		free(lst);

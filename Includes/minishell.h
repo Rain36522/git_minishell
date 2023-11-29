@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/28 16:45:05 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/29 16:14:13 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 # include "../ft_printf/ft_printf.h"
 # include "../ft_printf/libft/libft.h"
 # include "../multi_pipex/pipex.h"
+
 # include <readline/readline.h>
+# include <readline/history.h>
 # include <termios.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -67,13 +69,15 @@ int		ft_check_syntax(char **array);
 void	write_cmd_in_file(char *scmd, int fd);
 t_incmd	*ft_make_lst(char **array);
 t_incmd	*ft_free_lst(t_incmd *lst, char *str);
-void	ft_write_file(t_incmd *lst);
+void	ft_write_file(t_incmd *lst, char **array);
 t_acmd	*ft_file_to_array(int fd);
 char	**ft_replace_redir(t_incmd *lst, char **array);
 void	ft_put_data(char **array, int fd);
 t_lst	*ft_utils_open_quotes(t_lst *ptr, t_lst *lst, int fd);
 void	ft_free_file_lst(t_lst *lst, int ierror, char **array);
 char	*ft_strdup_remov(char *str);
+char	*input_error(char *scmd);
+t_incmd	*redir_lst(char *scmd);
 
 // ft_split
 char	**ft_split_minishell(char const *s);
@@ -100,11 +104,16 @@ int		ft_cnt_dbl_redir_str(char *str);
 void	ft_free_array(char ** array);
 void	ft_print_pipe_out(int fd_in, int fd_out);
 t_acmd	*ft_util_add_pipe(t_acmd *acmd_data);
+void	parent_signal(int isignal);
+void	child_signal(int isignal);
 
 // pipex
 int		pipex(int argc, char **argv, char **envp);
 
 // Temp
 void	ft_put_array(char **array);
+
+// readline
+void    rl_replace_line(const char *c, int d);
 
 #endif

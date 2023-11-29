@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_quotes.c                                     :+:      :+:    :+:   */
+/*   signaux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 11:32:55 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/13 14:24:27 by pudry            ###   ########.fr       */
+/*   Created: 2023/11/29 14:50:54 by pudry             #+#    #+#             */
+/*   Updated: 2023/11/29 16:14:43 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../Includes/minishell.h"
+#include <readline/readline.h>
 
-/*
-	check number quotes number re even or odd
-*/
-int	check_quotes(char *str)
+void	parent_signal(int isignal)
 {
-	int		i;
-	int		i_double;
-	int		i_single;
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	return;
+}
 
-	i_double = 0;
-	i_single = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == 34)
-			i_double++;
-		else if (str[i] == 39)
-			i_single++;
-		i++;
-	}
-	if ((i_double % 2) != 0)
-		return (1);
-	else if ((i_single % 2) != 0)
-		return (1);
-	return (0);
+void	child_signal(int isignal)
+{
+	exit(127);
 }

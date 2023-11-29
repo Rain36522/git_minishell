@@ -1,6 +1,8 @@
 {
 	"C_Cpp.autocompleteAddParentheses": true,
 	"files.associations": {
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"__tuple": "c",
+		"array": "c"
 	}
 }

@@ -6,31 +6,12 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/28 15:05:31 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/29 14:54:57 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-t_incmd	*error_and_redir_lst(char *scmd)
-{
-	t_incmd	*lst;
-	char	**array;
-
-	if (!scmd)
-		ft_error_int(0, 1, NULL, scmd);
-	if (! *scmd)
-		return (NULL);
-	add_history(scmd);
-	if (!(ft_str_end_quotes(scmd, 0) == 0 && ft_cnt_dbl_redir_str(scmd) > 0))
-		return (NULL);
-	array = ft_split_minishell(scmd);
-	if (!array)
-		ft_error_int(12, 1, NULL, scmd);
-	lst = ft_make_lst(array);
-	ft_free_array(array);
-	return (lst);
-}
 
 void	ft_double_input_redir(int *fd, char *scmd, t_incmd *lst)
 {
@@ -45,7 +26,7 @@ void	ft_double_input_redir(int *fd, char *scmd, t_incmd *lst)
 	if (!array)
 		ft_error_int(12, 1, NULL, NULL);
 	array = ft_replace_redir(lst, array);
-	ft_write_file(lst);
+	ft_write_file(lst, array);
 	if (!array)
 		ft_error_int(12, 1, NULL, NULL);
 	ft_put_data(array, fd[1]);
@@ -75,6 +56,7 @@ void	ft_open_quotes_cmd(int *fd, char *scmd)
 
 static void	ft_cmd_type(char *scmd, int *fd, t_incmd *lst)
 {
+	signal(SIGINT, child_signal);
 	if (ft_str_end_quotes(scmd, 0) == 0)
 		add_history(scmd);
 	if (lst)
@@ -93,17 +75,17 @@ t_acmd	*get_cmd(char *prompt)
 	int		fd[2];
 	char	*scmd;
 	int		istatus;
-	t_incmd	*lst;
 
 	scmd = readline(prompt);
+	if (!input_error(scmd))
+		return (NULL);
 	if (pipe(fd) == -1)
 		return (ft_error_ptr(32, 1, NULL, prompt));
-	lst = error_and_redir_lst(scmd);
 	pid = fork();
 	if (pid < 0)
 		return (ft_error_ptr(10, 1, NULL, prompt));
 	else if (pid == 0)
-		ft_cmd_type(scmd, fd, lst);
+		ft_cmd_type(scmd, fd, redir_lst(scmd));
 	else
 	{
 		close(fd[1]);

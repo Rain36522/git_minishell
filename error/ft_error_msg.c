@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:30:23 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/27 11:49:39 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/29 14:41:20 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	ft_error_msg(int i)
 		ft_putstr_fd("Error : Cannot allocate memory\n", 2);
 	else if (i == 23)
 		ft_putstr_fd("Error : To many open files\n", 2);
+	else if (i == 201)
+		ft_putstr_fd("\n", 2);
 	else if (i == 201)
 		ft_putstr_fd("Error : command not found\n", 2);
 	ft_putstr_fd("\033[0m", 2);

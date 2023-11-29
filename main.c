@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/28 15:04:45 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/29 16:17:41 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv, char **env)
 	argc += 0;
 	argv += 0;
 	i = 0;
+	signal(SIGINT, parent_signal);
 	while (i == 0)
 	{
 		prompt = ft_give_prompte(env);
