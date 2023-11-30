@@ -6,7 +6,7 @@
 /*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 14:33:50 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/30 14:33:58 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/30 17:34:20 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	exit_classic(char *str, char **tab)
 		str = NULL;
 	}
 	ft_free_array(tab);
+	printf("exit\n");
 	exit (0);
 }
 
@@ -76,6 +77,7 @@ void	exit_cmd(char *str)
 		free(str);
 		str = NULL;
 		ft_free_array(tab);
+		printf("exit\n");
 		exit (e_code);
 	}
 }
