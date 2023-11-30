@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:25:44 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/21 15:37:21 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 13:33:50 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,27 +95,20 @@ int	there_is_quotes(char *str)
 	return (0);
 }
 
-char	**from_quotes_to_wrds(char **tab)
+// Changement, fonctionnement en str au lieu de array
+char	*from_quotes_to_wrds(char *str)
 {
-	int		i;
-	int		j;
-	char	tmp;
 	char	*s_tmp;
 
-	i = 0;
-	j = 0;
-	tmp = '0';
-	while (tab[i])
+	if (!str)
+		return (NULL);
+	if (there_is_quotes(str) == 1)
 	{
-		if (there_is_quotes(tab[i]) == 1)
-		{
-			s_tmp = tab[i];
-			tab[i] = delete_quotes(tab[i], 0);
-			free(s_tmp);
-		}
-		i++;
+		s_tmp = str;
+		str = delete_quotes(str, 0);
+		free(s_tmp);
 	}
-	return (tab);
+	return (str);
 }
 
 /*int	main(int argc, char **argv)

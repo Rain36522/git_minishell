@@ -22,12 +22,9 @@ static void	ft_redir(int fd_in, int fd_out)
 	i = BUFFER_SIZE;
 	while (i == BUFFER_SIZE)
 	{
-		ft_printf("read\n");
 		i = read(fd_in, buf, BUFFER_SIZE);
-		ft_printf("i : %i\n", i);
 		if (i <= 0)
 			break;
-		ft_printf("write\n");
 		 write(fd_out, buf, i);
 		if (i < 0)
 			break;

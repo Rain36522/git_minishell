@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   replace_dollar_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:12:01 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/29 13:12:44 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:47:21 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/minishell.h"
+#include "../Includes/minishell.h"
 
 void	join_char(t_dlist *l, char c)
 {
@@ -26,7 +26,7 @@ void	join_char(t_dlist *l, char c)
 	if (!new)
 	{
 		free (l->input);
-		ft_error_array(12, 1, NULL, l->str);
+		ft_error_ptr(12, 1, NULL, l->str);
 	}
 	while (l->str && l->str[i])
 	{
@@ -49,6 +49,6 @@ void	check_join(t_dlist *list, char *str)
 			free (list->input);
 		if (list->str)
 			free (list->str);
-		ft_error_array(12, 1, NULL, NULL);
+		ft_error_ptr(12, 1, NULL, NULL);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:41:45 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/29 17:05:47 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 13:34:20 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_incmd	*ft_create_lst(t_incmd *lst, char *wrd, char **array)
 	if (!ptr)
 		return (ft_free_lst(lst, NULL));
 	ptr->next = NULL;
-	ptr->wrd = ft_strdup(wrd);
+	ptr->wrd = from_quotes_to_wrds(ft_strdup(wrd));
 	if (!ptr->wrd)
 		return (ft_free_lst(lst, wrd));
 	if (pipe(ptr->fd) < 0)

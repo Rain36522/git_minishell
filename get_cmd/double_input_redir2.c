@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/30 10:32:54 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 15:39:23 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,42 +43,50 @@ char	**ft_replace_redir(t_incmd *lst, char **array)
 	return (array);
 }
 
-static void	ft_write_dat_in_file(t_incmd *lst, char **array)
+static char	*ft_readline_redir(int i, t_incmd *lst, char **array, char **env)
 {
 	char	*str;
-	int		isize;
-
-	str = readline(">> ");
+	
+	str = readline(">>");
 	if (!str)
 	{
 		ft_free_lst(lst, NULL);
 		ft_error_int(4, 1, array, NULL);
 	}
+	str = replace_dollar(str, i, env);
+	return (str);
+}
+
+static void	ft_write_dat_in_file(t_incmd *lst, char **array, char **env)
+{
+	char	*str;
+	int		isize;
+	int		i;
+
+	i = 0;
+	str = ft_readline_redir(i, lst, array, env);
 	isize = ft_strlen(lst->wrd) + 1;
 	while (ft_strncmp(str, lst->wrd, isize))
 	{
+		i = ft_quotes(str, i);
 		ft_putstr_fd(str, lst->fd[1]);
 		free(str);
 		ft_putstr_fd("\n", lst->fd[1]);
-		str = readline(">> ");
-		if (!str)
-		{
-			ft_free_lst(lst, NULL);
-			ft_error_int(4, 1, array, NULL);
-		}
+
+		str = ft_readline_redir(i, lst, array, env);
 	}
 	free(str);
 	close(lst->fd[1]);
 }
 
-void	ft_write_file(t_incmd *lst, char **array)
+void	ft_write_file(t_incmd *lst, char **array, char **env)
 {
 	t_incmd	*lst_next;
 
 	while (lst)
 	{
 		lst_next = lst->next;
-		ft_write_dat_in_file(lst, array);
+		ft_write_dat_in_file(lst, array, env);
 		free(lst->read_fd);
 		free(lst->wrd);
 		free(lst);

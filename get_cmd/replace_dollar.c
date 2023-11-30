@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   replace_dollar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:26:03 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/29 13:13:51 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/30 14:10:16 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/minishell.h"
+#include "../Includes/minishell.h"
 
 // on est dans une double donc on carry le $ quoi quil ce passe
 void	state_2(t_dlist *l, char **env)
@@ -86,7 +86,7 @@ void	finish_dollar(t_dlist *l, char **env)
 }
 
 // est-ce qu'on est dans un single ou dans un double
-void	replace_dollar(char *str, int state, char **env)
+char	*replace_dollar(char *str, int state, char **env)
 {
 	t_dlist	list;
 
@@ -101,21 +101,22 @@ void	replace_dollar(char *str, int state, char **env)
 		state_2(&list, env);
 		state = 0;
 	}
+	free(str);
 	finish_dollar(&list, env);
-	printf ("%s\n", list.str);
+	return(list.str);
 }
 
 /*
 	dollar qui s'annule si sp tab ou \0 derrièe -> tu le laisse
 	sinon tu skip tout
 */
-/*int main(int argc, char **argv, char **env)
-{
-	(void) argc;
-	(void) argv;
+// int main(int argc, char **argv, char **env)
+// {
+// 	(void) argc;
+// 	(void) argv;
 
-	// si ça fini par un \0 : ca par en couille
-	char *str = "la befana $USE    ";
-	replace_dollar(str, 2, env);
-	return (0);
-}*/
+// 	// si ça fini par un \0 : ca par en couille
+// 	char *str = "la befana $USER    ";
+// 	replace_dollar(str, 2, env);
+// 	return (0);
+// }

@@ -6,13 +6,13 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/11/29 17:04:09 by pudry            ###   ########.fr        #
+#    Updated: 2023/11/30 14:09:20 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS = -lreadline -L$(HOME)/.brew/opt/readline/lib -Wall -Werror -Wextra
+FLAGS = -lreadline -L$(HOME)/.brew/opt/readline/lib
 LIBFTPRINTF = ft_printf/libftprintf.a
 
 BLUE = \\033[1;34m
@@ -48,7 +48,8 @@ SRC_UTILS = main.c utils/ft_utils.c utils/ft_utils2.c utils/ft_utils3.c utils/si
 SRC_ERROR = error/ft_error.c error/ft_error_msg.c
 
 SRC_CMD_2 = check_syntax.c double_input_redir2.c from_quotes_to_wrds.c ft_split_minishell_part_2.c write_cmd_in_file.c \
-			double_input_redir.c file_to_array.c ft_split_minishell.c get_cmd.c ft_strdup_remov.c input_error.c
+			double_input_redir.c file_to_array.c ft_split_minishell.c get_cmd.c ft_strdup_remov.c input_error.c \
+			replace_dollar.c replace_dollar_2.c replace_dollar_3.c
 SRC_CMD = $(addprefix get_cmd/,$(SRC_CMD_2))
 
 SRC_GNL = gnl/get_next_line_utils.c gnl/get_next_line.c

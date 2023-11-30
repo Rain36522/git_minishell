@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/30 09:58:28 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 15:35:22 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	*ft_error_child(int icode, char **array, char *str, char *str2);
 char	*get_next_line(int fd);
 
 // This functions are for taking the input
-t_acmd	*get_cmd(char *prompt);
+t_acmd	*get_cmd(char *prompt, char **env);
 t_incmd	*ft_free_lst(t_incmd *lst, char *scmd);
 int		ft_check_syntax(char **array);
 void	write_cmd_in_file(char *scmd, int fd);
 t_incmd	*ft_make_lst(char **array);
 t_incmd	*ft_free_lst(t_incmd *lst, char *str);
-void	ft_write_file(t_incmd *lst, char **array);
+void	ft_write_file(t_incmd *lst, char **array, char **env);
 t_acmd	*ft_file_to_array(int fd, int fd_out);
 char	**ft_replace_redir(t_incmd *lst, char **array);
 void	ft_put_data(char **array, int fd);
@@ -99,7 +99,7 @@ int		str_nbr(char const *s, int i, int j);
 int		skip_pipe_or_dir(const char *s, int i, char c);
 int		check_spe_case(char c);
 int		skip_until(const char *s, int i, char c);
-char	**from_quotes_to_wrds(char **tab);
+char	*from_quotes_to_wrds(char *str);
 
 // utils
 char	*ft_give_prompte(char **env);
@@ -124,5 +124,14 @@ void	ft_put_array(char **array);
 
 // readline
 void	rl_replace_line(const char *c, int d);
+
+// replace dollar
+void	join_dollar(t_dlist *l, char **env);
+int		print_dollar(char c);
+void	check_join(t_dlist *list, char *str);
+void	join_char(t_dlist *l, char c);
+void	list_init(t_dlist *list, char *str, int state);
+void	state_1(t_dlist *l);
+char	*replace_dollar(char *str, int state, char **env);
 
 #endif

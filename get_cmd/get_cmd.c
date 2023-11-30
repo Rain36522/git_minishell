@@ -6,14 +6,14 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/30 10:32:10 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 15:33:30 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
 
-void	ft_double_input_redir(int *fd, char *scmd, t_incmd *lst)
+static void	ft_double_input_redir(int *fd, char *scmd, t_incmd *lst, char **env)
 {
 	char	**array;
 
@@ -26,7 +26,7 @@ void	ft_double_input_redir(int *fd, char *scmd, t_incmd *lst)
 	if (!array)
 		ft_error_int(12, 1, NULL, NULL);
 	array = ft_replace_redir(lst, array);
-	ft_write_file(lst, array);
+	ft_write_file(lst, array, env);
 	if (!array)
 		ft_error_int(12, 1, NULL, NULL);
 	ft_put_data(array, fd[1]);
@@ -54,13 +54,13 @@ void	ft_open_quotes_cmd(int *fd, char *scmd)
 		write_cmd_in_file(scmd, fd[1]);
 }
 
-static void	ft_cmd_type(char *scmd, int *fd, t_incmd *lst)
+static void	ft_cmd_type(char *scmd, int *fd, t_incmd *lst, char **env)
 {
 	signal(SIGINT, child_signal);
 	if (ft_str_end_quotes(scmd, 0) == 0)
 		add_history(scmd);
 	if (lst)
-		ft_double_input_redir(fd, scmd, lst);
+		ft_double_input_redir(fd, scmd, lst, env);
 	else if (ft_cnt_dbl_redir_str(scmd) > 0)
 		ft_error_int(201, 1, NULL, scmd);
 	else if (ft_str_end_quotes(scmd, 0) != 0)
@@ -88,7 +88,7 @@ t_acmd	*get_cmd_parent(int *fd, t_incmd *lst, int istatus, char *scmd)
 	return (ft_file_to_array(fd[0], fd[1]));
 }
 
-t_acmd	*get_cmd(char *prompt)
+t_acmd	*get_cmd(char *prompt, char **env)
 {
 	pid_t	pid;
 	int		fd[2];
@@ -106,7 +106,7 @@ t_acmd	*get_cmd(char *prompt)
 	if (pid < 0)
 		return (ft_error_ptr(10, 1, NULL, prompt));
 	else if (pid == 0)
-		ft_cmd_type(scmd, fd, lst);
+		ft_cmd_type(scmd, fd, lst, env);
 	else
 	{
 		waitpid(pid, &istatus, 0);

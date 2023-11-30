@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/30 10:00:12 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 14:15:13 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv, char **env)
 	int		i;
 	char	*prompt;
 	t_acmd	*cmd_data;
+	char	*str;
 
 	argc += 0;
 	argv += 0;
@@ -27,7 +28,7 @@ int	main(int argc, char **argv, char **env)
 	while (i == 0)
 	{
 		prompt = ft_give_prompte(env);
-		cmd_data = get_cmd(prompt);
+		cmd_data = get_cmd(prompt, env);
 		ft_put_array(cmd_data->array);
 		ft_printf("CC\n");
 		if (cmd_data)

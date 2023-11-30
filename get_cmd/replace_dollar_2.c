@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   replace_dollar_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:10:54 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/29 13:14:14 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:47:03 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/minishell.h"
+#include "../Includes/minishell.h"
 
 // initialise the list
 void	list_init(t_dlist *list, char *str, int state)
@@ -59,7 +59,7 @@ void	join_var_to_str(t_dlist *l, char **env, int equal, int i)
 	if (!l->str)
 	{
 		free (l->input);
-		ft_error_array(12, 1, NULL, l->str);
+		ft_error_ptr(12, 1, NULL, l->str);
 	}
 	l->i += (equal);
 }
