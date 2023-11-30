@@ -67,33 +67,32 @@ void	not_builtin(char **tab, char **envp)
 	}
 }
 
-void	single_cmd(char **tab_cmd, char **envp)
+void	single_cmd(char *str, char **envp)
 {
 	char	**tmp;
 
 	tmp = NULL;
-	if (!*tab_cmd)
-	{
-		ft_putstr_fd("NULL: command not foud\n", 2);
+	if (!str)
 		ft_error_int(127, 1, NULL, NULL);
-	}
-	if (ft_strncmp(tab_cmd[0], "echo", 5) == 0)
-		echo_cmd(tab_cmd);
-	else if (ft_strncmp(tab_cmd[0], "cd", 3) == 0)
-		cd_cmd(tab_cmd);
-	else if (ft_strncmp(tab_cmd[0], "env", 4) == 0)
-		env_cmd(tab_cmd);
-	else if (ft_strncmp(tab_cmd[0], "export", 7) == 0)
-		export_cmd(tab_cmd);
-	else if (ft_strncmp(tab_cmd[0], "unset", 8) == 0)
-		unset_cmd(tab_cmd);
-	else if (ft_strncmp(tab_cmd[0], "exit", 5) == 0)
-		exit_cmd(tab_cmd);
+	if (ft_strncmp(str, "echo", 5) == 0)
+		echo_cmd(str, envp);
+	else if (ft_strncmp(str, "cd", 3) == 0)
+		init_cmd(str, envp);
+	else if (ft_strncmp(str, "env", 4) == 0)
+		env_cmd(str, envp);
+	else if (ft_strncmp(str, "export", 7) == 0)
+		export_cmd(envp, str);
+	//else if (ft_strncmp(str, "unset", 8) == 0)
+	//	unset_cmd(str);
+	//else if (ft_strncmp(str, "exit", 5) == 0)
+	//	exit_cmd(str);
 	else
-	tmp = ft_split (tab_cmd[0], ' ');
-	if (!tmp)
-		ft_error_int(12, 1, tab_cmd, NULL);
-	not_builtin(tmp, envp);
+	{
+		tmp = ft_split (str, ' ');
+		if (!tmp)
+			ft_error_int(12, 1, str, NULL);
+		not_builtin(tmp, envp);
+	}
 }
 
 /*int     main(int argc, char **argv, char **envp)
