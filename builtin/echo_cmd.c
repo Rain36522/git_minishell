@@ -3,17 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   echo_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:19:01 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/25 20:38:05 by csil             ###   ########.fr       */
+/*   Updated: 2023/11/29 22:26:54 by csil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
-#include "Includes/minishell.h"
+#include "../Includes/minishell.h"
 #include "Includes/header_builtin.h"
+
+int	dollar_gestion(char *str, int i, char **envp)
+{
+	int		j;
+	int		k;
+	int		start;
+
+	start = i;
+	k = 0;
+	j = 0;
+	while (str[i] && str[i] != 32 && str[i] != '\'' && str[i] != '\"')
+		i++;
+	while (envp[j])
+	{
+		if (ft_strncmp(envp[j], str + start + 1, i - start - 1) == 0)
+		{
+			while (envp[j][k] && envp[j][k] != '=')
+				k++;
+			printf ("%s", envp[j] + k + 1);
+			return (i);
+		}
+		j++;
+		k = 0;
+	}
+	return (i);
+}
 
 int	is_n(char *str, int i)
 {
@@ -63,15 +89,11 @@ void	not_found_str(char *str)
 		i++;
 	}
 	printf(": command not found\n");
-	exit (-1); // code erreur
+	exit (127);
 }
 
-/*
- *Je dois rajouter pour chaque special case loption dollar
- * */
-
 // display text following w \n if no -n
-int	echo_cmd(char *str, char **envp)
+void	echo_cmd(char *str, char **envp)
 {
 	int		i;
 	int		n;
@@ -83,27 +105,28 @@ int	echo_cmd(char *str, char **envp)
 	i = n;
 	while (str[i])
 	{
-		if (str[i] && str[i] == '\'')
-			i = print_until(str, i + 1, '\'', envp);
-		else if (str[i] && str[i] == '\"')
-			i = print_until(str, i + 1, '\"', envp);
-		while (str[i] && str[i] != '\'' && str[i] != '\"')
+		if (str[i] == '\'')
 		{
-			if (str[i] == '$')
-				i = dollar_gestion(str, i, envp); // doit ramener sur le char apres la var dollar
-			printf ("%c", str[i++]);
+			i++;
+			while (str[i] && str[i] != '\'')
+				printf ("%c", str[i++]);
+			if (str[i])
+				i++;
 		}
+		else if (str[i] == '$')
+			i = dollar_gestion(str, i, envp);
+		else
+			printf("%c", str[i++]);
 	}
 	if (print_backslash(str, 5) == 0)
 		printf ("\n");
-	return (0);
 }
 
 /*int	main(int argc, char **argv, char **envp)
 {
 	(void) argc;
+	(void) argv;
 
-	//echo_cmd("echo  coucou\"$OLDPWD\"greiohg \\nbangala", envp);
-	echo_cmd(argv[1], envp);
+	echo_cmd("echo '$USER' $USER", envp);
 	return (0);
 }*/

@@ -6,11 +6,11 @@
 /*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:47:09 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/27 11:03:12 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/11/30 08:56:45 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/minishell.h"
+#include "../Includes/minishell.h"
 #include "multi_pipex/pipex.h"
 
 // cd simple cmd
@@ -21,7 +21,7 @@ char	*simple_cd(char **envp)
 	i = 0;
 	while (envp[i] && ft_strncmp(envp[i], "HOME=", 5) != 0)
 		i++;
-	printf ("cmd to exec %s\n", envp[i] + 5);
+	//printf ("cmd to exec %s\n", envp[i] + 5);
 	return (envp[i] + 5);
 }
 
@@ -37,33 +37,52 @@ int	check_cd(char *str)
 
 void	cd_cmd(char **tab_cmd, char **envp)
 {
-	char	*line_path;
-	char	**tab_l_path;
-	
 	if (check_cd(tab_cmd[0]) == 0)
-		ft_error_msg(201);
-	if (!tab_cmd[1])
+		ft_error_int(127, 0, tab_cmd, NULL);
+	else if (!tab_cmd[1])
 	{
 		if (chdir(simple_cd(envp)) != 0)
 		{
-			printf ("path not found\n");
-			exit (1);
+			ft_error_int(127, 0, tab_cmd, NULL);
 		}
-		exit (0);
+		else
+			ft_free_array(tab_cmd);
 	}
-	line_path = env_path(envp);
-	if (!line_path)
-		ft_error_str(12, 1, NULL, line_path);
-	tab_l_path = ft_split(line_path, ' ');
-		ft_error_str(12, 1, tab_l_path, line_path);
+	else
+	{
+		printf ("cmd : %s\n", tab_cmd[1]);
+		if (chdir(tab_cmd[1]) != 0)
+		{
+			ft_error_int(127, 0, tab_cmd, NULL);
+			return ;
+		}
+		else
+			ft_free_array(tab_cmd);
+	}
 }
 
+void	init_cmd(char *str, char **envp)
+{
+	char	**tab;
 
-// you in arg the tab of the split ' ' cmd
-int	main(int argc, char **argv, char **envp)
+	if (!str)
+		ft_error_int(127, 1, NULL, NULL);
+	tab = ft_split(str, ' ');
+	if (!tab)
+		ft_error_int(12, 1, tab, str);
+	if (str)
+		free (str);
+	cd_cmd(tab, envp);
+}
+
+// Exit code 127 is not currently relate to
+// command not found
+/*int	main(int argc, char **argv, char **envp)
 {
 	(void) argc;
+	(void) argv;
 
-	cd_cmd(argv + 1, envp);
+	char *tab = ft_strdup("cd uti*");
+	init_cmd(tab, envp);
 	return (0);
-}
+}*/

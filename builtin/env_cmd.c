@@ -18,10 +18,10 @@ void	env_cmd(char *str, char **envp)
 	int		i;
 
 	i = 0;
-	if (str && ft_strncmp(str, "env", 3) != 0)
+	if (str && ft_strncmp(str, "env", 4) != 0)
 	{
-		printf ("%s", str);
-		exit (-1); // error code
+		ft_error_int(127, 0, NULL, str);
+		return ;
 	}
 	while (envp[i])
 	{
