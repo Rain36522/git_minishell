@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/29 16:22:52 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 09:58:28 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	write_cmd_in_file(char *scmd, int fd);
 t_incmd	*ft_make_lst(char **array);
 t_incmd	*ft_free_lst(t_incmd *lst, char *str);
 void	ft_write_file(t_incmd *lst, char **array);
-t_acmd	*ft_file_to_array(int fd);
+t_acmd	*ft_file_to_array(int fd, int fd_out);
 char	**ft_replace_redir(t_incmd *lst, char **array);
 void	ft_put_data(char **array, int fd);
 t_lst	*ft_utils_open_quotes(t_lst *ptr, t_lst *lst, int fd);
@@ -111,7 +111,7 @@ t_lst	*ft_add_end_lst_lst(t_lst *lst, t_lst *ptr);
 char	*ft_strjoin_free(char *str1, char *str2);
 int		ft_cnt_dbl_redir_str(char *str);
 void	ft_free_array(char ** array);
-void	ft_print_pipe_out(int fd_in, int fd_out);
+void	ft_print_pipe_out(int fd_in);
 t_acmd	*ft_util_add_pipe(t_acmd *acmd_data);
 void	parent_signal(int isignal);
 void	child_signal(int isignal);
@@ -123,6 +123,6 @@ int		pipex(int argc, char **argv, char **envp);
 void	ft_put_array(char **array);
 
 // readline
-void    rl_replace_line(const char *c, int d);
+void	rl_replace_line(const char *c, int d);
 
 #endif

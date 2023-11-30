@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/29 16:35:06 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 10:03:21 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_free_file_lst(t_lst *lst, int ierror, char **array)
 		free(lst);
 		lst = ptr;
 	}
+	ft_free_array(array);
 	if (ierror != 0)
 		ft_error_int(ierror, 1, NULL, NULL);
 }
@@ -54,8 +55,6 @@ static char	**ft_put_in_array(char **array, t_lst *lst, int isize)
 {
 	int		i;
 	t_lst	*mem_lst;
-	t_lst	*ptr;
-	char	*str;
 
 	if (isize == 1)
 		i = 0;
@@ -85,15 +84,13 @@ static char	**ft_put_lst_array(t_lst *mem_lst, int *fd)
 
 	lst = mem_lst;
 	isize = 0;
-	while (mem_lst->next)
+	while (mem_lst)
 	{
 		isize ++;
 		mem_lst = mem_lst->next;
 	}
-	ft_printf("lst size : %i,", isize);
 	if (isize > 1)
 		isize += 2;
-	ft_printf("isize : %i\n", isize);
 	array = (char **) malloc(sizeof(char *) * (isize + 1));
 	if (!array)
 		ft_free_file_lst(lst, 12, NULL);
@@ -107,22 +104,25 @@ static char	**ft_put_lst_array(t_lst *mem_lst, int *fd)
 	return (array);
 }
 
-t_acmd	*ft_file_to_array(int fd)
+t_acmd	*ft_file_to_array(int fd, int fd_out)
 {
 	t_lst	*lst;
 	int		i;
-	int		*fd_pipex;
+	int		j;
 	t_acmd	*acmd_data;
 
+	close(fd_out);
 	acmd_data = (t_acmd *) malloc(sizeof(t_acmd) * 1);
 	if (!acmd_data)
 		ft_error_int(12, 1, NULL, NULL);
 	lst = ft_read_file(fd);
 	acmd_data = ft_util_add_pipe(acmd_data);
 	acmd_data->array = ft_put_lst_array(lst, acmd_data->fd_pipe);
+	j = 0;
 	if (acmd_data->array[1])
-		i = 1;
-	while (acmd_data->array[i + 1] )
+		j = 1;
+	i = j;
+	while (acmd_data->array[i + j] )
 	{
 		acmd_data->array[i] = ft_strdup_remov(acmd_data->array[i]);
 		i++;

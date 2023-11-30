@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:22:52 by csil              #+#    #+#             */
-/*   Updated: 2023/11/28 12:39:31 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 09:21:06 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	child_process(char **argv, char **envp, t_pipex l)
 			free_all_exit(&l, 12);
 		close_all_pipes(&l);
 		l.cmd = create_final_path(&l, l.cmd_path, l.cmd_args[0]);
+		ft_printf("94\n");
 		ft_make_redir(l.cmd_args);
 		if (!l.cmd)
 			cmd_not_found(&l);

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:34:03 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/28 16:44:43 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 09:08:43 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_free_array(char ** array)
 	free(array);
 }
 
-void	ft_print_pipe_out(int fd_in, int fd_out)
+void	ft_print_pipe_out(int fd_in)
 {
 	int		i;
 	int		j;
@@ -76,7 +76,6 @@ t_acmd	*ft_util_add_pipe(t_acmd *acmd_data)
 		free(acmd_data);
 		ft_error_ptr(9, 1, NULL, NULL);
 	}
-	ft_printf("pipe in : %i, out : %i\n", fd[0], fd[1]);
 	acmd_data->fd_pipe[0] = fd[0];
 	acmd_data->fd_pipe[1] = fd[1];
 	return (acmd_data);

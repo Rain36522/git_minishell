@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/29 14:54:57 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 10:32:10 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,30 +69,48 @@ static void	ft_cmd_type(char *scmd, int *fd, t_incmd *lst)
 		write_cmd_in_file(scmd, fd[1]);
 }
 
+t_acmd	*get_cmd_parent(int *fd, t_incmd *lst, int istatus, char *scmd)
+{
+	t_incmd	*lst_next;
+
+	free(scmd);
+	while (lst)
+	{
+		lst_next = lst->next;
+		close(lst->fd[1]);
+		free(lst->read_fd);
+		free(lst->wrd);
+		free(lst);
+		lst =lst_next;
+	}
+	if (WEXITSTATUS(istatus) != 0)
+		return (ft_error_child(WEXITSTATUS(istatus), NULL, scmd, NULL));
+	return (ft_file_to_array(fd[0], fd[1]));
+}
+
 t_acmd	*get_cmd(char *prompt)
 {
 	pid_t	pid;
 	int		fd[2];
 	char	*scmd;
 	int		istatus;
+	t_incmd	*lst;
 
 	scmd = readline(prompt);
 	if (!input_error(scmd))
 		return (NULL);
 	if (pipe(fd) == -1)
 		return (ft_error_ptr(32, 1, NULL, prompt));
+	lst = redir_lst(scmd);
 	pid = fork();
 	if (pid < 0)
 		return (ft_error_ptr(10, 1, NULL, prompt));
 	else if (pid == 0)
-		ft_cmd_type(scmd, fd, redir_lst(scmd));
+		ft_cmd_type(scmd, fd, lst);
 	else
 	{
-		close(fd[1]);
 		waitpid(pid, &istatus, 0);
-		if (WEXITSTATUS(istatus) != 0)
-			return (ft_error_child(WEXITSTATUS(istatus), NULL, NULL, NULL));
-		return (ft_file_to_array(fd[0]));
+		return (get_cmd_parent(fd, lst, istatus, scmd));
 	}
 	return (NULL);
 }

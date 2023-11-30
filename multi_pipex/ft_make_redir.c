@@ -22,10 +22,13 @@ static void	ft_redir(int fd_in, int fd_out)
 	i = BUFFER_SIZE;
 	while (i == BUFFER_SIZE)
 	{
+		ft_printf("read\n");
 		i = read(fd_in, buf, BUFFER_SIZE);
-		if (i < 0)
+		ft_printf("i : %i\n", i);
+		if (i <= 0)
 			break;
-		i = write(fd_out, buf, i);
+		ft_printf("write\n");
+		 write(fd_out, buf, i);
 		if (i < 0)
 			break;
 		j = 0;
@@ -79,8 +82,6 @@ void	ft_make_redir(char **array)
 {
 	int		fd;
 	
-	ft_printf("redir_82 :\n");
-	ft_put_array(array);
 	if (ft_type_redir(array[0]) == 0)
 		return;
 	if (!array[1])

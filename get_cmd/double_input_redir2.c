@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/29 14:42:50 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 10:32:54 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ static void	ft_write_dat_in_file(t_incmd *lst, char **array)
 		free(str);
 		ft_putstr_fd("\n", lst->fd[1]);
 		str = readline(">> ");
+		if (!str)
+		{
+			ft_free_lst(lst, NULL);
+			ft_error_int(4, 1, array, NULL);
+		}
 	}
 	free(str);
 	close(lst->fd[1]);

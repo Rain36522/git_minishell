@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:10:29 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/29 12:41:30 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 09:09:22 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	ft_check_syntax(char **array)
 				return (0);
 			else if (array[i + 1] == NULL)
 				return (0);
-			ft_printf("str : %s, str1 : %s\n", array[i], array[i + 1]);
 		}
 		i ++;
 	}
