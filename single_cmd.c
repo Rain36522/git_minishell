@@ -74,7 +74,7 @@ void	single_cmd(char *str, char **envp)
 	tmp = NULL;
 	if (!str)
 		ft_error_int(127, 1, NULL, NULL);
-	if (ft_strncmp(str, "echo", 5) == 0)
+	else if (ft_strncmp(str, "echo", 5) == 0)
 		echo_cmd(str, envp);
 	else if (ft_strncmp(str, "cd", 3) == 0)
 		init_cmd(str, envp);
