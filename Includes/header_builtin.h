@@ -34,4 +34,9 @@ void	init_cmd(char *str, char **envp);
 // export command
 char	**export_cmd(char **env, char *scmd);
 
+// exit cmd
+void	exit_cmd(char *str);
+void	numeric_argument_required(char *str, char **tab);
+void	too_many_args(char *str, char **tab);
+
 #endif
