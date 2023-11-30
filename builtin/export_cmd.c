@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/28 17:07:24 by pudry            ###   ########.fr       */
+/*   Updated: 2023/11/30 15:54:02 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,12 @@ static char	**ft_replace_string_array(char **array, char *str, int ipos)
 	return (array);
 }
 
-char	**export_cmd(char **env, char *scmd)
+static char	**strdup_array_add_str(int i, char *scmd, char **env)
 {
-	int		i;
-	int		j;
 	char	**array;
+	int		j;
 
-	i = 0;
-	while (env[i] && ft_strcmp_egal(env[i], scmd) != 1)
-		i ++;
-	if (env[i])
-		return (ft_replace_str_array(env, i));
+	j = 0;
 	array = (char **) malloc(sizeof(char *) * i + 2);
 	if (!array)
 		ft_error_int(12, 1, NULL, scmd);
@@ -59,9 +54,34 @@ char	**export_cmd(char **env, char *scmd)
 	}
 	array[i] = ft_strdup(scmd);
 	if (!array[i])
-		ft_error_int(12, 1, NULL, scmd);
+		ft_error_int(12, 1, array, scmd);
 	ft_free_array(env);
 	free(scmd);
 	return (array);
+}
+
+char	**export_cmd(char **env, char *scmd)
+{
+	int		i;
+	int		j;
+	char	**env;
+
+	i = 0;
+	j = 0;
+	if (!ft_strchr(scmd, '='))
+		j ++;
+	while (scmd[i] != '=' && ft_isdigit(scmd[i]) && !j)
+		i ++;
+	if (scmd[i] == '=' && !j)
+		j ++;
+	if (j)
+		return (ft_error_ptr(22, 0, env, scmd));
+	i = 0;
+	while (env[i] && ft_strcmp_egal(env[i], scmd) != 1)
+		i ++;
+	if (env[i])
+		return (ft_replace_str_array(env, i));
+	env = strdup_array_add_str(i, scmd, env);
+	return (env);
 }
 
