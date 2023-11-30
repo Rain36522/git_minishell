@@ -16,7 +16,22 @@
 # include "minishell.h"
 
 // echo command
-int	dollar_gestion(char *str, int i, char **envp);
-int	print_until(char *str, int i, char c, char **envp);
+int		dollar_gestion(char *str, int i, char **envp);
+int		is_n(char *str, int i);
+int		print_backslash(char *str, int i);
+void	not_found_str(char *str);
+void	echo_cmd(char *str, char **envp);
+
+// env command
+void	env_cmd(char *str, char **envp);
+
+// cd command
+char	*simple_cd(char **envp);
+int		check_cd(char *str);
+void	cd_cmd(char **tab_cmd, char **envp);
+void	init_cmd(char *str, char **envp);
+
+// export command
+char	**export_cmd(char **env, char *scmd);
 
 #endif
