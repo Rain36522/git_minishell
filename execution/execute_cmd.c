@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:35:20 by csil              #+#    #+#             */
-/*   Updated: 2023/11/25 12:31:43 by csil             ###   ########.fr       */
+/*   Updated: 2023/12/01 16:28:02 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ char	*env_path(char **envp)
 	i = 0;
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
-	return (envp[i] + 5);
+	if (!envp[i])
+		return (envp[i] + 5);
+	else
+		return (NULL);
 }
 
 // join the valid path (env) + arg[0] cmd and return it

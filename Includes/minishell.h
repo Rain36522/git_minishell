@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 13:49:19 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 16:16:19 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	child_signal(int isignal);
 
 // output
 int		pipex(int argc, char **argv, char **envp);
-void	single_cmd(char *str, char **envp);
+char	**single_cmd(char *str, char **envp);
 
 // Temp
 void	ft_put_array(char **array);

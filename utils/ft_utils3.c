@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:34:03 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 09:58:59 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 16:25:48 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	ft_free_array(char **array)
 	int	i;
 
 	i = 0;
+	if (!array)
+		return ;
 	while (array[i])
 		free(array[i ++]);
 	free(array);

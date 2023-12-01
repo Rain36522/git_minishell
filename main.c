@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 15:10:22 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 16:17:07 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char **dup_env(char **env)
 	return (env2);	
 }
 
-static void	execute(t_acmd *cmd_data, char **env)
+static char	**execute(t_acmd *cmd_data, char **env)
 {
 	if (cmd_data->array[1])
 	{
@@ -47,8 +47,9 @@ static void	execute(t_acmd *cmd_data, char **env)
 	}
 	else
 	{
-		single_cmd(cmd_data->array[0], env);
+		env = single_cmd(cmd_data->array[0], env);
 	}
+	return (env);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -67,7 +68,7 @@ int	main(int argc, char **argv, char **env)
 		prompt = ft_give_prompte(env);
 		cmd_data = get_cmd(prompt, env);
 		if (cmd_data)
-			execute(cmd_data, env);
+			env = execute(cmd_data, env);
 		free(cmd_data);
 		free(prompt);
 	}
