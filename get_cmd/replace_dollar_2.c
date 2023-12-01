@@ -59,6 +59,7 @@ void	join_var_to_str(t_dlist *l, char **env, int equal, int i)
 	if (!l->str)
 	{
 		free (l->input);
+		l->input = NULL;
 		ft_error_ptr(12, 1, NULL, l->str);
 	}
 	l->i += (equal);

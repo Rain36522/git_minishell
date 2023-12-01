@@ -26,6 +26,7 @@ void	join_char(t_dlist *l, char c)
 	if (!new)
 	{
 		free (l->input);
+		l->input = NULL;
 		ft_error_ptr(12, 1, NULL, l->str);
 	}
 	while (l->str && l->str[i])
@@ -46,9 +47,15 @@ void	check_join(t_dlist *list, char *str)
 	if (!str)
 	{
 		if (list->input)
+		{
 			free (list->input);
+			list->input = NULL;
+		}
 		if (list->str)
+		{
 			free (list->str);
+			list->str = NULL;
+		}
 		ft_error_ptr(12, 1, NULL, NULL);
 	}
 }

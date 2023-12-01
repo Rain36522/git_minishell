@@ -101,7 +101,6 @@ char	*replace_dollar(char *str, int state, char **env)
 		state_2(&list, env);
 		state = 0;
 	}
-	free(str);
 	finish_dollar(&list, env);
 	return(list.str);
 }
