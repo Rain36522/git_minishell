@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 09:37:28 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 12:43:13 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ t_acmd	*get_cmd_parent(int *fd, t_incmd *lst, int istatus, char *scmd)
 {
 	t_incmd	*lst_next;
 
-	free(scmd);
+	ft_printf("77\n");
 	while (lst)
 	{
+		ft_printf("80\n");
 		lst_next = lst->next;
 		close(lst->fd[1]);
 		free(lst->read_fd);
@@ -83,8 +84,10 @@ t_acmd	*get_cmd_parent(int *fd, t_incmd *lst, int istatus, char *scmd)
 		free(lst);
 		lst =lst_next;
 	}
+	ft_printf("88\n");
 	if (WEXITSTATUS(istatus) != 0)
 		return (ft_error_child(WEXITSTATUS(istatus), NULL, scmd, NULL));
+	ft_printf("not exit\n");
 	return (ft_file_to_array(fd[0], fd[1]));
 }
 

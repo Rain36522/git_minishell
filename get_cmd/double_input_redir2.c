@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 09:34:39 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 12:36:14 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*ft_readline_redir(int i, t_incmd *lst, char **array, char **env)
 	if (!str)
 	{
 		ft_free_lst(lst, NULL);
-		ft_error_int(4, 1, array, NULL);
+		ft_error_int(150, 1, array, NULL);
 	}
 	str = replace_dollar(str, i, env);
 	return (str);
