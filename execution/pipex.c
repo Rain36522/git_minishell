@@ -47,6 +47,7 @@ int	pipex(int argc, char **argv, char **envp)
 	if (argc < 4)
 		wrong_args_number();
 	list.argv = argv;
+	list.envp = envp;
 	init_multi_pipex(&list, argc, argv);
 	list.env_path = env_path(envp);
 	list.cmd_path = ft_split(list.env_path, ':');

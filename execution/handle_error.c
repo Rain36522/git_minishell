@@ -48,6 +48,15 @@ void	close_all_pipes(t_pipex *list)
 	}
 }
 
+void	free_extra(t_pipex *list)
+{
+	if (list->envp)
+	{
+		free (list->envp);
+		list->envp = NULL;
+	}
+}
+
 // free all of the malloced content during the prog
 // and exit error code
 void	free_all_exit(t_pipex *list, int nbr)
@@ -72,6 +81,7 @@ void	free_all_exit(t_pipex *list, int nbr)
 	if (list->argv)
 		free_tab(list->argv);
 	list->argv = NULL;
+	free_extra(list);
 	if (nbr == 0)
 		return ;
 	else

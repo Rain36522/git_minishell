@@ -36,6 +36,7 @@ typedef struct s_pipex
 	char	**cmd_args;
 	char	*cmd;
 	char	**argv;
+	char	**envp;
 	pid_t	pid;
 }				t_pipex;
 
