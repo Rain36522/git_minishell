@@ -84,8 +84,8 @@ void	single_cmd(char *str, char **envp)
 		export_cmd(envp, str);
 	//else if (ft_strncmp(str, "unset", 8) == 0)
 	//	unset_cmd(str);
-	//else if (ft_strncmp(str, "exit", 5) == 0)
-	//	exit_cmd(str);
+	else if (ft_strncmp(str, "exit", 5) == 0)
+		exit_cmd(str);
 	else
 	{
 		tmp = ft_split (str, ' ');

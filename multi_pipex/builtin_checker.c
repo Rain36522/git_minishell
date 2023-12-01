@@ -27,11 +27,8 @@ void	builtin_checker_2(char *str, char **envp)
 	}
 	//else if (ft_strncmp(str, "unset", 8) == 0)
 	//	unset_cmd(str);
-	else if (ft_strncmp(str, "exit", 5) == 0)
-	{
-		exit_cmd(str);
-		exit;
-	}
+	//else if (ft_strncmp(str, "exit", 5) == 0)
+	//	exit_cmd(str);
 }
 
 void	builtin_checker(t_pipex *list, char *str, char **tab_cmd, char **envp)
