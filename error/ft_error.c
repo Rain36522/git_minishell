@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:52:09 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/01 12:44:54 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 12:52:39 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ void	*ft_error_child(int icode, char **array, char *str, char *str2)
 	str = NULL;
 	if (str2)
 		free(str2);
+	ft_printf("48\n");
+	ft_printf("icode : %i\n", icode);
+	ft_printf("50\n");
 	if (icode <= 130 && icode != 127)
 		exit(icode);
 	return (NULL);
