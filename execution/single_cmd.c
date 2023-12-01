@@ -84,7 +84,7 @@ static void	fork_not_builtin(char **tab, char **envp)
 	}
 }
 
-void	single_cmd(char *str, char **envp)
+char	**single_cmd(char *str, char **envp)
 {
 	char	**tmp;
 
@@ -98,9 +98,9 @@ void	single_cmd(char *str, char **envp)
 	else if (!ft_strncmp(str, "env ", 4) || !ft_strncmp(str, "env", 4))
 		env_cmd(str, envp);
 	else if (!ft_strncmp(str, "export ", 7) || !ft_strncmp(str, "export", 7))
-		export_cmd(envp, str);
-	//else if (ft_strncmp(str, "unset ", 8) == 0)
-	//	unset_cmd(str);
+		envp = export_cmd(envp, str);
+	//else if (ft_strncmp(str, "unset ", 6) || !ft_strncmp(str, "unset", 6))
+	//	envp = unset_cmd(str);
 	else if (!ft_strncmp(str, "exit ", 5) || !ft_strncmp(str, "exit", 5))
 		exit_cmd(str);
 	else
@@ -111,6 +111,7 @@ void	single_cmd(char *str, char **envp)
 			ft_error_int(12, 1, NULL, str);
 		fork_not_builtin(tmp, envp);
 	}
+	return (envp);
 }
 
 /*int     main(int argc, char **argv, char **envp)
