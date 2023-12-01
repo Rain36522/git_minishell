@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:15:58 by csil              #+#    #+#             */
-/*   Updated: 2023/11/28 14:49:46 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 10:34:37 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	pipex(int argc, char **argv, char **envp)
 	list = (t_pipex){};
 	if (argc < 4)
 		wrong_args_number();
+	list.argv = argv;
 	init_multi_pipex(&list, argc, argv);
 	list.env_path = env_path(envp);
 	list.cmd_path = ft_split(list.env_path, ':');
@@ -64,9 +65,14 @@ int	pipex(int argc, char **argv, char **envp)
 // tester for multipipex
 /*int	main(int argc, char **argv, char **envp)
 {
+	int		fd[2];
+
+	sleep(13);
 	(void) argc;
 	(void) argv;
-	char *tab[] = {"0", "echo Hello World", "zbeb", "echa ZbebZbeb", "1"};
+	if (pipe(fd) < 0)
+		exit(9);
+	char *tab[] = {ft_itoa(fd[0]), "< pipex.c", "cat", ft_itoa(fd[1])};
 	pipex(5, tab, envp);
 	return (0);
 }*/

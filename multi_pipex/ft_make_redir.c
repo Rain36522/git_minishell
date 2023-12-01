@@ -78,7 +78,7 @@ static int	ft_give_fd(int	itype, char *str)
 void	ft_make_redir(char **array)
 {
 	int		fd;
-	
+
 	if (ft_type_redir(array[0]) == 0)
 		return;
 	if (!array[1])

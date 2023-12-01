@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 20:44:24 by csil              #+#    #+#             */
-/*   Updated: 2023/11/28 14:49:25 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 10:32:47 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	free_all_exit(t_pipex *list, int nbr)
 {
 	close_all_pipes(list);
 	close(list->output);
-	// if (list->pipe)
-	// 	free(list->pipe);
-	// list->pipe = NULL;
+	if (list->pipe)
+		free(list->pipe);
+	list->pipe = NULL;
 	if (list->pid_array)
 		free(list->pid_array);
 	list->pid_array = NULL;
@@ -69,6 +69,9 @@ void	free_all_exit(t_pipex *list, int nbr)
 	if (list->cmd)
 		free(list->cmd);
 	list->cmd = NULL;
+	if (list->argv)
+		free_tab(list->argv);
+	list->argv = NULL;
 	if (nbr == 0)
 		return ;
 	else

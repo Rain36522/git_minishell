@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:39:14 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/01 07:56:56 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 09:26:37 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,9 @@ char	**ft_split_minishell(char const *s)
 		if (i == -1)
 			return (free_split(first));
 	}
+	i = 0;
+	while (first[i])
+		ft_printf("tab : %p\n", tab[i ++]);
+	ft_printf("array : \n");
 	return (first);
 }

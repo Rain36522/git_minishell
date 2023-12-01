@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/30 10:03:21 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 10:12:00 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ t_acmd	*ft_file_to_array(int fd, int fd_out)
 	i = j;
 	while (acmd_data->array[i + j] )
 	{
-		acmd_data->array[i] = ft_strdup_remov(acmd_data->array[i]);
+		acmd_data->array[i] = ft_strdup_remov(acmd_data->array[i], acmd_data);
 		i++;
 	}
 	acmd_data->isize = 0;

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:22:52 by csil              #+#    #+#             */
-/*   Updated: 2023/11/30 13:35:42 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 08:59:46 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	child_process(char **argv, char **envp, t_pipex l)
 		ft_make_redir(l.cmd_args);
 		if (!l.cmd)
 			cmd_not_found(&l);
-		builtin_checker(&l, l.cmd_args[0], l.cmd_args);
+		// builtin_checker(&l, l.cmd_args[0], l.cmd_args);
 		if (execve(l.cmd, l.cmd_args, envp) == -1)
 		{
 			free_all_exit (&l, l.exit_value);

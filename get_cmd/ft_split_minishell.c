@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:31:26 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/24 15:26:49 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 09:31:02 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,24 +94,23 @@ char	**free_split(char **tab)
 	return (tab);
 }
 
-/*
-int	main(void)
-{
-	char  		*s;
-	char		**tab = NULL;
+
+// int	main(void)
+// {
+// 	char  		*s;
+// 	char		**tab = NULL;
 	
-	s = "\'s\"a\'lut";
-	tab = ft_split_minishell(s);
-	int		i = 0;
-	while (tab[i])
-	{
-	    printf("tab: %s\n", tab[i]);
-		free(tab[i]);
-	    i++;
-	}
-	printf("fin: %s\n", tab[i]);
-	free(tab[i]);
-	free(tab);
-	return (0);
-}
-*/
+// 	s = "cat << a";
+// 	tab = ft_split_minishell(s);
+// 	int		i = 0;
+// 	while (tab[i])
+// 	{
+// 	    printf("tab: %s\n", tab[i]);
+// 		free(tab[i]);
+// 	    i++;
+// 	}
+// 	printf("fin: %s\n", tab[i]);
+// 	free(tab);
+// 	return (0);
+// }
+

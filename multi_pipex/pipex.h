@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 22:31:10 by csil              #+#    #+#             */
-/*   Updated: 2023/11/28 12:40:19 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 10:31:53 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_pipex
 	char	**cmd_path;
 	char	**cmd_args;
 	char	*cmd;
+	char	**argv;
 	pid_t	pid;
 }				t_pipex;
 
