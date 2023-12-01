@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/30 14:15:13 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 08:35:46 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int argc, char **argv, char **env)
 	int		i;
 	char	*prompt;
 	t_acmd	*cmd_data;
-	char	*str;
 
 	argc += 0;
 	argv += 0;

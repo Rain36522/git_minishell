@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:34:03 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/30 09:08:43 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 08:38:05 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_cnt_dbl_redir_str(char *str)
 	return (j);
 }
 
-void	ft_free_array(char ** array)
+void	ft_free_array(char **array)
 {
 	int	i;
 
@@ -57,7 +57,7 @@ void	ft_print_pipe_out(int fd_in)
 	{
 		i = read(fd_in, buf, BUFFER_SIZE);
 		if (i < 0)
-			break;
+			break ;
 		ft_putstr_fd(buf, 1);
 		j = 0;
 		while (j < BUFFER_SIZE && i == BUFFER_SIZE)

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/30 15:39:23 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 08:29:55 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,16 @@ static void	ft_write_dat_in_file(t_incmd *lst, char **array, char **env)
 {
 	char	*str;
 	int		isize;
-	int		i;
 
-	i = 0;
-	str = ft_readline_redir(i, lst, array, env);
+	str = ft_readline_redir(0, lst, array, env);
 	isize = ft_strlen(lst->wrd) + 1;
 	while (ft_strncmp(str, lst->wrd, isize))
 	{
-		i = ft_quotes(str, i);
 		ft_putstr_fd(str, lst->fd[1]);
 		free(str);
 		ft_putstr_fd("\n", lst->fd[1]);
 
-		str = ft_readline_redir(i, lst, array, env);
+		str = ft_readline_redir(0, lst, array, env);
 	}
 	free(str);
 	close(lst->fd[1]);

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/30 15:54:02 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 08:15:15 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	**strdup_array_add_str(int i, char *scmd, char **env)
 	return (array);
 }
 
-char	**export_cmd(char **env, char *scmd)
+static char	**ft_export(char **env, char *scmd)
 {
 	int		i;
 	int		j;
@@ -83,5 +83,24 @@ char	**export_cmd(char **env, char *scmd)
 		return (ft_replace_str_array(env, i));
 	env = strdup_array_add_str(i, scmd, env);
 	return (env);
+}
+
+char	**export_cmd(char **env, char **acmd)
+{
+	int	i;
+
+	i = 0;
+	while (acmd[i])
+		i ++;
+	if (i == 1)
+	{
+		ft_put_array(env);
+		return (env);
+	}
+	i = 1;
+	while (acmd[i])
+		env =ft_export(env, acmd[i]);
+	return (env);
+
 }
 
