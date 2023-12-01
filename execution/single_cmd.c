@@ -41,6 +41,14 @@ char	*join_path(char **paths, char **args, int i)
 	return (NULL);
 }
 
+static void	no_final_path(char **tab, char **paths, char *final_path)
+{
+		ft_putstr_fd(tab[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
+		ft_free_array(paths);
+		ft_error_int(127, 0, tab, final_path);
+}
+
 void	not_builtin(char **tab, char **envp)
 {
 	char	**paths;
@@ -58,12 +66,7 @@ void	not_builtin(char **tab, char **envp)
 		paths = NULL;
 	final_path = join_path(paths, tab, 0);
 	if (!final_path)
-	{
-		ft_putstr_fd(tab[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
-		ft_free_array(paths);
-		ft_error_int(127, 0, tab, final_path);
-	}
+		no_final_path(tab, paths, final_path);
 	ft_free_array(paths);
 	if (execve(final_path, tab, envp) == -1)
 	{
