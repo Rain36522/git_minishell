@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_builtin.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 20:35:26 by csil              #+#    #+#             */
-/*   Updated: 2023/11/25 20:58:24 by csil             ###   ########.fr       */
+/*   Updated: 2023/12/01 11:58:03 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	cd_cmd(char **tab_cmd, char **envp);
 void	init_cmd(char *str, char **envp);
 
 // export command
-char	**export_cmd(char **env, char *scmd);
+char	**export_cmd(char **env, char **acmd);
+void	ft_put_export(char **array);
 
 // exit cmd
 void	exit_cmd(char *str);
