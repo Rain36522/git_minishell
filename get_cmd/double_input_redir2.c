@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 12:36:14 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 12:58:06 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ static char	*ft_readline_redir(int i, t_incmd *lst, char **array, char **env)
 		ft_free_lst(lst, NULL);
 		ft_error_int(150, 1, array, NULL);
 	}
+	ft_printf("str : %s\n", str);
 	str = replace_dollar(str, i, env);
+	ft_printf("str after : %s\n", str);
 	return (str);
 }
 
@@ -67,6 +69,7 @@ static void	ft_write_dat_in_file(t_incmd *lst, char **array, char **env)
 	while (ft_strncmp(str, lst->wrd, isize))
 	{
 		ft_putstr_fd(str, lst->fd[1]);
+		ft_putstr_fd(str, 2);
 		free(str);
 		ft_putstr_fd("\n", lst->fd[1]);
 

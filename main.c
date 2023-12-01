@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 10:36:43 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 12:54:07 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	main(int argc, char **argv, char **env)
 	{
 		prompt = ft_give_prompte(env);
 		cmd_data = get_cmd(prompt, env);
-		ft_put_array(cmd_data->array);
 		ft_printf("CC\n");
 		// ft_free_array(cmd_data->array);
 		// free(cmd_data);
 		if (cmd_data)
 		{
+			ft_put_array(cmd_data->array);
 			pipex(cmd_data->isize, cmd_data->array, env);
 			ft_print_pipe_out(cmd_data->fd_pipe[0]);
 		}
