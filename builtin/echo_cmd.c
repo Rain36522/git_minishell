@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   echo_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csil <csil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:19:01 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/29 22:26:54 by csil             ###   ########.fr       */
+/*   Updated: 2023/12/01 14:04:49 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include "../Includes/minishell.h"
-#include "Includes/header_builtin.h"
+#include "../Includes/header_builtin.h"
 
 int	dollar_gestion(char *str, int i, char **envp)
 {

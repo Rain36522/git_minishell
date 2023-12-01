@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   single_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:07 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/29 16:44:21 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/01 13:56:39 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/minishell.h"
-#include "multi_pipex/pipex.h"
+#include "../Includes/minishell.h"
 
 //    Else: he execute the cmd (path + argv[0], argv, envp)
 char	*join_path(char **paths, char **args, int i)
@@ -74,23 +73,23 @@ void	single_cmd(char *str, char **envp)
 	tmp = NULL;
 	if (!str)
 		ft_error_int(127, 1, NULL, NULL);
-	else if (ft_strncmp(str, "echo", 5) == 0)
+	else if (ft_strncmp(str, "echo ", 5) == 0)
 		echo_cmd(str, envp);
-	else if (ft_strncmp(str, "cd", 3) == 0)
+	else if (ft_strncmp(str, "cd ", 3) == 0)
 		init_cmd(str, envp);
-	else if (ft_strncmp(str, "env", 4) == 0)
+	else if (ft_strncmp(str, "env ", 4) == 0)
 		env_cmd(str, envp);
-	else if (ft_strncmp(str, "export", 7) == 0)
+	else if (ft_strncmp(str, "export ", 7) == 0)
 		export_cmd(envp, str);
-	//else if (ft_strncmp(str, "unset", 8) == 0)
+	//else if (ft_strncmp(str, "unset ", 8) == 0)
 	//	unset_cmd(str);
-	else if (ft_strncmp(str, "exit", 5) == 0)
+	else if (ft_strncmp(str, "exit ", 5) == 0)
 		exit_cmd(str);
 	else
 	{
 		tmp = ft_split (str, ' ');
 		if (!tmp)
-			ft_error_int(12, 1, str, NULL);
+			ft_error_int(12, 1, NULL, str);
 		not_builtin(tmp, envp);
 	}
 }

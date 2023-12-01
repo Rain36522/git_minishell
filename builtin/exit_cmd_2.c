@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit_cmd_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:12:01 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/30 16:12:05 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:04:56 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
-#include "../multi_pipex/pipex.h"
 
 void	too_many_args(char *str, char **tab)
 {

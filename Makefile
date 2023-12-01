@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/12/01 08:37:25 by pudry            ###   ########.fr        #
+#    Updated: 2023/12/01 13:58:56 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ TEXT_4   = "			              |   |  ${GREEN}C:\\> Starting minishell in 2 second
 TEXT_5   = "			              |   |  ${GREEN}C:\\> Starting minishell in 1 seconds   ${WHITE}|    |\033[F"
 TEXT_6   = "			              |   |  ${GREEN}C:\\> Starting minishell in 0 seconds   ${WHITE}|    |"
 
-SRC_BUILT = builtin/cwd.c builtin/username.c
+SRC_BUILT_2 = cd_cmd.c cwd.c env_cmd.c exit_cmd_2.c export_cmd2.c username.c check_quotes.c echo_cmd.c exit_cmd.c export_cmd.c unset_cmd.c
+SRC_BUILT = $(addprefix builtin/,$(SRC_BUILT_2))
 
 SRC_UTILS = main.c utils/ft_utils.c utils/ft_utils2.c utils/ft_utils3.c utils/signaux.c
 
@@ -54,8 +55,8 @@ SRC_CMD = $(addprefix get_cmd/,$(SRC_CMD_2))
 
 SRC_GNL = gnl/get_next_line_utils.c gnl/get_next_line.c
 
-SRC_MUL_PIPE_2 = child_process.c execute_cmd.c handle_error.c pipex.c ft_make_redir.c
-SRC_MUL_PIPE = $(addprefix multi_pipex/,$(SRC_MUL_PIPE_2))
+SRC_MUL_PIPE_2 = child_process.c execute_cmd.c handle_error.c pipex.c ft_make_redir.c single_cmd.c builtin_checker.c
+SRC_MUL_PIPE = $(addprefix execution/,$(SRC_MUL_PIPE_2))
 
 all : header
 	@make -s -C ft_printf/

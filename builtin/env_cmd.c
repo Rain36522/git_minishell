@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 15:45:41 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/24 18:13:06 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:05:03 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "Includes/minishell.h"
+#include "../Includes/minishell.h"
 
 void	env_cmd(char *str, char **envp)
 {

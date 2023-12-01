@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:47:09 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/30 08:56:45 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:05:08 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
-#include "multi_pipex/pipex.h"
 
 // cd simple cmd
 char	*simple_cd(char **envp)

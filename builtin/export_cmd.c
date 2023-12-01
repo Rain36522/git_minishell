@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 11:56:59 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 14:04:30 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	**ft_replace_string_array(char **array, char *str, int ipos)
 	free(array[ipos]);
 	ptr = ft_strdup(str);
 	if (!ptr)
-		ft_error(12, 1, NULL, NULL);
+		ft_error_int(12, 1, NULL, NULL);
 	array[ipos] = ptr;
 	free(str);
 	return (array);
@@ -64,7 +64,6 @@ static char	**ft_export(char **env, char *scmd)
 {
 	int		i;
 	int		j;
-	char	**env;
 
 	i = 0;
 	j = 0;
@@ -80,26 +79,32 @@ static char	**ft_export(char **env, char *scmd)
 	while (env[i] && ft_strcmp_egal(env[i], scmd) != 1)
 		i ++;
 	if (env[i])
-		return (ft_replace_str_array(env, i));
+		return (ft_replace_string_array(env, scmd, i));
 	env = strdup_array_add_str(i, scmd, env);
 	return (env);
 }
 
-char	**export_cmd(char **env, char **acmd)
+char	**export_cmd(char **env, char *scmd)
 {
-	int	i;
+	int		i;
+	char	**acmd;
 
 	i = 0;
+	acmd = ft_split_minishell(scmd);
+	free(scmd);
+	if (!acmd)
+		ft_error_int(12, 1, env, NULL);
 	while (acmd[i])
 		i ++;
 	if (i == 1)
 	{
-		;
+		ft_put_export(acmd);
 		return (env);
 	}
 	i = 1;
 	while (acmd[i])
-		env =ft_export(env, acmd[i]);
+		env = ft_export(env, acmd[i]);
+	ft_free_array(acmd);
 	return (env);
 
 }

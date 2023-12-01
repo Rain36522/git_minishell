@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cduffaut <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 14:33:50 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/30 17:34:20 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:04:40 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
-#include "../multi_pipex/pipex.h"
 
 static int	non_numeric(char *str)
 {

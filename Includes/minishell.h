@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 10:11:44 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 13:49:19 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # include "../ft_printf/ft_printf.h"
 # include "../ft_printf/libft/libft.h"
-# include "../multi_pipex/pipex.h"
+# include "../execution/pipex.h"
 # include "header_builtin.h"
 
 # include <readline/readline.h>
@@ -117,8 +117,9 @@ t_acmd	*ft_util_add_pipe(t_acmd *acmd_data);
 void	parent_signal(int isignal);
 void	child_signal(int isignal);
 
-// pipex
+// output
 int		pipex(int argc, char **argv, char **envp);
+void	single_cmd(char *str, char **envp);
 
 // Temp
 void	ft_put_array(char **array);
