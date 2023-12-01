@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 12:58:06 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 15:22:03 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ static char	*ft_readline_redir(int i, t_incmd *lst, char **array, char **env)
 {
 	char	*str;
 	
-	str = readline(">>");
+	str = readline(">> ");
 	if (!str)
 	{
 		ft_free_lst(lst, NULL);
+		ft_free_array(env);
 		ft_error_int(150, 1, array, NULL);
 	}
 	ft_printf("str : %s\n", str);

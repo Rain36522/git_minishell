@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:07 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/01 13:56:39 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 15:32:56 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,24 @@ void	not_builtin(char **tab, char **envp)
 	}
 }
 
+static void	fork_not_builtin(char **tab, char **envp)
+{
+	pid_t	pid;
+	int		istatus;
+
+	pid = fork();
+	if (pid < 0)
+		ft_error_ptr(9, 1, tab, NULL);
+	else if (pid == 0)
+		not_builtin(tab, envp);
+	else
+	{
+		waitpid(pid, &istatus, 0);
+		if (WEXITSTATUS(istatus) != 0)
+			ft_error_child(WEXITSTATUS(istatus), tab, NULL, NULL);
+	}
+}
+
 void	single_cmd(char *str, char **envp)
 {
 	char	**tmp;
@@ -79,7 +97,7 @@ void	single_cmd(char *str, char **envp)
 		init_cmd(str, envp);
 	else if (ft_strncmp(str, "env ", 4) == 0)
 		env_cmd(str, envp);
-	else if (ft_strncmp(str, "export ", 7) == 0)
+	else if (!ft_strncmp(str, "export ", 7) || !ft_strncmp(str, "export", 7))
 		export_cmd(envp, str);
 	//else if (ft_strncmp(str, "unset ", 8) == 0)
 	//	unset_cmd(str);
@@ -87,10 +105,11 @@ void	single_cmd(char *str, char **envp)
 		exit_cmd(str);
 	else
 	{
+		ft_printf("not builtin\n");
 		tmp = ft_split (str, ' ');
 		if (!tmp)
 			ft_error_int(12, 1, NULL, str);
-		not_builtin(tmp, envp);
+		fork_not_builtin(tmp, envp);
 	}
 }
 

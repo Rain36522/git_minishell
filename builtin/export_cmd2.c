@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 11:56:32 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/01 15:33:30 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_put_export(char **array)
 	while (array[i])
 	{
 		ft_printf("declare -x ");
-		ptr = ft_put_to_egal(array[i]);
+		ptr = ft_put_to_egal(array[i ++]);
 		ft_printf("\"%s\"\n", ptr);
 	}
 }
