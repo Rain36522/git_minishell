@@ -6,12 +6,11 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 15:10:17 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/02 14:09:16 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
-
 
 static void	ft_double_input_redir(int *fd, char *scmd, t_incmd *lst, char **env)
 {
@@ -80,7 +79,7 @@ t_acmd	*get_cmd_parent(int *fd, t_incmd *lst, int istatus, char *scmd)
 		free(lst->read_fd);
 		free(lst->wrd);
 		free(lst);
-		lst =lst_next;
+		lst = lst_next;
 	}
 	if (WEXITSTATUS(istatus) != 0)
 		return (ft_error_child(WEXITSTATUS(istatus), NULL, scmd, NULL));

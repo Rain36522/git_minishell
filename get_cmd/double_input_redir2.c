@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 15:22:03 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/02 14:04:22 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**ft_replace_redir(t_incmd *lst, char **array)
 static char	*ft_readline_redir(int i, t_incmd *lst, char **array, char **env)
 {
 	char	*str;
-	
+
 	str = readline(">> ");
 	if (!str)
 	{
@@ -73,7 +73,6 @@ static void	ft_write_dat_in_file(t_incmd *lst, char **array, char **env)
 		ft_putstr_fd(str, 2);
 		free(str);
 		ft_putstr_fd("\n", lst->fd[1]);
-
 		str = ft_readline_redir(0, lst, array, env);
 	}
 	free(str);
