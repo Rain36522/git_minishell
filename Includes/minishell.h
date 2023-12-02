@@ -136,4 +136,7 @@ void	list_init(t_dlist *list, char *str, int state);
 void	state_1(t_dlist *l);
 char	*replace_dollar(char *str, int state, char **env);
 
+// free the str and put him null
+void	free_str_and_null(char *str);
+
 #endif

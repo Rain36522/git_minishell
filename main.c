@@ -52,6 +52,18 @@ static char	**execute(t_acmd *cmd_data, char **env)
 	return (env);
 }
 
+void	free_str_and_null(char *str)
+{
+	free(str);
+	str = NULL;
+}
+
+void	free_list_and_null(t_acmd *list)
+{
+	free(list);
+	list = NULL;
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	int		i;
@@ -70,20 +82,13 @@ int	main(int argc, char **argv, char **env)
 		if (cmd_data)
 			env = execute(cmd_data, env);
 		if (cmd_data->array)
-		{
-			free(cmd_data->array);
-			cmd_data->array = NULL;
-		}
+			ft_free_array(cmd_data->array);
 		if (cmd_data)
 		{
-			free(cmd_data);
-			cmd_data = NULL;
+			free_list_and_null(cmd_data);
 		}
 		if (prompt)
-		{
-			free (prompt);
-			prompt = NULL;
-		}
+			free_str_and_null(prompt);
 	}
 	return (0);
 }
