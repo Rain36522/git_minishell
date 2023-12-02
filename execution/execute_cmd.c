@@ -20,7 +20,7 @@ char	*env_path(char **envp)
 	i = 0;
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
-	if (!envp[i])
+	if (envp[i])
 		return (envp[i] + 5);
 	else
 		return (NULL);
