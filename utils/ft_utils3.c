@@ -63,7 +63,7 @@ void	ft_print_pipe_out(int fd_in)
 		ft_putstr_fd(buf, 1);
 		j = 0;
 		while (j < BUFFER_SIZE && i == BUFFER_SIZE)
-			buf[j ++] = '\0';
+			buf[j++] = '\0';
 	}
 	if (i < 0)
 		ft_error_int(23, 0, NULL, NULL);

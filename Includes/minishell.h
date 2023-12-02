@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 16:16:19 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/02 13:52:24 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int		ft_quotes(char *str, int istatus);
 t_lst	*ft_add_end_lst_lst(t_lst *lst, t_lst *ptr);
 char	*ft_strjoin_free(char *str1, char *str2);
 int		ft_cnt_dbl_redir_str(char *str);
-void	ft_free_array(char ** array);
+void	ft_free_array(char **array);
 void	ft_print_pipe_out(int fd_in);
 t_acmd	*ft_util_add_pipe(t_acmd *acmd_data);
 void	parent_signal(int isignal);

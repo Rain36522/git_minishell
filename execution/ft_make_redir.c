@@ -6,10 +6,9 @@
 /*   By: pudry <pudry@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 10:10:35 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/26 10:21:58 by pudry            ###   ########.ch       */
+/*   Updated: 2023/12/02 13:59:23 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "pipex.h"
 
@@ -24,10 +23,10 @@ static void	ft_redir(int fd_in, int fd_out)
 	{
 		i = read(fd_in, buf, BUFFER_SIZE);
 		if (i <= 0)
-			break;
-		 write(fd_out, buf, i);
+			break ;
+		write(fd_out, buf, i);
 		if (i < 0)
-			break;
+			break ;
 		j = 0;
 		while (j < BUFFER_SIZE)
 			buf[j ++] = '\0';
@@ -53,7 +52,7 @@ static int	ft_type_redir(char	*str)
 static int	ft_str_is_digit(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i] && ft_isdigit(str[i]))
 		i ++;
@@ -62,7 +61,7 @@ static int	ft_str_is_digit(char *str)
 	return (0);
 }
 
-static int	ft_give_fd(int	itype, char *str)
+static int	ft_give_fd(int itype, char *str)
 {
 	if (ft_str_is_digit(str))
 		return (ft_atoi(str));
@@ -72,7 +71,7 @@ static int	ft_give_fd(int	itype, char *str)
 		return (open(str, O_CREAT | O_TRUNC | O_WRONLY, 0644));
 	else if (itype == 3)
 		return (open(str, O_CREAT | O_APPEND | O_WRONLY, 0644));
-	return (-1);	
+	return (-1);
 }
 
 void	ft_make_redir(char **array)
@@ -80,12 +79,12 @@ void	ft_make_redir(char **array)
 	int		fd;
 
 	if (ft_type_redir(array[0]) == 0)
-		return;
+		return ;
 	if (!array[1])
 		ft_error_int(201, 1, array, NULL);
 	fd = ft_give_fd(ft_type_redir(array[0]), array[1]);
 	if (ft_type_redir(array[0]) == 1)
 		ft_redir(fd, 1);
-	else if (ft_type_redir(array[0]) == 2 || ft_type_redir(array[0]) == 3) 
+	else if (ft_type_redir(array[0]) == 2 || ft_type_redir(array[0]) == 3)
 		ft_redir(0, fd);
 }

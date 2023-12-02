@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 14:02:08 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/02 13:54:35 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,9 @@ static char	**ft_remove_env_str(char **env, int isize, int ipos, char *scmd)
 	free(env[ipos]);
 	free(env);
 	return (array);
-
 }
 
-static char	**ft_unset(char ** env, char *scmd)
+static char	**ft_unset(char **env, char *scmd)
 {
 	int	i;
 	int	j;
@@ -59,7 +58,7 @@ static char	**ft_unset(char ** env, char *scmd)
 	j = 2147483647;
 	while (env[i])
 	{
-		if(ft_strcmp_unset(env[i], scmd) == 1)
+		if (ft_strcmp_unset(env[i], scmd) == 1)
 			j = i;
 		i ++;
 	}

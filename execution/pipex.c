@@ -6,13 +6,12 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:15:58 by csil              #+#    #+#             */
-/*   Updated: 2023/12/01 10:34:37 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/02 14:00:00 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include <stdio.h>
-
 
 // open and check error for the output file
 // pour handle le cas output : >> file 

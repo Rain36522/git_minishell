@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 15:34:22 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/02 13:53:35 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,4 @@ char	**export_cmd(char **env, char *scmd)
 		env = ft_export(env, acmd[i]);
 	ft_free_array(acmd);
 	return (env);
-
 }
-
