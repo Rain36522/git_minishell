@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 16:17:07 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/02 14:12:49 by cduffaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <readline/history.h>
 #include <stdio.h>
 
-static char **dup_env(char **env)
+static char	**dup_env(char **env)
 {
 	char	**env2;
 	int		i;
@@ -35,7 +35,7 @@ static char **dup_env(char **env)
 		}
 		i ++;
 	}
-	return (env2);	
+	return (env2);
 }
 
 static char	**execute(t_acmd *cmd_data, char **env)
@@ -74,4 +74,3 @@ int	main(int argc, char **argv, char **env)
 	}
 	return (0);
 }
-
