@@ -69,8 +69,21 @@ int	main(int argc, char **argv, char **env)
 		cmd_data = get_cmd(prompt, env);
 		if (cmd_data)
 			env = execute(cmd_data, env);
-		free(cmd_data);
-		free(prompt);
+		if (cmd_data->array)
+		{
+			free(cmd_data->array);
+			cmd_data->array = NULL;
+		}
+		if (cmd_data)
+		{
+			free(cmd_data);
+			cmd_data = NULL;
+		}
+		if (prompt)
+		{
+			free (prompt);
+			prompt = NULL;
+		}
 	}
 	return (0);
 }

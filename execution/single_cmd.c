@@ -71,7 +71,7 @@ void	not_builtin(char **tab, char **envp)
 	if (execve(final_path, tab, envp) == -1)
 	{
 		ft_free_array(envp);
-		ft_error_int(errno, 1, NULL, NULL);
+		ft_error_int(errno, 1, tab, final_path);
 	}
 }
 
@@ -119,6 +119,11 @@ char	**single_cmd(char *str, char **envp)
 		if (!tmp)
 			ft_error_int(12, 1, NULL, str);
 		fork_not_builtin(tmp, envp);
+		if (tmp)
+		{
+			free(tmp);
+			tmp = NULL;
+		}
 	}
 	return (envp);
 }

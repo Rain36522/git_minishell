@@ -129,6 +129,6 @@ t_acmd	*ft_file_to_array(int fd, int fd_out)
 	}
 	acmd_data->isize = 0;
 	while (acmd_data->array[acmd_data->isize])
-		acmd_data->isize ++;
+		acmd_data->isize++;
 	return (acmd_data);
 }

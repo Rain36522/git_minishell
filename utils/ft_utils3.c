@@ -44,8 +44,13 @@ void	ft_free_array(char **array)
 	if (!array)
 		return ;
 	while (array[i])
-		free(array[i ++]);
+	{
+		free(array[i]);
+		array[i] = NULL;
+		i++;
+	}
 	free(array);
+	array = NULL;
 }
 
 void	ft_print_pipe_out(int fd_in)

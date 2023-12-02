@@ -16,7 +16,9 @@
 static char	*ft_remove_dup(t_acmd *cmd)
 {
 	ft_free_array(cmd->array);
+	cmd->array = NULL;
 	free(cmd);
+	cmd = NULL;
 	ft_error_ptr(12, 1, NULL, NULL);
 	return (NULL);
 }
@@ -43,6 +45,7 @@ char	*ft_strdup_remov(char *str, t_acmd	*cmd)
 		}
 		dup[i] = '\0';
 		free(str);
+		str = NULL;
 		return (dup);
 	}
 	return (str);
