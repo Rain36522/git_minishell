@@ -45,6 +45,7 @@ static void	no_final_path(char **tab, char **paths, char *final_path)
 {
 	ft_putstr_fd(tab[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
+	// les deux ont ete pour autant malloc mais petent un cable quand tu les free ?
 	ft_free_array(paths);
 	ft_error_int(127, 0, tab, final_path);
 }
