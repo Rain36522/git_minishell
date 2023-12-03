@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 17:33:17 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/03 17:39:47 by pudry            ###   ########.ch       */
+/*   Updated: 2023/12/03 17:39:52 by pudry            ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ t_acmd	*ft_util_add_pipe(t_acmd *acmd_data)
 	acmd_data->fd_pipe[1] = fd[1];
 	return (acmd_data);
 }
-
+// This function replace the arraz contening the cmd
+// bz an string contening the cmd
+// The ft free the arraz.
+// The ft return Null case error
 char	*ft_acmd_to_scmd(char **acmd)
 {
 	int		i;
