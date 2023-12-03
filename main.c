@@ -81,14 +81,14 @@ int	main(int argc, char **argv, char **env)
 		cmd_data = get_cmd(prompt, env);
 		if (cmd_data)
 			env = execute(cmd_data, env);
-		if (cmd_data->array)
-			ft_free_array(cmd_data->array);
+
+		//if (cmd_data->array)
+		//	ft_free_array(cmd_data->array);
 		if (cmd_data)
-		{
 			free_list_and_null(cmd_data);
-		}
 		if (prompt)
 			free_str_and_null(prompt);
 	}
+	ft_free_array(env);
 	return (0);
 }
