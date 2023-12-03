@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pudry <pudry@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 11:34:03 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 16:25:48 by pudry            ###   ########.fr       */
+/*   Created: 2023/12/03 17:33:17 by pudry             #+#    #+#             */
+/*   Updated: 2023/12/03 17:39:47 by pudry            ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,25 @@ t_acmd	*ft_util_add_pipe(t_acmd *acmd_data)
 	acmd_data->fd_pipe[0] = fd[0];
 	acmd_data->fd_pipe[1] = fd[1];
 	return (acmd_data);
+}
+
+char	*ft_acmd_to_scmd(char **acmd)
+{
+	int		i;
+	char	*scmd;
+
+	if (!acmd || ! *acmd)
+		return (NULL);
+	i = 1;
+	scmd = acmd[0];
+	while (acmd[i] && scmd)
+	{
+		scmd = ft_strjoin(scmd, " ");
+		if (scmd)
+			scmd = ft_strjoin_free(scmd, acmd[i ++]);
+	}
+	while (acmd[i])
+		free(acmd[i ++]);
+	free(acmd);
+	return (scmd);
 }
