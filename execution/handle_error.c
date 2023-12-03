@@ -48,7 +48,6 @@ void	close_all_pipes(t_pipex *list)
 	}
 }
 
-
 // free all of the malloced content during the prog
 // and exit error code
 void	free_all_exit(t_pipex *list, int nbr)
