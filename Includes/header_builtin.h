@@ -36,7 +36,9 @@ void	init_cmd(char *str, char **envp);
 
 // export command
 char	**export_cmd(char **env, char *scmd);
-void	ft_put_export(char **array);
+char	**ft_put_export(char **array, char **afree);
+char	**ft_change_env(char *str, char **env);
+int		ft_strcmp_egal(char *s1, char *s2);
 
 // exit cmd
 void	exit_cmd(char *str);

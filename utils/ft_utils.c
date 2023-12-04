@@ -53,21 +53,21 @@ char	*ft_give_prompte(char **env)
 	ptr = find_hostname(env);
 	if (!ptr)
 		ft_error_ptr(12, 1, NULL, NULL);
-	str = ft_strjoin("👤 \033[1;31m", ptr);
+	str = ft_strjoin("👤 ", ptr);
 	free(ptr);
 	if (!str)
 		ft_error_ptr(12, 1, NULL, NULL);
 	ptr = cwd();
 	if (!str)
 		ft_error_ptr(12, 1, NULL, NULL);
-	str = ft_strjoin_free(str, " 📂 \033[0;37m");
+	str = ft_strjoin_free(str, " 📂 ");
 	if (!str)
 		ft_error_ptr(12, 1, NULL, NULL);
 	str = ft_strjoin_free(str, ft_strrchr(ptr, '/') + 1);
 	free(ptr);
 	if (!str)
 		ft_error_ptr(12, 1, NULL, NULL);
-	str = ft_strjoin_free(str, " \033[1;37m➤ $ \033[0m");
+	str = ft_strjoin_free(str, " ➤ $ ");
 	if (!str)
 		ft_error_ptr(12, 1, NULL, NULL);
 	return (str);

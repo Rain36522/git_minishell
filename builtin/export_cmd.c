@@ -6,107 +6,115 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/04 13:11:33 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/04 15:46:57 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/header_builtin.h"
 
-static int	ft_strcmp_egal(const char *s1, const char *s2)
+int	ft_strcmp_egal(char *s1, char *s2)
 {
 	int	i;
 
 	i = 0;
 	while (s1[i] && s1[i] == s2[i] && s1[i] != '=')
 		i ++;
-	if (s1[i] == '=' && s2[i] == '=')
+	if ((s1[i] == '=' && s2[i] == '=') || (!s1 && !s2))
 		return (1);
 	return (0);
 }
 
-static char	**ft_replace_string_array(char **array, char *str, int ipos)
+static int	ft_str_is_in_array(char *s1, char **array)
 {
-	char	*ptr;
+	int	i;
 
-	free(array[ipos]);
-	ptr = ft_strdup(str);
-	if (!ptr)
-		ft_error_int(12, 1, NULL, NULL);
-	array[ipos] = ptr;
-	free(str);
-	return (array);
+	i = 0;
+	while (array[i])
+	{
+		if (ft_strcmp_egal(s1, array[i]))
+			return (1);
+		i ++;
+	}
+	return (0);
 }
 
-static char	**strdup_array_add_str(int i, char *scmd, char **env)
+static int	ft_check_arg(char **acmd)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (acmd[i])
+	{
+		j = 0;
+		if (acmd[i][0] == '=')
+			return (ft_error_int(201, 0, acmd, NULL));
+		while (acmd[i][j] && ft_isdigit(acmd[i][j]))
+			j ++;
+		if(!acmd[i][j])
+			return (ft_error_int(201, 0, acmd, NULL));
+		j = 0;
+		while (acmd[i][j] && ft_isalnum(acmd[i][j]))
+			j ++;
+		if (acmd[i][j] != '=')
+			return (ft_error_int(201, 0, acmd, NULL));
+		i ++;
+	}
+	return (i);
+}
+
+static char	**ft_cpy_array_big_size(char **env, int iargs)
 {
 	char	**array;
 	int		j;
+	int		isize;
 
 	j = 0;
-	array = (char **) malloc(sizeof(char *) * i + 2);
+	while (env[j])
+		j ++;
+	isize = j + iargs - 1;
+	array = (char **) malloc(sizeof(char *) * (isize + 1));
 	if (!array)
-		ft_error_int(12, 1, NULL, scmd);
-	array[i + 1] = NULL;
-	while (j <= i)
+		return (ft_error_ptr(150, 0, env, NULL));
+	j = 0;
+	while (env[j])
 	{
 		array[j] = env[j];
 		j ++;
 	}
-	array[i] = ft_strdup(scmd);
-	if (!array[i])
-		ft_error_int(12, 1, array, scmd);
 	free(env);
+	while (j < isize)
+		array[j ++] = NULL;
 	return (array);
-}
-
-static char	**ft_export(char **env, char *scmd)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if (!ft_strchr(scmd, '='))
-		j ++;
-	while (scmd[i] != '=' && ft_isdigit(scmd[i]) && !j)
-		i ++;
-	if (scmd[i] == '=' && !j)
-		j ++;
-	if (j)
-		return (ft_error_ptr(22, 0, env, scmd));
-	i = 0;
-	while (env[i] && ft_strcmp_egal(env[i], scmd) != 1)
-		i ++;
-	if (env[i])
-		return (ft_replace_string_array(env, scmd, i));
-	env = strdup_array_add_str(i, scmd, env);
-	return (env);
 }
 
 char	**export_cmd(char **env, char *scmd)
 {
-	int		i;
 	char	**acmd;
+	int		i;
+	int		j;
 
-	i = 0;
-	ft_putstr_fd("92\n", 2);
 	acmd = ft_split_minishell(scmd);
 	free(scmd);
 	if (!acmd)
-		ft_error_int(12, 1, env, NULL);
-	while (acmd[i])
-		i ++;
-	if (i == 1)
-	{
-		ft_printf("101\n");
-		ft_free_array(acmd);
-		ft_put_export(env);
+		ft_error_ptr(12, 1, env, NULL);
+	i = ft_check_arg(acmd);
+	if (!i)
 		return (env);
-	}
+	if (i == 1)
+		return (ft_put_export(env, acmd));
+	j = 1;
+	while (acmd[j])
+		i -= ft_str_is_in_array(acmd[j ++], env);
+	env = ft_cpy_array_big_size(env, i);
+	if (!env)
+		ft_error_int(12, 1, acmd, NULL);
 	i = 1;
-	while (acmd[i])
-		env = ft_export(env, acmd[i++]);
-	ft_free_array(acmd);
-	ft_putstr_fd("109\n", 2);
+	while(acmd[i])
+		env = ft_change_env(acmd[i ++], env);
+	free(*acmd);
+	free(acmd);
 	return (env);
 }
+
+

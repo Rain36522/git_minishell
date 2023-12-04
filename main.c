@@ -75,18 +75,19 @@ int	main(int argc, char **argv, char **env)
 	i = 0;
 	env = dup_env(env);
 	signal(SIGINT, parent_signal);
-	add_history("ls | echo bonjour");
 	while (i == 0)
 	{
 		prompt = ft_give_prompte(env);
+		readline(prompt);
+		//free(prompt);
 		cmd_data = get_cmd(prompt, env);
 		if (cmd_data)
-			env = execute(cmd_data, env);
-
-		//if (cmd_data->array)
-		//	ft_free_array(cmd_data->array);
-		if (cmd_data)
+		{
+				env = execute(cmd_data, env);
+			if (cmd_data->array)
+				ft_free_array(cmd_data->array);
 			free_list_and_null(cmd_data);
+		}
 		if (prompt)
 			free_str_and_null(prompt);
 	}

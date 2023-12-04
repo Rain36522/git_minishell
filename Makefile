@@ -12,7 +12,7 @@
 
 NAME = minishell
 CC = gcc
-FLAGS = -lreadline -L$(HOME)/.brew/opt/readline/lib -Wall -Wextra -Werror
+FLAGS = -lreadline -L$(HOME)/.brew/opt/readline/lib
 LIBFTPRINTF = ft_printf/libftprintf.a
 
 BLUE = \\033[1;34m
