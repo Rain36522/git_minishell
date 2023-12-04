@@ -139,9 +139,6 @@ char	*replace_dollar(char *str, int state, char **env);
 // free the str and put him null
 void	free_str_and_null(char *str);
 
-// builtins
-void	builtin_checker(t_pipex *list, char **envp);
-
 // utils 3
 char	*ft_acmd_to_scmd(char **acmd);
 

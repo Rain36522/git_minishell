@@ -65,6 +65,7 @@ void	set_infile(char **argv, t_pipex *list);
 void	set_outfile(int argc, char **argv, t_pipex *list);
 void	create_pipes(t_pipex *list);
 int		pipex(int argc, char **argv, char **envp);
+void	builtin_checker(t_pipex *list, char **envp);
 void	wait_child_process(t_pipex *list);
 
 #endif
