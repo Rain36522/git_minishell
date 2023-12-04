@@ -25,6 +25,9 @@ void	echo_cmd(char *str, char **envp);
 // env command
 void	env_cmd(char *str, char **envp);
 
+// Unset cmd
+char	**unset_cmd(char **env, char *scmd);
+
 // cd command
 char	*simple_cd(char **envp);
 int		check_cd(char *str);

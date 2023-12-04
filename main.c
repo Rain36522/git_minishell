@@ -75,6 +75,7 @@ int	main(int argc, char **argv, char **env)
 	i = 0;
 	env = dup_env(env);
 	signal(SIGINT, parent_signal);
+	add_history("ls | echo bonjour");
 	while (i == 0)
 	{
 		prompt = ft_give_prompte(env);

@@ -50,7 +50,7 @@ char	*ft_get_ptr_line(char *ptr, char *file, int fd)
 		ptr = (char *) ft_calloc(1, sizeof(char));
 		ptr[0] = '\0';
 	}
-	while (i >= BUFFER_SIZE && !ft_strchr(file))
+	while (i >= BUFFER_SIZE && !ft_strchr_endl(file))
 	{
 		i = read(fd, file, BUFFER_SIZE);
 		if (i > 0)

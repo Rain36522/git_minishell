@@ -30,10 +30,10 @@ void	builtin_checker(t_pipex *list, char **envp)
 		init_cmd(str, envp);
 	else if (!ft_strncmp(str, "env ", 4) || !ft_strncmp(str, "env", 4))
 		env_cmd(str, envp);
-	if (!ft_strncmp(str, "export ", 7) || !ft_strncmp(str, "export", 7))
+	else if (!ft_strncmp(str, "export ", 7) || !ft_strncmp(str, "export", 7))
 		export_cmd(envp, str);
 	else if (!ft_strncmp(str, "unset ", 8) || !ft_strncmp(str, "unset ", 8))
-		unset_cmd(str);
+		unset_cmd(envp, str);
 	else if (!ft_strncmp(str, "exit ", 5) || !ft_strncmp(str, "exit", 5))
 		exit_cmd(str);
 	else

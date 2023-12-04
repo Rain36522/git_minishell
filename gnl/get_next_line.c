@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int	ft_strchr(char *ptr)
+int	ft_strchr_endl(char *ptr)
 {
 	while (*ptr)
 	{
@@ -77,7 +77,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_give_line(ptr);
 	ptr = ft_remove_line(ptr);
-	if (!ft_strchr(line))
+	if (!ft_strchr_endl(line))
 		free(ptr);
 	return (line);
 }

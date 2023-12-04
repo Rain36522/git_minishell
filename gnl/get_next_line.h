@@ -22,7 +22,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-int		ft_strchr(char *ptr);
+int		ft_strchr_endl(char *ptr);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *str);
 char	*ft_get_ptr_line(char *ptr, char *file, int fd);

@@ -49,14 +49,13 @@ static char	**strdup_array_add_str(int i, char *scmd, char **env)
 	array[i + 1] = NULL;
 	while (j < i)
 	{
-		env[j] = array[j];
+		array[j] = env[j];
 		j ++;
 	}
 	array[i] = ft_strdup(scmd);
 	if (!array[i])
 		ft_error_int(12, 1, array, scmd);
-	ft_free_array(env);
-	free(scmd);
+	free(env);
 	return (array);
 }
 
@@ -90,6 +89,7 @@ char	**export_cmd(char **env, char *scmd)
 	char	**acmd;
 
 	i = 0;
+	ft_putstr_fd("92\n", 2);
 	acmd = ft_split_minishell(scmd);
 	free(scmd);
 	if (!acmd)
@@ -107,5 +107,6 @@ char	**export_cmd(char **env, char *scmd)
 	while (acmd[i])
 		env = ft_export(env, acmd[i]);
 	ft_free_array(acmd);
+	ft_putstr_fd("109\n", 2);
 	return (env);
 }
