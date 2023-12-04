@@ -96,12 +96,10 @@ char	**export_cmd(char **env, char *scmd)
 	int		j;
 
 	acmd = ft_split_minishell(scmd);
-	free(scmd);
 	if (!acmd)
 		ft_error_ptr(12, 1, env, NULL);
 	i = ft_check_arg(acmd);
-	ft_printf("i : %i\n", i);
-	if (!i)
+	if (i == 0)
 		return (env);
 	if (i == 1)
 		return (ft_put_export(env, acmd));

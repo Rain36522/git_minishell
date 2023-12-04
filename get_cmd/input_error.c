@@ -12,14 +12,26 @@
 
 #include "../Includes/minishell.h"
 
+static void	*return_null(char *str)
+{
+	free(str);
+	return NULL;
+}
+
 char	*input_error(char *scmd)
 {
 	char	**array;
+	char	*mem_scmd;
 
+	mem_scmd = scmd;
 	if (!scmd)
 		ft_error_int(4, 1, NULL, scmd);
 	else if (! *scmd)
-		return (NULL);
+		return (return_null(mem_scmd));
+	while (*scmd && ((*scmd >= 9 && *scmd <= 14) || *scmd == 32))
+		scmd ++;
+	if (!*scmd)
+		return (return_null(mem_scmd));
 	add_history(scmd);
 	if (ft_cnt_dbl_redir_str(scmd) > 0 && ft_str_end_quotes(scmd, 0) != 0)
 		return (ft_error_ptr(201, 1, NULL, NULL));

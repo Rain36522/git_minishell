@@ -78,12 +78,10 @@ int	main(int argc, char **argv, char **env)
 	while (i == 0)
 	{
 		prompt = ft_give_prompte(env);
-		readline(prompt);
-		//free(prompt);
 		cmd_data = get_cmd(prompt, env);
 		if (cmd_data)
 		{
-				env = execute(cmd_data, env);
+			env = execute(cmd_data, env);
 			if (cmd_data->array)
 				ft_free_array(cmd_data->array);
 			free_list_and_null(cmd_data);

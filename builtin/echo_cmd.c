@@ -98,6 +98,11 @@ void	echo_cmd(char *str, char **envp)
 	int		i;
 	int		n;
 
+	if (!ft_strncmp("echo", str, 5))
+	{
+		printf ("\n");
+		return ;
+	}
 	i = 4;
 	n = is_n(str, i);
 	if (n == -1)
