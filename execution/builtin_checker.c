@@ -17,11 +17,11 @@
 // If that goes in one of those conditions, it should not
 // "return" to the callong child process
 // It should stop
-void	builtin_checker(char *str, char **envp)
+void	builtin_checker(t_pipex *list, char **envp)
 {
-	char	**tmp;
+	char	*str;
 
-	tmp = NULL;
+	str = ft_acmd_to_scmd(list->cmd_args);
 	if (!str)
 		ft_error_int(127, 1, NULL, NULL);
 	else if (!ft_strncmp(str, "echo ", 5) || !ft_strncmp(str, "echo", 5))
