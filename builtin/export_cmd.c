@@ -105,7 +105,7 @@ char	**export_cmd(char **env, char *scmd)
 	}
 	i = 1;
 	while (acmd[i])
-		env = ft_export(env, acmd[i]);
+		env = ft_export(env, acmd[i++]);
 	ft_free_array(acmd);
 	ft_putstr_fd("109\n", 2);
 	return (env);
