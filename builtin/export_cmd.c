@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/04 15:46:57 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/04 17:51:10 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,13 @@ static int	ft_check_arg(char **acmd)
 			return (ft_error_int(201, 0, acmd, NULL));
 		while (acmd[i][j] && ft_isdigit(acmd[i][j]))
 			j ++;
-		if(!acmd[i][j])
+		
+		if(!acmd[i][j] || acmd[i][j] == '=')
 			return (ft_error_int(201, 0, acmd, NULL));
 		j = 0;
 		while (acmd[i][j] && ft_isalnum(acmd[i][j]))
 			j ++;
-		if (acmd[i][j] != '=')
+		if (acmd[i][j] && acmd[i][j] != '=')
 			return (ft_error_int(201, 0, acmd, NULL));
 		i ++;
 	}
@@ -99,6 +100,7 @@ char	**export_cmd(char **env, char *scmd)
 	if (!acmd)
 		ft_error_ptr(12, 1, env, NULL);
 	i = ft_check_arg(acmd);
+	ft_printf("i : %i\n", i);
 	if (!i)
 		return (env);
 	if (i == 1)
@@ -114,6 +116,7 @@ char	**export_cmd(char **env, char *scmd)
 		env = ft_change_env(acmd[i ++], env);
 	free(*acmd);
 	free(acmd);
+	ft_put_array(env);
 	return (env);
 }
 
