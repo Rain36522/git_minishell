@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/02 13:53:35 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/04 13:11:33 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	**strdup_array_add_str(int i, char *scmd, char **env)
 	if (!array)
 		ft_error_int(12, 1, NULL, scmd);
 	array[i + 1] = NULL;
-	while (j < i)
+	while (j <= i)
 	{
 		array[j] = env[j];
 		j ++;

@@ -1,0 +1,13 @@
+Makefile
+ft_printf.c
+ft_printf.h
+ft_printf.h.gch
+ft_printf.o
+ft_put.c
+ft_put.o
+ft_put2.c
+ft_put2.o
+ft_util.c
+ft_util.o
+libft
+libftprintf.a
