@@ -94,7 +94,7 @@ void	child_process(char **argv, char **envp, t_pipex l)
 		ft_make_redir(l.cmd_args);
 		if (!l.cmd)
 			cmd_not_found(&l);
-		//builtin_checker(&l, envp);
+		builtin_checker(&l, envp);
 		if (execve(l.cmd, l.cmd_args, envp) == -1)
 		{
 			free_all_exit (&l, l.exit_value);

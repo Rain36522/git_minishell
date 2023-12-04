@@ -24,16 +24,16 @@ void	builtin_checker(char *str, char **envp)
 	tmp = NULL;
 	if (!str)
 		ft_error_int(127, 1, NULL, NULL);
-	else if (ft_strncmp(str, "echo ", 5) == 0)
+	else if (!ft_strncmp(str, "echo ", 5) || !ft_strncmp(str, "echo", 5))
 		echo_cmd(str, envp);
-	else if (ft_strncmp(str, "cd ", 3) == 0)
+	else if (!ft_strncmp(str, "cd ", 3) || !ft_strncmp(str, "cd", 3))
 		init_cmd(str, envp);
-	else if (ft_strncmp(str, "env ", 4) == 0)
+	else if (!ft_strncmp(str, "env ", 4) || !ft_strncmp(str, "env", 4))
 		env_cmd(str, envp);
-	if (ft_strncmp(str, "export ", 7) == 0)
+	if (!ft_strncmp(str, "export ", 7) || !ft_strncmp(str, "export", 7))
 		export_cmd(envp, str);
-	// else if (ft_strncmp(str, "unset ", 8) == 0)
-	// 	unset_cmd(str);
+	else if (!ft_strncmp(str, "unset ", 8) || !ft_strncmp(str, "unset ", 8))
+		unset_cmd(str);
 	else if (ft_strncmp(str, "exit ", 5) == 0)
 		exit_cmd(str);
 	else
