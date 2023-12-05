@@ -5,6 +5,7 @@
 		"__tuple": "c",
 		"array": "c",
 		"stdio.h": "c",
-		"pipex.h": "c"
+		"pipex.h": "c",
+		"readline.h": "c"
 	}
 }

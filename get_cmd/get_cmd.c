@@ -86,12 +86,10 @@ t_acmd	*get_cmd_parent(int *fd, t_incmd *lst, int istatus, char *scmd)
 	return (ft_file_to_array(fd[0], fd[1]));
 }
 
-t_acmd	*get_cmd(char *prompt, char **env)
+t_acmd	*get_cmd(char *prompt, t_data *data)
 {
-	pid_t	pid;
 	int		fd[2];
 	char	*scmd;
-	int		istatus;
 	t_incmd	*lst;
 
 	scmd = readline(prompt);
@@ -100,15 +98,15 @@ t_acmd	*get_cmd(char *prompt, char **env)
 	if (pipe(fd) == -1)
 		return (ft_error_ptr(32, 1, NULL, prompt));
 	lst = redir_lst(scmd);
-	pid = fork();
-	if (pid < 0)
+	data->pid = fork();
+	if (data->pid < 0)
 		return (ft_error_ptr(10, 1, NULL, prompt));
-	else if (pid == 0)
-		ft_cmd_type(scmd, fd, lst, env);
+	else if (data->pid == 0)
+		ft_cmd_type(scmd, fd, lst, data->env);
 	else
 	{
-		waitpid(pid, &istatus, 0);
-		return (get_cmd_parent(fd, lst, istatus, scmd));
+		waitpid(data->pid, &data->iexit, 0);
+		return (get_cmd_parent(fd, lst, data->iexit, scmd));
 	}
 	return (NULL);
 }

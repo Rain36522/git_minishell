@@ -38,7 +38,7 @@ void	init_multi_pipex(t_pipex *list, int argc, char **argv)
 }
 
 // main function of multipipex
-int	pipex(int argc, char **argv, char **envp)
+int	pipex(int argc, char **argv, t_data *data)
 {
 	t_pipex	list;
 
@@ -46,18 +46,18 @@ int	pipex(int argc, char **argv, char **envp)
 	if (argc < 4)
 		wrong_args_number();
 	list.argv = argv;
-	list.envp = envp;
+	list.envp = data->env;
 	init_multi_pipex(&list, argc, argv);
-	list.env_path = env_path(envp);
+	list.env_path = env_path(data->env);
 	list.cmd_path = ft_split(list.env_path, ':');
 	if (!list.cmd_path)
 		free_all_exit(&list, 12);
 	create_pipes(&list);
 	list.index = -1;
 	while (++list.index < list.cmd_nbr)
-		child_process(argv, envp, list);
+		child_process(argv, data, list);
 	close_all_pipes(&list);
-	wait_child_process(&list);
+	wait_child_process(&list, data);
 	free_all_exit(&list, list.exit_value);
 	return (list.exit_value);
 }

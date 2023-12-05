@@ -38,18 +38,18 @@ static char	**dup_env(char **env)
 	return (env2);
 }
 
-static char	**execute(t_acmd *cmd_data, char **env)
+static char	**execute(t_acmd *cmd_data, t_data *data)
 {
 	if (cmd_data->array[1])
 	{
-		pipex(cmd_data->isize, cmd_data->array, env);
+		pipex(cmd_data->isize, cmd_data->array, data);
 		ft_print_pipe_out(cmd_data->fd_pipe[0]);
 	}
 	else
 	{
-		env = single_cmd(cmd_data->array[0], env);
+		data->env = single_cmd(cmd_data->array[0], data);
 	}
-	return (env);
+	return (data->env);
 }
 
 void	free_str_and_null(char *str)
@@ -66,22 +66,20 @@ void	free_list_and_null(t_acmd *list)
 
 int	main(int argc, char **argv, char **env)
 {
-	int		i;
 	char	*prompt;
 	t_acmd	*cmd_data;
+	t_data	data;
 
-	argc += 0;
-	argv += 0;
-	i = 0;
-	env = dup_env(env);
+	argv += argc;
+	data.env = dup_env(env);
 	signal(SIGINT, parent_signal);
-	while (i == 0)
+	while (1)
 	{
-		prompt = ft_give_prompte(env);
-		cmd_data = get_cmd(prompt, env);
+		prompt = ft_give_prompte(data.env);
+		cmd_data = get_cmd(prompt, &data);
 		if (cmd_data)
 		{
-			env = execute(cmd_data, env);
+			env = execute(cmd_data, &data);
 			if (cmd_data->array)
 				ft_free_array(cmd_data->array);
 			free_list_and_null(cmd_data);
@@ -89,6 +87,5 @@ int	main(int argc, char **argv, char **env)
 		if (prompt)
 			free_str_and_null(prompt);
 	}
-	ft_free_array(env);
 	return (0);
 }

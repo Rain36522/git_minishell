@@ -20,26 +20,24 @@ void	ft_dup2(t_pipex *list, int input, int output)
 		free_all_exit(list, errno);
 }
 
-void	wait_child_process(t_pipex *list)
+void	wait_child_process(t_pipex *list, t_data *data)
 {
 	int		i;
-	int		wait_v;
 
 	i = 0;
-	wait_v = 0;
 	while (i < list->cmd_nbr)
 	{
-		waitpid(list->pid_array[i], &wait_v, 0);
-		if (WIFEXITED(wait_v))
+		waitpid(list->pid_array[i], &data->iexit, 0);
+		if (WIFEXITED(data->iexit))
 		{
-			list->exit_value = WEXITSTATUS(wait_v);
+			list->exit_value = WEXITSTATUS(data->iexit);
 		}
-		else if (WIFSIGNALED(wait_v))
+		else if (WIFSIGNALED(data->iexit))
 		{
-			list->exit_value = -WTERMSIG(wait_v);
+			list->exit_value = -WTERMSIG(data->iexit);
 		}
 		else
-			list->exit_value = wait_v;
+			list->exit_value = data->iexit;
 		i++;
 	}
 }
@@ -75,7 +73,7 @@ void	create_pipes(t_pipex *list)
 }
 
 // In Dir and Builtin process need to be finished by an exit
-void	child_process(char **argv, char **envp, t_pipex l)
+void	child_process(char **argv, t_data *data, t_pipex l)
 {
 	l.pid_array[l.index] = fork();
 	if (l.pid_array[l.index] == 0)
@@ -94,8 +92,8 @@ void	child_process(char **argv, char **envp, t_pipex l)
 		ft_make_redir(l.cmd_args);
 		if (!l.cmd)
 			cmd_not_found(&l);
-		builtin_checker(&l, envp);
-		if (execve(l.cmd, l.cmd_args, envp) == -1)
+		builtin_checker(&l, data->env);
+		if (execve(l.cmd, l.cmd_args, data->env) == -1)
 		{
 			free_all_exit (&l, l.exit_value);
 		}

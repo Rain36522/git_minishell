@@ -76,25 +76,23 @@ void	not_builtin(char **tab, char **envp)
 	}
 }
 
-static void	fork_not_builtin(char **tab, char **envp)
+static void	fork_not_builtin(char **tab, t_data *data)
 {
-	pid_t	pid;
-	int		istatus;
 
-	pid = fork();
-	if (pid < 0)
+	data->pid = fork();
+	if (data->pid < 0)
 		ft_error_ptr(9, 1, tab, NULL);
-	else if (pid == 0)
-		not_builtin(tab, envp);
+	else if (data->pid == 0)
+		not_builtin(tab, data->env);
 	else
 	{
-		waitpid(pid, &istatus, 0);
-		if (WEXITSTATUS(istatus) != 0)
-			ft_error_child(WEXITSTATUS(istatus), tab, NULL, NULL);
+		waitpid(data->pid, &data->iexit, 0);
+		if (WEXITSTATUS(data->iexit) != 0)
+			ft_error_child(WEXITSTATUS(data->iexit), tab, NULL, NULL);
 	}
 }
 
-char	**single_cmd(char *str, char **envp)
+char	**single_cmd(char *str, t_data *data)
 {
 	char	**tmp;
 
@@ -102,13 +100,13 @@ char	**single_cmd(char *str, char **envp)
 	if (!str)
 		ft_error_int(127, 1, NULL, NULL);
 	else if (!ft_strncmp(str, "echo ", 5) || !ft_strncmp(str, "echo", 5))
-		echo_cmd(str, envp);
+		echo_cmd(str, data->env);
 	else if (!ft_strncmp(str, "cd ", 3) || !ft_strncmp(str, "cd", 3))
-		init_cmd(str, envp);
+		init_cmd(str, data->env);
 	else if (!ft_strncmp(str, "env ", 4) || !ft_strncmp(str, "env", 4))
-		env_cmd(str, envp);
+		env_cmd(str, data->env);
 	else if (!ft_strncmp(str, "export ", 7) || !ft_strncmp(str, "export", 7))
-		envp = export_cmd(envp, str);
+		data->env = export_cmd(data->env, str);
 	//else if (ft_strncmp(str, "unset ", 6) || !ft_strncmp(str, "unset", 6))
 	//	envp = unset_cmd(str);
 	else if (!ft_strncmp(str, "exit ", 5) || !ft_strncmp(str, "exit", 5))
@@ -119,14 +117,14 @@ char	**single_cmd(char *str, char **envp)
 		tmp = ft_split (str, ' ');
 		if (!tmp)
 			ft_error_int(12, 1, NULL, str);
-		fork_not_builtin(tmp, envp);
+		fork_not_builtin(tmp, data);
 		if (tmp)
 		{
 			free(tmp);
 			tmp = NULL;
 		}
 	}
-	return (envp);
+	return (data->env);
 }
 
 /*int     main(int argc, char **argv, char **envp)

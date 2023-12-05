@@ -19,15 +19,25 @@
 
 # include "../ft_printf/ft_printf.h"
 # include "../ft_printf/libft/libft.h"
-# include "../execution/pipex.h"
-# include "header_builtin.h"
 
+# include "header_builtin.h"
+# include "../execution/pipex.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <signal.h>
+
+# ifndef S_DATA
+#  define S_DATA
+typedef struct s_data
+{
+	char			**env;
+	pid_t			pid;
+	int				iexit;
+}				t_data;
+# endif
 
 typedef struct s_incmd
 {
@@ -73,7 +83,7 @@ void	*ft_error_child(int icode, char **array, char *str, char *str2);
 char	*get_next_line(int fd);
 
 // This functions are for taking the input
-t_acmd	*get_cmd(char *prompt, char **env);
+t_acmd	*get_cmd(char *prompt, t_data *data);
 t_incmd	*ft_free_lst(t_incmd *lst, char *scmd);
 int		ft_check_syntax(char **array);
 void	write_cmd_in_file(char *scmd, int fd);
@@ -118,8 +128,8 @@ void	parent_signal(int isignal);
 void	child_signal(int isignal);
 
 // output
-int		pipex(int argc, char **argv, char **envp);
-char	**single_cmd(char *str, char **envp);
+int		pipex(int argc, char **argv, t_data *data);
+char	**single_cmd(char *str, t_data *data);
 
 // Temp
 void	ft_put_array(char **array);
