@@ -67,7 +67,7 @@ void	ft_print_pipe_out(int fd_in)
 			break ;
 		ft_putstr_fd(buf, 1);
 		j = 0;
-		while (j < BUFFER_SIZE && i == BUFFER_SIZE)
+		while (j <= BUFFER_SIZE && i == BUFFER_SIZE)
 			buf[j++] = '\0';
 	}
 	if (i < 0)
@@ -96,8 +96,12 @@ char	*ft_acmd_to_scmd(char **acmd)
 	int		i;
 	char	*scmd;
 
+	ft_put_array(acmd);
 	if (!acmd || ! *acmd)
+	{
+		ft_putstr_fd("NULL\n", 2);
 		return (NULL);
+	}
 	i = 1;
 	scmd = acmd[0];
 	while (acmd[i] && scmd)

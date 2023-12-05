@@ -72,6 +72,7 @@ int	main(int argc, char **argv, char **env)
 
 	argv += argc;
 	data.env = dup_env(env);
+	add_history("echo | cat > a");
 	signal(SIGINT, parent_signal);
 	while (1)
 	{

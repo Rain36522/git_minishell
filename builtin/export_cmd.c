@@ -76,7 +76,7 @@ static char	**ft_cpy_array_big_size(char **env, int iargs)
 		j ++;
 	}
 	free(env);
-	while (j < isize)
+	while (j <= isize)
 		array[j ++] = NULL;
 	return (array);
 }
