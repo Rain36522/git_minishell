@@ -13,12 +13,12 @@
 #include "../Includes/minishell.h"
 
 // on est dans une double donc on carry le $ quoi quil ce passe
-void	state_2(t_dlist *l, char **env)
+void	state_2(t_dlist *l, char **env, t_data *data)
 {
 	while (l->input[l->i] && l->input[l->i] != '\"')
 	{
 		if (l->input[l->i] == '$' && print_dollar(l->input[l->i + 1]) == 0)
-			join_dollar(l, env);
+			join_dollar(l, data);
 		else
 		{
 			join_char(l, l->input[l->i]);
@@ -43,6 +43,8 @@ int	print_dollar(char c)
 		return (1);
 	else if (c == '\0')
 		return (1);
+	else if (c == '?')
+		return (0);
 	else
 		return (0);
 }
@@ -58,7 +60,7 @@ void	relais_state_1(t_dlist *l)
 // were not anymore in double or single quote
 // take the count with qdouble if were in a double
 // or a single so we know what we hae to do
-void	finish_dollar(t_dlist *l, char **env)
+void	finish_dollar(t_dlist *l, char **env, t_data *data)
 {
 	while (l->input[l->i])
 	{
@@ -71,11 +73,11 @@ void	finish_dollar(t_dlist *l, char **env)
 			join_char(l, l->input[l->i]);
 			check_join(l, l->str);
 			l->i++;
-			state_2(l, env);
+			state_2(l, data->env, data);
 		}
 		else if (l->input[l->i] && l->input[l->i] == '$'
 			&& print_dollar(l->input[l->i + 1]) == 0)
-			join_dollar(l, env);
+			join_dollar(l, data);
 		else
 		{
 			join_char(l, l->input[l->i]);
@@ -86,7 +88,7 @@ void	finish_dollar(t_dlist *l, char **env)
 }
 
 // est-ce qu'on est dans un single ou dans un double
-char	*replace_dollar(char *str, int state, char **env)
+char	*replace_dollar(char *str, int state, t_data *data)
 {
 	t_dlist	list;
 
@@ -98,10 +100,10 @@ char	*replace_dollar(char *str, int state, char **env)
 	}
 	if (state == 2)
 	{
-		state_2(&list, env);
+		state_2(&list, data->env, data);
 		state = 0;
 	}
-	finish_dollar(&list, env);
+	finish_dollar(&list, data->env, data);
 	return (list.str);
 }
 

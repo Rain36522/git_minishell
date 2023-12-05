@@ -68,17 +68,15 @@ void	not_builtin(char **tab, char **envp)
 	final_path = join_path(paths, tab, 0);
 	if (!final_path)
 		no_final_path(tab, paths, final_path);
-	ft_free_array(paths);
 	if (execve(final_path, tab, envp) == -1)
 	{
 		ft_free_array(envp);
-		ft_error_int(errno, 1, tab, final_path);
+		ft_error_int(150, 1, NULL, final_path);
 	}
 }
 
 static void	fork_not_builtin(char **tab, t_data *data)
 {
-
 	data->pid = fork();
 	if (data->pid < 0)
 		ft_error_ptr(9, 1, tab, NULL);
@@ -100,7 +98,7 @@ char	**single_cmd(char *str, t_data *data)
 	if (!str)
 		ft_error_int(127, 1, NULL, NULL);
 	else if (!ft_strncmp(str, "echo ", 5) || !ft_strncmp(str, "echo", 5))
-		echo_cmd(str, data->env);
+		echo_cmd(str, data->env, data);
 	else if (!ft_strncmp(str, "cd ", 3) || !ft_strncmp(str, "cd", 3))
 		init_cmd(str, data->env);
 	else if (!ft_strncmp(str, "env ", 4) || !ft_strncmp(str, "env", 4))

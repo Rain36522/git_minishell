@@ -15,12 +15,22 @@
 
 # include "minishell.h"
 
+# ifndef S_DATA
+#  define S_DATA
+typedef struct s_data
+{
+	char			**env;
+	pid_t			pid;
+	int				iexit;
+}				t_data;
+# endif
+
 // echo command
-int		dollar_gestion(char *str, int i, char **envp);
+int	dollar_gestion(char *str, int i, char **envp, t_data *data);
 int		is_n(char *str, int i);
 int		print_backslash(char *str, int i);
 void	not_found_str(char *str);
-void	echo_cmd(char *str, char **envp);
+void	echo_cmd(char *str, char **envp, t_data *data);
 
 // env command
 void	env_cmd(char *str, char **envp);

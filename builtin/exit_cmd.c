@@ -44,12 +44,11 @@ static void	exit_classic(char *str, char **tab)
 {
 	if (str)
 	{
-		free (str);
+		str = ft_free_str(str);
 		str = NULL;
 	}
-	ft_free_array(tab);
-	printf("exit\n");
-	exit (0);
+	tab = ft_free_array(tab);
+	exit (1);
 }
 
 void	exit_cmd(char *str)
@@ -62,21 +61,22 @@ void	exit_cmd(char *str)
 	tab = ft_split(str, ' ');
 	if (!tab)
 		ft_error_int(12, 1, NULL, str);
+	printf("exit\n");
+	if (tab[1] && non_numeric(tab[1]) == 1)
+		numeric_argument_required(str, tab);
 	else if (tab_size(tab) >= 3)
 	{
 		too_many_args(str, tab);
+		return ;
 	}
 	else if (tab_size(tab) == 1)
 		exit_classic(str, tab);
-	else if (non_numeric(tab[1]) == 1)
-		numeric_argument_required(str, tab);
 	else
 	{
 		e_code = ft_atoi(tab[1]);
-		free(str);
+		str = ft_free_str(str);
 		str = NULL;
-		ft_free_array(tab);
-		printf("exit\n");
+		tab = ft_free_array(tab);
 		exit (e_code);
 	}
 }

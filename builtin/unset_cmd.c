@@ -44,8 +44,8 @@ static char	**ft_remove_env_str(char **env, int isize, int ipos, char *scmd)
 		}
 		array[isize + k] = env[isize];
 	}
-	free(env[ipos]);
-	free(env);
+	env[ipos] = ft_free_str(env[ipos]);
+	env = ft_free_ptr_ptr(env);
 	return (array);
 }
 
@@ -62,7 +62,7 @@ static char	**ft_unset(char **env, char *scmd)
 			j = i;
 		i ++;
 	}
-	free(scmd);
+	scmd = ft_free_str(scmd);
 	if (j >= i)
 		ft_error_int(22, 0, NULL, NULL);
 	return (ft_remove_env_str(env, i, j, scmd));

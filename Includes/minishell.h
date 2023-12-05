@@ -89,7 +89,7 @@ int		ft_check_syntax(char **array);
 void	write_cmd_in_file(char *scmd, int fd);
 t_incmd	*ft_make_lst(char **array);
 t_incmd	*ft_free_lst(t_incmd *lst, char *str);
-void	ft_write_file(t_incmd *lst, char **array, char **env);
+void	ft_write_file(t_incmd *lst, char **array, t_data *data);
 t_acmd	*ft_file_to_array(int fd, int fd_out);
 char	**ft_replace_redir(t_incmd *lst, char **array);
 void	ft_put_data(char **array, int fd);
@@ -121,11 +121,13 @@ int		ft_quotes(char *str, int istatus);
 t_lst	*ft_add_end_lst_lst(t_lst *lst, t_lst *ptr);
 char	*ft_strjoin_free(char *str1, char *str2);
 int		ft_cnt_dbl_redir_str(char *str);
-void	ft_free_array(char **array);
+char	**ft_free_array(char **array);
 void	ft_print_pipe_out(int fd_in);
 t_acmd	*ft_util_add_pipe(t_acmd *acmd_data);
 void	parent_signal(int isignal);
 void	child_signal(int isignal);
+char	*ft_free_str(char *str);
+char	**ft_free_ptr_ptr(char **ptr);
 
 // output
 int		pipex(int argc, char **argv, t_data *data);
@@ -138,13 +140,13 @@ void	ft_put_array(char **array);
 void	rl_replace_line(const char *c, int d);
 
 // replace dollar
-void	join_dollar(t_dlist *l, char **env);
+void	join_dollar(t_dlist *l, t_data *data);
 int		print_dollar(char c);
 void	check_join(t_dlist *list, char *str);
 void	join_char(t_dlist *l, char c);
 void	list_init(t_dlist *list, char *str, int state);
 void	state_1(t_dlist *l);
-char	*replace_dollar(char *str, int state, char **env);
+char	*replace_dollar(char *str, int state, t_data *data);
 
 // free the str and put him null
 void	free_str_and_null(char *str);

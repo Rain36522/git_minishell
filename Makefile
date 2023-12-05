@@ -44,7 +44,7 @@ TEXT_6   = "			              |   |  ${GREEN}C:\\> Starting minishell in 0 second
 SRC_BUILT_2 = cd_cmd.c cwd.c env_cmd.c exit_cmd_2.c export_cmd2.c username.c check_quotes.c echo_cmd.c exit_cmd.c export_cmd.c unset_cmd.c
 SRC_BUILT = $(addprefix builtin/,$(SRC_BUILT_2))
 
-SRC_UTILS = main.c utils/ft_utils.c utils/ft_utils2.c utils/ft_utils3.c utils/signaux.c
+SRC_UTILS = main.c utils/ft_utils.c utils/ft_utils2.c utils/ft_utils3.c utils/ft_utils4.c utils/signaux.c
 
 SRC_ERROR = error/ft_error.c error/ft_error_msg.c
 

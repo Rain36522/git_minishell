@@ -17,7 +17,8 @@ int	ft_error_int(int icode, int iexit, char **array, char *str)
 	if (array)
 		ft_free_array(array);
 	if (str)
-		free(str);
+		str = ft_free_str(str);
+	ft_putstr_fd("error:21\n", 2);
 	ft_error_msg(icode);
 	if (iexit == 1)
 		exit(icode);
@@ -29,7 +30,7 @@ void	*ft_error_ptr(int icode, int iexit, char **array, char *str)
 	if (array)
 		ft_free_array(array);
 	if (str)
-		free(str);
+		str = ft_free_str(str);
 	ft_error_msg(icode);
 	if (iexit == 1)
 		exit(icode);
@@ -41,10 +42,10 @@ void	*ft_error_child(int icode, char **array, char *str, char *str2)
 	if (array)
 		ft_free_array(array);
 	if (str)
-		free(str);
+		str = ft_free_str(str);
 	str = NULL;
 	if (str2)
-		free(str2);
+		str2 = ft_free_str(str2);
 	if (icode <= 130 && icode != 127)
 		exit(icode);
 	return (NULL);

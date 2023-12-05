@@ -68,24 +68,35 @@ void	join_var_to_str(t_dlist *l, char **env, int equal, int i)
 // return the index until '=' in the env
 // found the variable attibuate to
 // if the variable dosent exist : skip it
-void	join_dollar(t_dlist *l, char **env)
+void	join_dollar(t_dlist *l, t_data *data)
 {
 	int		equal;
 	int		i;
+	char	*tmp;
 
 	equal = 0;
 	i = 0;
 	if (l->input[l->i] && l->input[l->i] == '$')
 		l->i++;
-	while (env[i])
+	if (l->input[l->i] == '?')
 	{
-		equal = found_equal(env[i]);
-		if (ft_strncmp(l->input + l->i, env[i], equal) == 0)
+		tmp = ft_itoa((int)WEXITSTATUS(data->iexit));
+		ft_strjoin_free(l->str, tmp);
+		free(tmp);
+		l->i++;
+	}
+	else
+	{
+		while (data->env[i])
 		{
-			join_var_to_str(l, env, equal, i);
-			return ;
+			equal = found_equal(data->env[i]);
+			if (ft_strncmp(l->input + l->i, data->env[i], equal) == 0)
+			{
+				join_var_to_str(l, data->env, equal, i);
+				return ;
+			}
+			i++;
 		}
-		i++;
 	}
 	while (l->input[l->i] && print_dollar(l->input[l->i]) == 0)
 		l->i++;

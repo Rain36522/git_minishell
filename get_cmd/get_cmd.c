@@ -12,7 +12,7 @@
 
 #include "../Includes/minishell.h"
 
-static void	ft_double_input_redir(int *fd, char *scmd, t_incmd *lst, char **env)
+static void	ft_double_input_redir(int *fd, char *scmd, t_incmd *lst, t_data *data)
 {
 	char	**array;
 
@@ -25,7 +25,7 @@ static void	ft_double_input_redir(int *fd, char *scmd, t_incmd *lst, char **env)
 	if (!array)
 		ft_error_int(12, 1, NULL, NULL);
 	array = ft_replace_redir(lst, array);
-	ft_write_file(lst, array, env);
+	ft_write_file(lst, array, data);
 	if (!array)
 		ft_error_int(12, 1, NULL, NULL);
 	ft_put_data(array, fd[1]);
@@ -53,13 +53,13 @@ void	ft_open_quotes_cmd(int *fd, char *scmd)
 		write_cmd_in_file(scmd, fd[1]);
 }
 
-static void	ft_cmd_type(char *scmd, int *fd, t_incmd *lst, char **env)
+static void	ft_cmd_type(char *scmd, int *fd, t_incmd *lst, t_data *data)
 {
 	signal(SIGINT, child_signal);
 	if (ft_str_end_quotes(scmd, 0) == 0)
 		add_history(scmd);
 	if (lst)
-		ft_double_input_redir(fd, scmd, lst, env);
+		ft_double_input_redir(fd, scmd, lst, data);
 	else if (ft_cnt_dbl_redir_str(scmd) > 0)
 		ft_error_int(201, 1, NULL, scmd);
 	else if (ft_str_end_quotes(scmd, 0) != 0)
@@ -102,10 +102,12 @@ t_acmd	*get_cmd(char *prompt, t_data *data)
 	if (data->pid < 0)
 		return (ft_error_ptr(10, 1, NULL, prompt));
 	else if (data->pid == 0)
-		ft_cmd_type(scmd, fd, lst, data->env);
+		ft_cmd_type(scmd, fd, lst, data);
 	else
 	{
 		waitpid(data->pid, &data->iexit, 0);
+		if (WEXITSTATUS(data->iexit) != 0)
+			ft_error_child(WEXITSTATUS(data->iexit), data->env, NULL, NULL);
 		return (get_cmd_parent(fd, lst, data->iexit, scmd));
 	}
 	return (NULL);

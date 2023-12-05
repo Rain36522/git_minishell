@@ -14,24 +14,24 @@
 
 void	too_many_args(char *str, char **tab)
 {
-	if (str)
-	{
-		free (str);
-		str = NULL;
-	}
-	ft_free_array(tab);
+	// if (str)
+	// {
+	//		free (str);
+	//		str = NULL;
+	// }
+	//ft_free_array(tab);
 	ft_putstr_fd("Error: too many arguments\n", 2);
-	exit (1);
+	return ;
 }
 
 void	numeric_argument_required(char *str, char **tab)
 {
 	if (str)
 	{
-		free (str);
+		str = ft_free_str(str);
 		str = NULL;
 	}
-	ft_free_array(tab);
+	tab = ft_free_array(tab);
 	ft_putstr_fd("Error: numeric argument required\n", 2);
 	exit (255);
 }

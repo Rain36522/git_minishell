@@ -40,7 +40,6 @@ typedef struct s_pipex
 	pid_t	pid;
 }				t_pipex;
 
-
 # ifndef S_DATA
 #  define S_DATA
 typedef struct s_data
@@ -75,7 +74,7 @@ void	ft_make_redir(char **array);
 void	set_outfile(int argc, char **argv, t_pipex *list);
 void	create_pipes(t_pipex *list);
 int		pipex(int argc, char **argv, t_data *data);
-void	builtin_checker(t_pipex *list, char **envp);
+void	builtin_checker(t_pipex *list, char **envp, t_data *data);
 void	wait_child_process(t_pipex *list, t_data *data);
 
 #endif

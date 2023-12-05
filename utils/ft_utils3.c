@@ -36,13 +36,13 @@ int	ft_cnt_dbl_redir_str(char *str)
 	return (j);
 }
 
-void	ft_free_array(char **array)
+char	**ft_free_array(char **array)
 {
 	int	i;
 
 	i = 0;
 	if (!array)
-		return ;
+		return (NULL);
 	while (array[i])
 	{
 		free(array[i]);
@@ -50,7 +50,7 @@ void	ft_free_array(char **array)
 		i++;
 	}
 	free(array);
-	array = NULL;
+	return (NULL);
 }
 
 void	ft_print_pipe_out(int fd_in)

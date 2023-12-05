@@ -83,7 +83,7 @@ static char	**ft_cpy_array_big_size(char **env, int iargs)
 		array[j] = env[j];
 		j ++;
 	}
-	free(env);
+	env = ft_free_ptr_ptr(env);
 	while (j < isize)
 		array[j ++] = NULL;
 	return (array);
@@ -112,8 +112,8 @@ char	**export_cmd(char **env, char *scmd)
 	i = 1;
 	while(acmd[i])
 		env = ft_change_env(acmd[i ++], env);
-	free(*acmd);
-	free(acmd);
+	*acmd = ft_free_str(*acmd);
+	acmd = ft_free_ptr_ptr(acmd);
 	ft_put_array(env);
 	return (env);
 }

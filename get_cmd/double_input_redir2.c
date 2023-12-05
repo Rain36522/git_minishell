@@ -43,7 +43,7 @@ char	**ft_replace_redir(t_incmd *lst, char **array)
 	return (array);
 }
 
-static char	*ft_readline_redir(int i, t_incmd *lst, char **array, char **env)
+static char	*ft_readline_redir(int i, t_incmd *lst, char **array, t_data *data)
 {
 	char	*str;
 
@@ -51,21 +51,21 @@ static char	*ft_readline_redir(int i, t_incmd *lst, char **array, char **env)
 	if (!str)
 	{
 		ft_free_lst(lst, NULL);
-		ft_free_array(env);
+		ft_free_array(data->env);
 		ft_error_int(150, 1, array, NULL);
 	}
 	ft_printf("str : %s\n", str);
-	str = replace_dollar(str, i, env);
+	str = replace_dollar(str, i, data);
 	ft_printf("str after : %s\n", str);
 	return (str);
 }
 
-static void	ft_write_dat_in_file(t_incmd *lst, char **array, char **env)
+static void	ft_write_dat_in_file(t_incmd *lst, char **array, t_data *data)
 {
 	char	*str;
 	int		isize;
 
-	str = ft_readline_redir(0, lst, array, env);
+	str = ft_readline_redir(0, lst, array, data);
 	isize = ft_strlen(lst->wrd) + 1;
 	while (ft_strncmp(str, lst->wrd, isize))
 	{
@@ -73,20 +73,20 @@ static void	ft_write_dat_in_file(t_incmd *lst, char **array, char **env)
 		ft_putstr_fd(str, 2);
 		free(str);
 		ft_putstr_fd("\n", lst->fd[1]);
-		str = ft_readline_redir(0, lst, array, env);
+		str = ft_readline_redir(0, lst, array, data);
 	}
 	free(str);
 	close(lst->fd[1]);
 }
 
-void	ft_write_file(t_incmd *lst, char **array, char **env)
+void	ft_write_file(t_incmd *lst, char **array, t_data *data)
 {
 	t_incmd	*lst_next;
 
 	while (lst)
 	{
 		lst_next = lst->next;
-		ft_write_dat_in_file(lst, array, env);
+		ft_write_dat_in_file(lst, array, data);
 		free(lst->read_fd);
 		free(lst->wrd);
 		free(lst);

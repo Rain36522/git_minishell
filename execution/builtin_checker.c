@@ -17,7 +17,7 @@
 // If that goes in one of those conditions, it should not
 // "return" to the callong child process
 // It should stop
-void	builtin_checker(t_pipex *list, char **envp)
+void	builtin_checker(t_pipex *list, char **envp, t_data *data)
 {
 	char	*str;
 
@@ -25,7 +25,7 @@ void	builtin_checker(t_pipex *list, char **envp)
 	if (!str)
 		ft_error_int(127, 1, NULL, NULL);
 	else if (!ft_strncmp(str, "echo ", 5) || !ft_strncmp(str, "echo", 5))
-		echo_cmd(str, envp);
+		echo_cmd(str, envp, data);
 	else if (!ft_strncmp(str, "cd ", 3) || !ft_strncmp(str, "cd", 3))
 		init_cmd(str, envp);
 	else if (!ft_strncmp(str, "env ", 4) || !ft_strncmp(str, "env", 4))

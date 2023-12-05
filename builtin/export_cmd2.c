@@ -58,6 +58,6 @@ char	**ft_put_export(char **array, char **afree)
 			ft_printf("\"%s\"", ptr);
 		ft_putchar_fd('\n', 1);
 	}
-	ft_free_array(afree);
+	afree = ft_free_array(afree);
 	return (array);
 }

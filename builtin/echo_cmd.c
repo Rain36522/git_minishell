@@ -15,28 +15,41 @@
 #include "../Includes/minishell.h"
 #include "../Includes/header_builtin.h"
 
-int	dollar_gestion(char *str, int i, char **envp)
+int	dollar_gestion(char *str, int i, char **envp, t_data *data)
 {
 	int		j;
 	int		k;
 	int		start;
+	char	*tmp;
 
 	start = i;
 	k = 0;
 	j = 0;
-	while (str[i] && str[i] != 32 && str[i] != '\'' && str[i] != '\"')
-		i++;
-	while (envp[j])
+	if (str[i + 1] == '?')
 	{
-		if (ft_strncmp(envp[j], str + start + 1, i - start - 1) == 0)
+		i++;
+		printf ("34\n");
+		tmp = ft_itoa((int)WEXITSTATUS(data->iexit));
+		printf("%s", tmp);
+		tmp = ft_free_str(tmp);
+		i++;
+	}
+	else
+	{
+		while (str[i] && str[i] != 32 && str[i] != '\'' && str[i] != '\"')
+			i++;
+		while (envp[j])
 		{
-			while (envp[j][k] && envp[j][k] != '=')
-				k++;
-			printf ("%s", envp[j] + k + 1);
-			return (i);
+			if (ft_strncmp(envp[j], str + start + 1, i - start - 1) == 0)
+			{
+				while (envp[j][k] && envp[j][k] != '=')
+					k++;
+				printf ("%s", envp[j] + k + 1);
+				return (i);
+			}
+			j++;
+			k = 0;
 		}
-		j++;
-		k = 0;
 	}
 	return (i);
 }
@@ -93,7 +106,7 @@ void	not_found_str(char *str)
 }
 
 // display text following w \n if no -n
-void	echo_cmd(char *str, char **envp)
+void	echo_cmd(char *str, char **envp,  t_data *data)
 {
 	int		i;
 	int		n;
@@ -119,7 +132,7 @@ void	echo_cmd(char *str, char **envp)
 				i++;
 		}
 		else if (str[i] == '$')
-			i = dollar_gestion(str, i, envp);
+			i = dollar_gestion(str, i, envp, data);
 		else
 			printf("%c", str[i++]);
 	}
