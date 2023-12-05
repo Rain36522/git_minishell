@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:35:20 by csil              #+#    #+#             */
-/*   Updated: 2023/12/01 16:28:02 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/05 14:13:43 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ char	*create_final_path(t_pipex *list, char **paths, char *arg)
 		final_path = ft_strjoin(tmp, arg);
 		if (!final_path)
 			free_all_exit(list, 12);
-		free(tmp);
+		tmp = ft_free_str(tmp);
 		if (access(final_path, F_OK) == 0)
 		{
 			return (final_path);
 		}
-		free(final_path);
+		final_path = ft_free_str(final_path);
 		i++;
 	}
 	return (NULL);

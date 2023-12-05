@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:10:54 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/30 13:47:03 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/05 14:28:20 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	join_dollar(t_dlist *l, t_data *data)
 	{
 		tmp = ft_itoa((int)WEXITSTATUS(data->iexit));
 		ft_strjoin_free(l->str, tmp);
-		free(tmp);
+		tmp = ft_free_str(tmp);
 		l->i++;
 	}
 	else

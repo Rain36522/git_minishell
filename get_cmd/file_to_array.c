@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/02 14:08:30 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:23:55 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	ft_free_file_lst(t_lst *lst, int ierror, char **array)
 	while (lst)
 	{
 		ptr = lst->next;
-		free(lst->str);
+		lst->str = ft_free_str(lst->str);
 		free(lst);
 		lst = ptr;
 	}
-	ft_free_array(array);
+	array = ft_free_array(array);
 	if (ierror != 0)
 		ft_error_int(ierror, 1, NULL, NULL);
 }

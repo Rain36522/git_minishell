@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:25:44 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/30 13:33:50 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/05 14:24:37 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*from_quotes_to_wrds(char *str)
 	{
 		s_tmp = str;
 		str = delete_quotes(str, 0);
-		free(s_tmp);
+		s_tmp = ft_free_str(s_tmp);
 	}
 	return (str);
 }

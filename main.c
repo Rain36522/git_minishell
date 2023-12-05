@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/02 14:12:49 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:36:21 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static char	**execute(t_acmd *cmd_data, t_data *data)
 	{
 		data->env = single_cmd(cmd_data->array[0], data);
 	}
-	printf ("execute 52\n");
 	return (data->env);
 }
 
@@ -76,28 +75,17 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGINT, parent_signal);
 	while (1)
 	{
-		printf ("main 79\n");
 		prompt = ft_give_prompte(data.env);
-		printf ("main 81\n");
 		cmd_data = get_cmd(prompt, &data);
-		printf ("main 83\n");
 		if (cmd_data)
 		{
-			printf ("main 86\n");
-			ft_put_array(cmd_data->array);
-			printf ("main 88\n");
 			env = execute(cmd_data, &data);
-			printf ("main 90\n");
 			// if (cmd_data->array)
 			// 	ft_free_array(cmd_data->array);
-			printf ("main 93\n");
 			free_list_and_null(cmd_data);
-			printf ("main 95\n");
 		}
-		printf ("main 97\n");
 		if (prompt)
 			free_str_and_null(prompt);
-		printf ("main 100\n");
 	}
 	return (0);
 }

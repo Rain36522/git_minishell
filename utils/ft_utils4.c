@@ -14,12 +14,14 @@
 
 char	*ft_free_str(char *str)
 {
-	free(str);
+	if (str)
+		free(str);
 	return (NULL);
 }
 
 char	**ft_free_ptr_ptr(char **ptr)
 {
-	free(ptr);
+	if (ptr)
+		free(ptr);
 	return (NULL);
 }

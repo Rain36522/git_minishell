@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:41:45 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/30 13:34:20 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/05 14:21:40 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@ t_incmd	*ft_free_lst(t_incmd *lst, char *str)
 	while (lst)
 	{
 		if (lst->wrd)
-			free(lst->wrd);
+			lst->wrd = ft_free_str(lst->wrd);
 		if (lst->read_fd)
 			free(lst->read_fd);
+		lst->read_fd = NULL;
 		nxt_lst = lst->next;
 		free(lst);
 		lst = nxt_lst;
 	}
+	lst = NULL;
 	if (str)
-		free(str);
+		str = ft_free_str(str);
 	return (NULL);
 }
 

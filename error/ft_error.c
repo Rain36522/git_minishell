@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:52:09 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/02 13:55:14 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:40:01 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 int	ft_error_int(int icode, int iexit, char **array, char *str)
 {
 	if (array)
-		ft_free_array(array);
+		array = ft_free_array(array);
 	if (str)
 		str = ft_free_str(str);
-	ft_putstr_fd("error:21\n", 2);
 	ft_error_msg(icode);
 	if (iexit == 1)
 		exit(icode);

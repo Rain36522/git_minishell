@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:32:44 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/02 14:04:22 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:24:13 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	**ft_replace_str_array(char **a, int ipos, char *new_str, t_incmd *lst)
 {
-	free(a[ipos]);
+	a[ipos] = ft_free_str(a[ipos]);
 	a[ipos] = ft_strdup(new_str);
 	if (!a[ipos])
 	{
@@ -51,7 +51,7 @@ static char	*ft_readline_redir(int i, t_incmd *lst, char **array, t_data *data)
 	if (!str)
 	{
 		ft_free_lst(lst, NULL);
-		ft_free_array(data->env);
+		data->env = ft_free_array(data->env);
 		ft_error_int(150, 1, array, NULL);
 	}
 	ft_printf("str : %s\n", str);
@@ -71,11 +71,11 @@ static void	ft_write_dat_in_file(t_incmd *lst, char **array, t_data *data)
 	{
 		ft_putstr_fd(str, lst->fd[1]);
 		ft_putstr_fd(str, 2);
-		free(str);
+		str = ft_free_str(str);
 		ft_putstr_fd("\n", lst->fd[1]);
 		str = ft_readline_redir(0, lst, array, data);
 	}
-	free(str);
+	str = ft_free_str(str);
 	close(lst->fd[1]);
 }
 
@@ -88,7 +88,7 @@ void	ft_write_file(t_incmd *lst, char **array, t_data *data)
 		lst_next = lst->next;
 		ft_write_dat_in_file(lst, array, data);
 		free(lst->read_fd);
-		free(lst->wrd);
+		lst->wrd = ft_free_str(lst->wrd);
 		free(lst);
 		lst = lst->next;
 	}

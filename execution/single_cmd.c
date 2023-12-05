@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:07 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/02 14:03:03 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:37:46 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	**single_cmd(char *str, t_data *data)
 		echo_cmd(str, data->env, data);
 	else if (!ft_strncmp(str, "cd ", 3) || !ft_strncmp(str, "cd", 3))
 		init_cmd(str, data->env);
-	else if (!ft_strncmp(str, "env ", 4) || !ft_strncmp(str, "env", 4))
+	else if (!ft_strncmp(str, "env", 4))
 		env_cmd(str, data->env);
 	else if (!ft_strncmp(str, "export ", 7) || !ft_strncmp(str, "export", 7))
 		data->env = export_cmd(data->env, str);
@@ -114,13 +114,10 @@ char	**single_cmd(char *str, t_data *data)
 		ft_printf("not builtin\n");
 		tmp = ft_split (str, ' ');
 		if (!tmp)
-			ft_error_int(12, 1, NULL, str);
+			ft_error_int(12, 0, NULL, str);
 		fork_not_builtin(tmp, data);
-		if (tmp)
-		{
-			free(tmp);
-			tmp = NULL;
-		}
+		// if (tmp)
+		// 	tmp = ft_free_array(tmp);
 	}
 	return (data->env);
 }

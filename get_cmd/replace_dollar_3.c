@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:12:01 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/11/30 13:47:21 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/05 14:28:39 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	join_char(t_dlist *l, char c)
 	new[i] = c;
 	new[i + 1] = '\0';
 	if (l->str)
-		free(l->str);
+		l->str = ft_free_str(l->str);
 	l->str = new;
 }
 

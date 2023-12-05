@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:31:26 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/02 14:08:43 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:25:14 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,7 @@ int	str_nbr(char const *s, int i, int j)
 // free all the tab in arg and return NULL
 char	**free_split(char **tab)
 {
-	int		i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	tab = NULL;
-	return (tab);
+	return (ft_free_array(tab));
 }
 
 // int	main(void)

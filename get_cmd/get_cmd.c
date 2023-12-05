@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/02 14:09:16 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:27:43 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_double_input_redir(int *fd, char *scmd, t_incmd *lst, t_data *dat
 	char	**array;
 
 	array = ft_split_minishell(scmd);
-	free(scmd);
+	scmd = ft_free_str(scmd);
 	if (!array)
 		ft_error_int(12, 1, NULL, NULL);
 	if (ft_check_syntax(array) == 0)
@@ -43,7 +43,7 @@ void	ft_open_quotes_cmd(int *fd, char *scmd)
 		ptr2 = readline("> ");
 		i = ft_quotes(ptr2, i);
 		scmd = ft_strjoin_free(scmd, ptr2);
-		free(ptr2);
+		ptr2 = ft_free_str(ptr2);
 	}
 	if (!scmd)
 		ft_error_int(12, 1, NULL, NULL);
@@ -77,7 +77,7 @@ t_acmd	*get_cmd_parent(int *fd, t_incmd *lst, int istatus, char *scmd)
 		lst_next = lst->next;
 		close(lst->fd[1]);
 		free(lst->read_fd);
-		free(lst->wrd);
+		lst->wrd = ft_free_str(lst->wrd);
 		free(lst);
 		lst = lst_next;
 	}

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/01 09:33:04 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/05 14:29:29 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,15 @@ void	ft_put_data(char **array, int fd)
 		ft_put_cmd_in_file(array, i, fd);
 		while (array[i] && !(array[i][0] == '|' && array[i][1] == '\0'))
 		{
-			free(array[i]);
+			array[i] = ft_free_str(array[i]);
 			i ++;
 		}
 		if (!array[i])
 			break ;
-		free(array[i]);
+		array[i] = ft_free_str(array[i]);
 		i ++;
 	}
-	free(array);
+	array = ft_free_ptr_ptr(array);
 	close(fd);
 	exit(0);
 }
@@ -103,7 +103,7 @@ void	write_cmd_in_file(char *scmd, int fd)
 	int		i;
 
 	array = ft_split_minishell(scmd);
-	free(scmd);
+	scmd = ft_free_str(scmd);
 	if (!array)
 		ft_error_int(12, 1, NULL, NULL);
 	i = ft_check_syntax(array);
