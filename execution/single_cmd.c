@@ -111,7 +111,6 @@ char	**single_cmd(char *str, t_data *data)
 		exit_cmd(str);
 	else
 	{
-		ft_printf("not builtin\n");
 		tmp = ft_split (str, ' ');
 		if (!tmp)
 			ft_error_int(12, 0, NULL, str);
