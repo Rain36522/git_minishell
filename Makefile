@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/12/05 15:22:14 by pudry            ###   ########.fr        #
+#    Updated: 2023/12/06 09:32:20 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,11 @@ lldb : header
 	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_GNL) $(SRC_MUL_PIPE) $(LIBFTPRINTF) -o $(NAME) -g
 	lldb ./$(NAME)
 
+array :
+	@gcc -lreadline array_maker/make_array.c -o make_array
+	@./make_array
+	@rm make_array
+	
 leaks : header
 	@make -s -C ft_printf/
 	@$(CC) $(FLAGS) $(SRC_UTILS) $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_GNL) $(SRC_MUL_PIPE) $(LIBFTPRINTF) -o $(NAME)
