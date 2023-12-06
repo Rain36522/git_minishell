@@ -21,14 +21,11 @@ void	builtin_checker(t_pipex *list, char **envp, t_data *data)
 {
 	char	*str;
 
-	ft_putstr_fd("24\n", 2);
 	str = ft_acmd_to_scmd(list->cmd_args);
 	if (!str)
 	{
-		ft_putstr_fd("27\n", 2);
 		ft_error_int(127, 1, NULL, NULL);
 	}
-	ft_putstr_fd("28\n", 2);
 	if (!ft_strncmp(str, "echo ", 5) || !ft_strncmp(str, "echo", 5))
 		echo_cmd(str, envp, data);
 	else if (!ft_strncmp(str, "cd ", 3) || !ft_strncmp(str, "cd", 3))
@@ -37,7 +34,6 @@ void	builtin_checker(t_pipex *list, char **envp, t_data *data)
 		env_cmd(str, envp);
 	else if (!ft_strncmp(str, "export ", 7) || !ft_strncmp(str, "export", 7))
 	{
-		ft_putstr_fd("35\n", 2);
 		export_cmd(envp, str);
 	}
 	else if (!ft_strncmp(str, "unset ", 8) || !ft_strncmp(str, "unset ", 8))
