@@ -49,7 +49,6 @@ void	cd_cmd(char **tab_cmd, char **envp)
 	}
 	else
 	{
-		printf ("cmd : %s\n", tab_cmd[1]);
 		if (chdir(tab_cmd[1]) != 0)
 		{
 			ft_error_int(127, 0, tab_cmd, NULL);
