@@ -88,8 +88,8 @@ void	child_process(char **argv, t_data *data, t_pipex l)
 		if (!l.cmd_args)
 			free_all_exit(&l, 12);
 		close_all_pipes(&l);
-		ft_make_redir(l.cmd_args);
-		builtin_checker(&l, data->env, data);
+		//ft_make_redir(l.cmd_args);
+		//builtin_checker(&l, data->env, data);
 		l.cmd = create_final_path(&l, l.cmd_path, l.cmd_args[0]);
 		if (!l.cmd)
 			cmd_not_found(&l);
