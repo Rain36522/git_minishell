@@ -65,6 +65,48 @@ void	join_var_to_str(t_dlist *l, char **env, int equal, int i)
 	l->i += (equal);
 }
 
+static char	*dollar_join_char(char *str, char c)
+{
+	int		len;
+	int		i;
+	char	*new;
+
+	len = 0;
+	if (str)
+		len = ft_strlen(str);
+	i = 0;
+	new = malloc(sizeof(char) * len + 2);
+	if (!new)
+		ft_error_ptr(12, 1, NULL, str);
+	while (str && str[i])
+	{
+		new[i] = str[i];
+		i++;
+	}
+	new[i] = c;
+	new[i + 1] = '\0';
+	if (str)
+		free(str);
+	str = NULL;
+	return (new);
+}
+
+static void	if_question_mark(t_dlist *l, t_data *data)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = ft_itoa((int)WEXITSTATUS(data->iexit));
+	while (tmp[i])
+	{
+		l->str = dollar_join_char(l->str, tmp[i]);
+		i++;
+	}
+	tmp = ft_free_str(tmp);
+	l->i++;
+}
+
 // return the index until '=' in the env
 // found the variable attibuate to
 // if the variable dosent exist : skip it
@@ -74,17 +116,10 @@ void	join_dollar(t_dlist *l, t_data *data)
 	int		i;
 	char	*tmp;
 
-	equal = 0;
-	i = 0;
 	if (l->input[l->i] && l->input[l->i] == '$')
 		l->i++;
-	if (l->input[l->i] == '?')
-	{
-		tmp = ft_itoa((int)WEXITSTATUS(data->iexit));
-		ft_strjoin_free(l->str, tmp);
-		tmp = ft_free_str(tmp);
-		l->i++;
-	}
+	if (l->input[l->i] && l->input[l->i] == '?')
+		if_question_mark(l, data);
 	else
 	{
 		while (data->env[i])
