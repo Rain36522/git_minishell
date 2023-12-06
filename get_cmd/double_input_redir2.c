@@ -54,9 +54,7 @@ static char	*ft_readline_redir(int i, t_incmd *lst, char **array, t_data *data)
 		data->env = ft_free_array(data->env);
 		ft_error_int(150, 1, array, NULL);
 	}
-	ft_printf("str : %s\n", str);
 	str = replace_dollar(str, i, data);
-	ft_printf("str after : %s\n", str);
 	return (str);
 }
 

@@ -16,7 +16,7 @@
 void	parent_signal(int isignal)
 {
 	isignal = 0;
-	ft_putstr_fd("\033[<n> salut\n", 1);
+	ft_putstr_fd("\033[<n>\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
