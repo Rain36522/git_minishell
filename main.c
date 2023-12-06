@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/05 14:36:21 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 12:34:28 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **env)
 
 	argv += argc;
 	data.env = dup_env(env);
-	add_history("echo | cat > a");
+	add_history("echo\"\n\"<< a");
 	signal(SIGINT, parent_signal);
 	while (1)
 	{
@@ -80,13 +80,15 @@ int	main(int argc, char **argv, char **env)
 		cmd_data = get_cmd(prompt, &data);
 		if (cmd_data)
 		{
-			env = execute(cmd_data, &data);
-			// if (cmd_data->array)
-			// 	ft_free_array(cmd_data->array);
+			// env = execute(cmd_data, &data);
+			// // if (cmd_data->array)
+			// // 	ft_free_array(cmd_data->array);
+			ft_put_array(cmd_data->array);
+			ft_printf("isize : %i, fd_in : %i, fd_out : %i\n", cmd_data->isize, cmd_data->fd_pipe[0], cmd_data->fd_pipe[1]);
 			free_list_and_null(cmd_data);
 		}
 		if (prompt)
-			free_str_and_null(prompt);
+			prompt = ft_free_str(prompt);
 	}
 	return (0);
 }

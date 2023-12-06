@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:10:29 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/30 09:09:22 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 12:50:43 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_check_syntax(char **array)
 		if (j != 0)
 		{
 			k = ft_check_redir_pipe(array[i + 1]);
-			if (k != 0 && j == 5 && k == 5)
+			if ((k != 0 && j != 5) || (k == j && k == 5))
 				return (0);
 			else if (array[i + 1] == NULL)
 				return (0);

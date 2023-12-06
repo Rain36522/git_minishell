@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/05 14:27:43 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 13:21:02 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	ft_cmd_type(char *scmd, int *fd, t_incmd *lst, t_data *data)
 		write_cmd_in_file(scmd, fd[1]);
 }
 
-t_acmd	*get_cmd_parent(int *fd, t_incmd *lst, int istatus, char *scmd)
+static t_acmd	*get_cmd_parent(int *fd, t_incmd *lst)
 {
 	t_incmd	*lst_next;
 
@@ -81,8 +81,6 @@ t_acmd	*get_cmd_parent(int *fd, t_incmd *lst, int istatus, char *scmd)
 		free(lst);
 		lst = lst_next;
 	}
-	if (WEXITSTATUS(istatus) != 0)
-		return (ft_error_child(WEXITSTATUS(istatus), NULL, scmd, NULL));
 	return (ft_file_to_array(fd[0], fd[1]));
 }
 
@@ -107,8 +105,8 @@ t_acmd	*get_cmd(char *prompt, t_data *data)
 	{
 		waitpid(data->pid, &data->iexit, 0);
 		if (WEXITSTATUS(data->iexit) != 0)
-			ft_error_child(WEXITSTATUS(data->iexit), data->env, NULL, NULL);
-		return (get_cmd_parent(fd, lst, data->iexit, scmd));
+			return (ft_error_get_cmd(WEXITSTATUS(data->iexit), data->env, NULL, NULL));
+		return (get_cmd_parent(fd, lst));
 	}
 	return (NULL);
 }

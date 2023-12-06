@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:07 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/05 14:37:46 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 14:26:46 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ static void	fork_not_builtin(char **tab, t_data *data)
 char	**single_cmd(char *str, t_data *data)
 {
 	char	**tmp;
-
 	tmp = NULL;
 	if (!str)
 		ft_error_int(127, 1, NULL, NULL);

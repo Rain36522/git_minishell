@@ -6,14 +6,14 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:26:03 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/05 14:28:46 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 13:19:13 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
 // on est dans une double donc on carry le $ quoi quil ce passe
-void	state_2(t_dlist *l, char **env, t_data *data)
+void	state_2(t_dlist *l, t_data *data)
 {
 	while (l->input[l->i] && l->input[l->i] != '\"')
 	{
@@ -60,7 +60,7 @@ void	relais_state_1(t_dlist *l)
 // were not anymore in double or single quote
 // take the count with qdouble if were in a double
 // or a single so we know what we hae to do
-void	finish_dollar(t_dlist *l, char **env, t_data *data)
+void	finish_dollar(t_dlist *l, t_data *data)
 {
 	while (l->input[l->i])
 	{
@@ -73,7 +73,7 @@ void	finish_dollar(t_dlist *l, char **env, t_data *data)
 			join_char(l, l->input[l->i]);
 			check_join(l, l->str);
 			l->i++;
-			state_2(l, data->env, data);
+			state_2(l, data);
 		}
 		else if (l->input[l->i] && l->input[l->i] == '$'
 			&& print_dollar(l->input[l->i + 1]) == 0)
@@ -100,10 +100,10 @@ char	*replace_dollar(char *str, int state, t_data *data)
 	}
 	if (state == 2)
 	{
-		state_2(&list, data->env, data);
+		state_2(&list, data);
 		state = 0;
 	}
-	finish_dollar(&list, data->env, data);
+	finish_dollar(&list, data);
 	return (list.str);
 }
 

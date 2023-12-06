@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/02 13:52:24 by cduffaut         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:34:13 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	ft_error_msg(int i);
 int		ft_error_int(int icode, int iexit, char **array, char *str);
 void	*ft_error_ptr(int icode, int iexit, char **array, char *str);
 void	*ft_error_child(int icode, char **array, char *str, char *str2);
+void	*ft_error_get_cmd(int icode, char **env, char *str, char *str2);
 
 // GNL
 char	*get_next_line(int fd);
@@ -128,6 +129,7 @@ void	parent_signal(int isignal);
 void	child_signal(int isignal);
 char	*ft_free_str(char *str);
 char	**ft_free_ptr_ptr(char **ptr);
+int		ft_array_len(char **a);
 
 // output
 int		pipex(int argc, char **argv, t_data *data);

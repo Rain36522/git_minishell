@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:55:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/05 14:28:01 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 12:46:54 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ char	*input_error(char *scmd)
 		return (return_null(mem_scmd));
 	add_history(scmd);
 	if (ft_cnt_dbl_redir_str(scmd) > 0 && ft_str_end_quotes(scmd, 0) != 0)
-		return (ft_error_ptr(201, 1, NULL, NULL));
+		return (ft_error_ptr(201, 0, NULL, NULL));
 	array = ft_split_minishell(scmd);
 	if (!array)
 		ft_error_int(12, 1, NULL, scmd);
+	ft_put_array(array);
+	ft_putstr_fd("\ntab\n", 2);
 	if (ft_check_syntax(array) == 0)
-		return (ft_error_ptr(201, 1, array, NULL));
+		return (ft_error_ptr(201, 0, array, NULL));
 	array = ft_free_array(array);
 	return (scmd);
 }

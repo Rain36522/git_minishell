@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/05 14:23:55 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 13:30:56 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_free_file_lst(t_lst *lst, int ierror, char **array)
 		free(lst);
 		lst = ptr;
 	}
+	lst = NULL;
 	array = ft_free_array(array);
 	if (ierror != 0)
 		ft_error_int(ierror, 1, NULL, NULL);
@@ -44,10 +45,14 @@ t_lst	*ft_read_file(int fd)
 		ptr->str = str;
 		ptr->next = NULL;
 		ptr = ft_utils_open_quotes(ptr, lst, fd);
+		if (!ptr)
+			break;
 		lst = ft_add_end_lst_lst(lst, ptr);
 		str = get_next_line(fd);
 	}
 	close(fd);
+	if (!ptr)
+		return (NULL);
 	return (lst);
 }
 
@@ -112,23 +117,20 @@ t_acmd	*ft_file_to_array(int fd, int fd_out)
 	t_acmd	*acmd_data;
 
 	close(fd_out);
+	lst = ft_read_file(fd);
+	if (!lst)
+		return (NULL);
 	acmd_data = (t_acmd *) malloc(sizeof(t_acmd) * 1);
 	if (!acmd_data)
-		ft_error_int(12, 1, NULL, NULL);
-	lst = ft_read_file(fd);
+		ft_free_file_lst(lst, 12, NULL);
 	acmd_data = ft_util_add_pipe(acmd_data);
 	acmd_data->array = ft_put_lst_array(lst, acmd_data->fd_pipe);
 	j = 0;
 	if (acmd_data->array[1])
 		j = 1;
-	i = j;
-	while (acmd_data->array[i + j])
-	{
+	i = j - 1;
+	while (acmd_data->array[++i + j])
 		acmd_data->array[i] = ft_strdup_remov(acmd_data->array[i], acmd_data);
-		i++;
-	}
-	acmd_data->isize = 0;
-	while (acmd_data->array[acmd_data->isize])
-		acmd_data->isize++;
+	acmd_data->isize = ft_array_len(acmd_data->array);
 	return (acmd_data);
 }

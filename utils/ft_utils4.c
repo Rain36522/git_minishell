@@ -25,3 +25,13 @@ char	**ft_free_ptr_ptr(char **ptr)
 		free(ptr);
 	return (NULL);
 }
+
+int	ft_array_len(char **a)
+{
+	int	i;
+
+	i = 0;
+	while (a[i])
+		i ++;
+	return (i);
+}
