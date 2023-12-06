@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:22:52 by csil              #+#    #+#             */
-/*   Updated: 2023/12/01 08:59:46 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 15:46:21 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	child_process(char **argv, t_data *data, t_pipex l)
 		else
 			ft_dup2(&l, l.pipe[l.index * 2 - 2], l.pipe[l.index * 2 + 1]);
 		l.cmd_args = ft_split_minishell(argv[l.index + 1]);
+		
 		if (!l.cmd_args)
 			free_all_exit(&l, 12);
 		close_all_pipes(&l);

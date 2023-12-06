@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/06 13:30:56 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 16:18:22 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static char	**ft_put_lst_array(t_lst *mem_lst, int *fd)
 	return (array);
 }
 
-t_acmd	*ft_file_to_array(int fd, int fd_out)
+t_acmd	*ft_file_to_array(int fd, int fd_out, t_data *data)
 {
 	t_lst	*lst;
 	int		i;
@@ -132,5 +132,6 @@ t_acmd	*ft_file_to_array(int fd, int fd_out)
 	while (acmd_data->array[++i + j])
 		acmd_data->array[i] = ft_strdup_remov(acmd_data->array[i], acmd_data);
 	acmd_data->isize = ft_array_len(acmd_data->array);
+	acmd_data = treat_input(acmd_data, data);
 	return (acmd_data);
 }

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/06 13:21:02 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 16:18:07 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	ft_open_quotes_cmd(int *fd, char *scmd)
 	{
 		scmd = ft_strjoin_free(scmd, "\n");
 		ptr2 = readline("> ");
+		if (!ptr2)
+			ft_error_int(1, 1, NULL, scmd);
 		i = ft_quotes(ptr2, i);
 		scmd = ft_strjoin_free(scmd, ptr2);
 		ptr2 = ft_free_str(ptr2);
@@ -68,7 +70,7 @@ static void	ft_cmd_type(char *scmd, int *fd, t_incmd *lst, t_data *data)
 		write_cmd_in_file(scmd, fd[1]);
 }
 
-static t_acmd	*get_cmd_parent(int *fd, t_incmd *lst)
+static t_acmd	*get_cmd_parent(int *fd, t_incmd *lst, t_data *data)
 {
 	t_incmd	*lst_next;
 
@@ -81,7 +83,7 @@ static t_acmd	*get_cmd_parent(int *fd, t_incmd *lst)
 		free(lst);
 		lst = lst_next;
 	}
-	return (ft_file_to_array(fd[0], fd[1]));
+	return (ft_file_to_array(fd[0], fd[1], data));
 }
 
 t_acmd	*get_cmd(char *prompt, t_data *data)
@@ -106,7 +108,7 @@ t_acmd	*get_cmd(char *prompt, t_data *data)
 		waitpid(data->pid, &data->iexit, 0);
 		if (WEXITSTATUS(data->iexit) != 0)
 			return (ft_error_get_cmd(WEXITSTATUS(data->iexit), data->env, NULL, NULL));
-		return (get_cmd_parent(fd, lst));
+		return (get_cmd_parent(fd, lst, data));
 	}
 	return (NULL);
 }

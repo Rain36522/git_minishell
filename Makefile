@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/12/06 13:21:25 by pudry            ###   ########.fr        #
+#    Updated: 2023/12/06 15:20:33 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ SRC_ERROR = error/ft_error.c error/ft_error_msg.c
 
 SRC_CMD_2 = check_syntax.c double_input_redir2.c from_quotes_to_wrds.c ft_split_minishell_part_2.c write_cmd_in_file.c \
 			double_input_redir.c file_to_array.c ft_split_minishell.c get_cmd.c ft_strdup_remov.c input_error.c \
-			replace_dollar.c replace_dollar_2.c replace_dollar_3.c
+			replace_dollar.c replace_dollar_2.c replace_dollar_3.c file_to_array2.c
 SRC_CMD = $(addprefix get_cmd/,$(SRC_CMD_2))
 
 SRC_GNL = gnl/get_next_line_utils.c gnl/get_next_line.c

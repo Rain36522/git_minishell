@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/06 12:34:13 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 16:19:32 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	write_cmd_in_file(char *scmd, int fd);
 t_incmd	*ft_make_lst(char **array);
 t_incmd	*ft_free_lst(t_incmd *lst, char *str);
 void	ft_write_file(t_incmd *lst, char **array, t_data *data);
-t_acmd	*ft_file_to_array(int fd, int fd_out);
+t_acmd	*ft_file_to_array(int fd, int fd_out, t_data *data);
 char	**ft_replace_redir(t_incmd *lst, char **array);
 void	ft_put_data(char **array, int fd);
 t_lst	*ft_utils_open_quotes(t_lst *ptr, t_lst *lst, int fd);
@@ -99,6 +99,7 @@ void	ft_free_file_lst(t_lst *lst, int ierror, char **array);
 char	*ft_strdup_remov(char *str, t_acmd	*cmd);
 char	*input_error(char *scmd);
 t_incmd	*redir_lst(char *scmd);
+t_acmd	*treat_input(t_acmd *acmd_data, t_data *data);
 
 // ft_split
 char	**ft_split_minishell(char const *s);
