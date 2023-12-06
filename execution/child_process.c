@@ -84,21 +84,15 @@ void	child_process(char **argv, t_data *data, t_pipex l)
 			ft_dup2(&l, l.pipe[l.index * 2 - 2], l.output);
 		else
 			ft_dup2(&l, l.pipe[l.index * 2 - 2], l.pipe[l.index * 2 + 1]);
-		ft_putstr_fd("87\n", 2);
 		l.cmd_args = ft_split_minishell(argv[l.index + 1]);
 		if (!l.cmd_args)
 			free_all_exit(&l, 12);
-		ft_putstr_fd("90\n", 2);
 		close_all_pipes(&l);
-		ft_putstr_fd("91\n", 2);
 		ft_make_redir(l.cmd_args);
-		ft_putstr_fd("94\n", 2);
-		ft_putstr_fd("97\n", 2);
 		builtin_checker(&l, data->env, data);
 		l.cmd = create_final_path(&l, l.cmd_path, l.cmd_args[0]);
 		if (!l.cmd)
 			cmd_not_found(&l);
-		ft_putstr_fd("99\n", 2);
 		if (execve(l.cmd, l.cmd_args, data->env) == -1)
 		{
 			free_all_exit (&l, l.exit_value);
