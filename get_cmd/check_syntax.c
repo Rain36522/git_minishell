@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:10:29 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 14:14:57 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 15:10:15 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ static int	ft_check_redir_pipe(char *str)
 		return (0);
 }
 
+static int	ft_check_multiple_redir(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && (str[i] == '<' || str[i] == '>'))
+		i ++;
+	if (i >= 3)
+		return (0);
+	return (1);
+}
+
 int	ft_check_syntax(char **array)
 {
 	int	i;
@@ -39,7 +51,8 @@ int	ft_check_syntax(char **array)
 	i = 0;
 	while (array[i])
 	{
-		if (array[i][0] == '|' && array[i][1] == '|')
+		if ((array[i][0] == '|' && array[i][1] == '|') || \
+							!ft_check_multiple_redir(array[i]))
 			return (0);
 		j = ft_check_redir_pipe(array[i]);
 		if (j != 0)
