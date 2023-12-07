@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:55:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/06 15:25:17 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 10:47:47 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	*return_null(char *str)
 {
 	free(str);
-	return NULL;
+	return (NULL);
 }
 
 char	*input_error(char *scmd)

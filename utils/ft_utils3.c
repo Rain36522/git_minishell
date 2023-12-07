@@ -87,6 +87,7 @@ t_acmd	*ft_util_add_pipe(t_acmd *acmd_data)
 	acmd_data->fd_pipe[1] = fd[1];
 	return (acmd_data);
 }
+
 // This function replace the array contening the cmd
 // by an string contening the cmd
 // The ft free the array.

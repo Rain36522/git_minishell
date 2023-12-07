@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 09:41:18 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 10:50:42 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ int	main(int argc, char **argv, char **env)
 			// env = execute(cmd_data, &data);
 			// // if (cmd_data->array)
 			// // 	ft_free_array(cmd_data->array);
-			ft_put_array(cmd_data->array);
-			ft_printf("isize : %i, fd_in : %i, fd_out : %i\n", cmd_data->isize, cmd_data->fd_pipe[0], cmd_data->fd_pipe[1]);
 			ft_free_array(cmd_data->array);
 			free_list_and_null(cmd_data);
 		}

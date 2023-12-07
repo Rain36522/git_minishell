@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/12/07 09:56:43 by pudry            ###   ########.fr        #
+#    Updated: 2023/12/07 10:45:21 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,7 @@ all : header
 # 	@make go_down
 
 norm :
-	norminette $(SRC_BUILT) $(SRC_CMD) $(SRC_ERROR) $(SRC_MUL_PIPE) $(SRC_UTILS)
+	norminette $(SRC_CMD) $(SRC_ERROR) $(SRC_MUL_PIPE) $(SRC_UTILS)
 
 lldb : header
 	@make -s -C ft_printf/

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:07 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/06 14:26:46 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 10:50:16 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ char	*join_path(char **paths, char **args, int i)
 static void	no_final_path(char **tab, char **paths, char *final_path)
 {
 	ft_putstr_fd(tab[0], 2);
-	ft_putstr_fd(": command not found\n", 2);
-	// les deux ont ete pour autant malloc mais petent un cable quand tu les free ?
 	ft_free_array(paths);
 	ft_error_int(127, 0, tab, final_path);
 }
@@ -93,6 +91,7 @@ static void	fork_not_builtin(char **tab, t_data *data)
 char	**single_cmd(char *str, t_data *data)
 {
 	char	**tmp;
+
 	tmp = NULL;
 	if (!str)
 		ft_error_int(127, 1, NULL, NULL);

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 09:59:08 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 10:46:26 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_lst	*ft_read_file(int fd)
 		ptr->next = NULL;
 		ptr = ft_utils_open_quotes(ptr, lst, fd);
 		if (!ptr)
-			break;
+			break ;
 		lst = ft_add_end_lst_lst(lst, ptr);
 		str = get_next_line(fd);
 	}

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:10:54 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/07 09:56:26 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 10:48:25 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	join_dollar(t_dlist *l, t_data *data)
 		{
 			equal = found_equal(data->env[i]);
 			if (ft_strncmp(l->input + l->i, data->env[i], equal) == 0)
-			{ 
+			{
 				join_var_to_str(l, data->env, equal, i);
 				return ;
 			}
