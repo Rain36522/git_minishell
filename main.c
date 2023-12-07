@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 16:13:00 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 17:34:25 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,6 @@ static char	**dup_env(char **env)
 	return (env2);
 }
 
-static char	**execute(t_acmd *cmd_data, t_data *data)
-{
-	if (cmd_data->array[1])
-	{
-		pipex(cmd_data->isize, cmd_data->array, data);
-		ft_print_pipe_out(cmd_data->fd_pipe[0]);
-	}
-	else
-	{
-		data->env = single_cmd(cmd_data->array[0], data);
-	}
-	return (data->env);
-}
-
 void	free_str_and_null(char *str)
 {
 	free(str);
@@ -64,15 +50,31 @@ void	free_list_and_null(t_acmd *list)
 	list = NULL;
 }
 
+static void	execute(t_acmd *cmd_data, t_data *data)
+{
+	if (cmd_data->array[1])
+	{
+		data->iexit = pipex(cmd_data->isize, cmd_data->array, data);
+		ft_print_pipe_out(cmd_data->fd_pipe[0]);
+	}
+	else
+	{
+		data = single_cmd(cmd_data->array[0], data);
+	}
+	if (cmd_data->array)
+		cmd_data->array = ft_free_array(cmd_data->array);
+	free_list_and_null(cmd_data);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*prompt;
 	t_acmd	*cmd_data;
 	t_data	data;
 
+	data = (t_data){};
 	argv += argc;
 	data.env = dup_env(env);
-	add_history("export a=1");
 	signal(SIGINT, parent_signal);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -82,15 +84,14 @@ int	main(int argc, char **argv, char **env)
 		if (cmd_data)
 		{
 			ft_put_array(cmd_data->array);
-			ft_printf("start exec\n");
-			env = execute(cmd_data, &data);
-			if (cmd_data->array)
-				ft_free_array(cmd_data->array);
-			// // ft_free_array(cmd_data->array);
-			free_list_and_null(cmd_data);
+			ft_printf("start exec %i\n", data.imem_exit);
+			execute(cmd_data, &data);
 		}
+		else
+			data.iexit = 1;
 		if (prompt)
 			prompt = ft_free_str(prompt);
+		data.imem_exit = data.iexit;
 	}
 	return (0);
 }

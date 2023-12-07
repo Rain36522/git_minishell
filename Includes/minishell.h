@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 11:31:42 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 17:24:07 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_data
 	char			**env;
 	pid_t			pid;
 	int				iexit;
+	int				imem_exit;
 }				t_data;
 # endif
 
@@ -131,7 +132,7 @@ int		ft_array_len(char **a);
 
 // output
 int		pipex(int argc, char **argv, t_data *data);
-char	**single_cmd(char *str, t_data *data);
+t_data	*single_cmd(char *str, t_data *data);
 
 // Temp
 void	ft_put_array(char **array);

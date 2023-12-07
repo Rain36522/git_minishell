@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 20:35:26 by csil              #+#    #+#             */
-/*   Updated: 2023/12/07 13:06:15 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 17:23:58 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_data
 	char			**env;
 	pid_t			pid;
 	int				iexit;
+	int				imem_exit;
 }				t_data;
 # endif
 

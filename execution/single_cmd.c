@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:07 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/07 16:12:45 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:52:56 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	not_builtin(char **tab, char **envp)
 	}
 }
 
-static void	fork_not_builtin(char **tab, t_data *data)
+static int	fork_not_builtin(char **tab, t_data *data)
 {
 	int	i;
 
@@ -88,11 +88,15 @@ static void	fork_not_builtin(char **tab, t_data *data)
 	{
 		waitpid(data->pid, &i, 0);
 		if (WEXITSTATUS(i) != 0)
+		{
 			ft_error_child(i, tab, NULL, NULL);
+			return (1);
+		}	
 	}
+	return (0);	
 }
 
-static char	**ft_make_builtin(char **array, t_data *data)
+static t_data	*ft_make_builtin(char **array, t_data *data)
 {
 	int		i;
 
@@ -111,10 +115,10 @@ static char	**ft_make_builtin(char **array, t_data *data)
 		exit_cmd(array);
 	else if (i == 7)
 		cwd(data->env);
-	return (data->env);
+	return (data);
 }
 
-char	**single_cmd(char *str, t_data *data)
+t_data	*single_cmd(char *str, t_data *data)
 {
 	char	**tmp;
 
@@ -125,11 +129,11 @@ char	**single_cmd(char *str, t_data *data)
 		return (ft_make_builtin(tmp, data));
 	else if (check_builtin(tmp[0], 0) == 0)
 	{
-		fork_not_builtin(tmp, data);
+		data->iexit = fork_not_builtin(tmp, data);
 		// if (tmp)
 		// 	tmp = ft_free_array(tmp);
 	}
-	return (data->env);
+	return (data);
 }
 
 /*int     main(int argc, char **argv, char **envp)

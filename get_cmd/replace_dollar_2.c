@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:10:54 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/07 10:48:25 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 17:32:47 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	if_question_mark(t_dlist *l, t_data *data)
 	int		i;
 
 	i = 0;
-	tmp = ft_itoa((int)WEXITSTATUS(data->iexit));
+	tmp = ft_itoa(data->imem_exit);
 	while (tmp[i])
 	{
 		l->str = dollar_join_char(l->str, tmp[i]);
