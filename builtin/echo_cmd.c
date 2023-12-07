@@ -49,12 +49,14 @@ void	echo_cmd(char **tab)
 	while (tab[i])
 	{
 		printf ("%s", tab[i]);
-		i++;
+			i++;
+		if (tab[i])
+			printf (" ");
 	}
 	if (n == 0)
 		printf ("\n");
 	tab = ft_free_array(tab);
-}
+} 
 /*int	main(int argc, char **argv)
 {
 	(void) argc;
