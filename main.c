@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 15:48:08 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:13:00 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **env)
 
 	argv += argc;
 	data.env = dup_env(env);
-	add_history("echo bijour > a | cat -e >b | wc -c");
+	add_history("export a=1");
 	signal(SIGINT, parent_signal);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)

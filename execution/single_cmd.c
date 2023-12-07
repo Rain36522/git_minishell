@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:07 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/07 14:17:17 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:12:45 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,14 @@ static char	**ft_make_builtin(char **array, t_data *data)
 	else if (i == 3)
 		env_cmd(array, data->env);
 	else if (i == 4)
-		export_cmd(data->env, array);
+		data->env = export_cmd(data->env, array);
 	else if (i == 5)
-		unset_cmd(data->env, array);
+		data->env = unset_cmd(data->env, array);
 	else if (i == 6)
 		exit_cmd(array);
 	else if (i == 7)
-		printf ("%s\n", cwd(data->env));
+		cwd(data->env);
 	return (data->env);
-
 }
 
 char	**single_cmd(char *str, t_data *data)

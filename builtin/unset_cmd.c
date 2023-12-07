@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 10:41:20 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:23:31 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ static char	**ft_remove_env_str(char **env, int isize, int ipos, char *scmd)
 	isize --;
 	while (isize >= 0)
 	{
-		if (isize == ipos)
+		if (isize == ipos && isize >= 1)
 		{
 			k ++;
 			isize --;
 		}
 		array[isize + k] = env[isize];
+		isize --;
 	}
 	env[ipos] = ft_free_str(env[ipos]);
 	env = ft_free_ptr_ptr(env);
@@ -62,9 +63,8 @@ static char	**ft_unset(char **env, char *scmd)
 			j = i;
 		i ++;
 	}
-	scmd = ft_free_str(scmd);
 	if (j >= i)
-		ft_error_int(22, 0, NULL, NULL);
+		return (env);
 	return (ft_remove_env_str(env, i, j, scmd));
 }
 
@@ -79,7 +79,7 @@ char	**unset_cmd(char **env, char **acmd)
 	}
 	i = 1;
 	while (acmd[i])
-		env = ft_unset(env, acmd[i]);
+		env = ft_unset(env, acmd[i ++]);
 	acmd = ft_free_array(acmd);
 	return (env);
 }
