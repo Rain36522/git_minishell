@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
+#include "../Includes/header_builtin.h"
 
 static int	non_numeric(char *str)
 {
@@ -40,42 +41,29 @@ static int	tab_size(char **tab)
 	return (i);
 }
 
-static void	exit_classic(char *str, char **tab)
+static void	 exit_classic(char **tab)
 {
-	if (str)
-	{
-		str = ft_free_str(str);
-		str = NULL;
-	}
 	tab = ft_free_array(tab);
 	exit (1);
 }
 
-void	exit_cmd(char *str)
+void	exit_cmd(char **tab)
 {
 	int		e_code;
-	char	**tab;
 
-	if (!str)
-		exit (1);
-	tab = ft_split(str, ' ');
-	if (!tab)
-		ft_error_int(12, 1, NULL, str);
 	printf("exit\n");
 	if (tab[1] && non_numeric(tab[1]) == 1)
-		numeric_argument_required(str, tab);
+		numeric_argument_required(tab);
 	else if (tab_size(tab) >= 3)
 	{
-		too_many_args(str, tab);
+		too_many_args(tab);
 		return ;
 	}
 	else if (tab_size(tab) == 1)
-		exit_classic(str, tab);
+		exit_classic(tab);
 	else
 	{
 		e_code = ft_atoi(tab[1]);
-		str = ft_free_str(str);
-		str = NULL;
 		tab = ft_free_array(tab);
 		exit (e_code);
 	}

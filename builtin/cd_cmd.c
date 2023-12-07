@@ -20,7 +20,6 @@ char	*simple_cd(char **envp)
 	i = 0;
 	while (envp[i] && ft_strncmp(envp[i], "HOME=", 5) != 0)
 		i++;
-	//printf ("cmd to exec %s\n", envp[i] + 5);
 	return (envp[i] + 5);
 }
 
@@ -45,7 +44,7 @@ void	cd_cmd(char **tab_cmd, char **envp)
 			ft_error_int(127, 0, tab_cmd, NULL);
 		}
 		else
-			ft_free_array(tab_cmd);
+			tab_cmd = ft_free_array(tab_cmd);
 	}
 	else
 	{
@@ -55,22 +54,17 @@ void	cd_cmd(char **tab_cmd, char **envp)
 			return ;
 		}
 		else
-			ft_free_array(tab_cmd);
+			tab_cmd = ft_free_array(tab_cmd);
 	}
 }
 
-void	init_cmd(char *str, char **envp)
+void	init_cmd(char **tab, char **envp)
 {
-	char	**tab;
-
-	if (!str)
-		ft_error_int(127, 1, NULL, NULL);
-	tab = ft_split(str, ' ');
 	if (!tab)
-		ft_error_int(12, 1, tab, str);
-	if (str)
-		free (str);
+		ft_error_int(12, 1, NULL, NULL);
 	cd_cmd(tab, envp);
+	if (tab)
+		tab = ft_free_array(tab);
 }
 
 // Exit code 127 is not currently relate to

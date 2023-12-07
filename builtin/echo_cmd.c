@@ -15,136 +15,50 @@
 #include "../Includes/minishell.h"
 #include "../Includes/header_builtin.h"
 
-int	dollar_gestion(char *str, int i, char **envp, t_data *data)
+static int	check_n(char *str)
 {
-	int		j;
-	int		k;
-	int		start;
-	char	*tmp;
+	int		i;
 
-	start = i;
-	k = 0;
-	j = 0;
-	if (str[i + 1] == '?')
-	{
+	i = 1;
+	if (str[0] != '-')
+		return (0);
+	if (str[i] != 'n')
+		return (0);
+	while (str[i] && str[i] == 'n')
 		i++;
-		printf ("34\n");
-		tmp = ft_itoa((int)WEXITSTATUS(data->iexit));
-		printf("%s", tmp);
-		tmp = ft_free_str(tmp);
-		i++;
-	}
-	else
-	{
-		while (str[i] && str[i] != 32 && str[i] != '\'' && str[i] != '\"')
-			i++;
-		while (envp[j])
-		{
-			if (ft_strncmp(envp[j], str + start + 1, i - start - 1) == 0)
-			{
-				while (envp[j][k] && envp[j][k] != '=')
-					k++;
-				printf ("%s", envp[j] + k + 1);
-				return (i);
-			}
-			j++;
-			k = 0;
-		}
-	}
-	return (i);
-}
-
-int	is_n(char *str, int i)
-{
-	int		backup;
-
-	if (str[i] != 32)
-		return (-1);
-	i++;
-	backup = i;
-	if (str[i] == '-' && str[i + 1] == 'n')
-	{
-		i++;
-		while (str[i] && str[i] == 'n')
-			i++;
-		if (str[i] && str[i] != 32)
-			return (backup);
-		return (i + 1);
-	}
-	return (i);
-}
-
-// return 1 if -n, and 0 if no n
-int	print_backslash(char *str, int i)
-{
-	if (str[i] == '-' && str[i + 1] == 'n')
-	{
-		i++;
-		while (str[i] && str[i] == 'n')
-			i++;
-		if (str[i] && str[i] != 32)
-			return (0);
+	if (str[i] == '\0')
 		return (1);
-	}
 	return (0);
 }
 
-// str to return if cmd not found
-// return str from start until 32 or \n
-void	not_found_str(char *str)
+void	echo_cmd(char **tab)
 {
-	int		i;
-
-	i = 0;
-	while (str[i] && str[i] != 32)
-	{
-		printf ("%c", str[i]);
-		i++;
-	}
-	printf(": command not found\n");
-	exit (127);
-}
-
-// display text following w \n if no -n
-void	echo_cmd(char *str, char **envp,  t_data *data)
-{
-	int		i;
 	int		n;
+	int		i;
 
-	if (!ft_strncmp("echo", str, 5))
+	i = 1;
+	if (!tab[1])
 	{
 		printf ("\n");
+		tab = ft_free_array(tab);
 		return ;
 	}
-	i = 4;
-	n = is_n(str, i);
-	if (n == -1)
-		not_found_str(str);
-	i = n;
-	while (str[i])
+	n = check_n(tab[1]);
+	if (n == 1)
+		i = 2;
+	while (tab[i])
 	{
-		if (str[i] == '\'')
-		{
-			i++;
-			while (str[i] && str[i] != '\'')
-				printf ("%c", str[i++]);
-			if (str[i])
-				i++;
-		}
-		else if (str[i] == '$')
-			i = dollar_gestion(str, i, envp, data);
-		else
-			printf("%c", str[i++]);
+		printf ("%s", tab[i]);
+		i++;
 	}
-	if (print_backslash(str, 5) == 0)
+	if (n == 0)
 		printf ("\n");
+	tab = ft_free_array(tab);
 }
-
-/*int	main(int argc, char **argv, char **envp)
+/*int	main(int argc, char **argv)
 {
 	(void) argc;
-	(void) argv;
 
-	echo_cmd("echo '$USER' $USER", envp);
+	echo_cmd(argv + 1);
 	return (0);
 }*/

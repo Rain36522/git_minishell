@@ -27,5 +27,7 @@ void	ft_error_msg(int i)
 		ft_putstr_fd("Error : Invalid argument\n", 2);
 	else if (i == 201)
 		ft_putstr_fd("Error : command not found\n", 2);
+	else if (i == 2)
+		ft_putstr_fd("Error : No such file or directory\n", 2);
 	ft_putstr_fd("\033[0m", 2);
 }

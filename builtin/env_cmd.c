@@ -13,14 +13,15 @@
 #include <stdio.h>
 #include "../Includes/minishell.h"
 
-void	env_cmd(char *str, char **envp)
+// receive in arg a tab of the cmd
+void	env_cmd(char **tab, char **envp)
 {
 	int		i;
 
 	i = 0;
-	if (str && ft_strncmp(str, "env", 4) != 0)
+	if (tab[1])
 	{
-		ft_error_int(127, 0, NULL, str);
+		ft_error_int(2, 0, tab, NULL);
 		return ;
 	}
 	while (envp[i])
@@ -28,11 +29,13 @@ void	env_cmd(char *str, char **envp)
 		printf ("%s\n", envp[i]);
 		i++;
 	}
+	tab = ft_free_array(tab);
+	exit(0);
 }
 
 /*int	main(int argc, char **argv, char **envp)
 {
 	(void) argc;
-	env_cmd(argv[1], envp);
+	env_cmd(argv + 1, envp);
 	return (0);
 }*/
