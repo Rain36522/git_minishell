@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:51:41 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/05 14:26:06 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 17:48:04 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,21 @@ char	*ft_strdup_remov(char *str, t_acmd	*cmd)
 
 	last = ft_strlen(str);
 	dup = NULL;
-	if (str[last - 1] == '\n')
+	if (!(str[last - 1] == '\n'))
+		return (str);
+	dup = malloc(sizeof(char) * (last));
+	if (!dup)
+		return (ft_remove_dup(cmd));
+	dup[last - 1] = '\0';
+	i = 0;
+	while (str[i + 1])
 	{
-		dup = malloc(sizeof(char) * last);
-		if (!dup)
-			return (ft_remove_dup(cmd));
-		i = 0;
-		while (str[i + 1])
-		{
-			dup[i] = str[i];
-			i++;
-		}
-		dup[i] = '\0';
-		str = ft_free_str(str);
-		return (dup);
+		dup[i] = str[i];
+		i++;
 	}
-	return (str);
+	str = ft_free_str(str);
+	ft_printf("dup : %s\n", dup);
+	return (dup);
 }
 
 /*int		main(void)

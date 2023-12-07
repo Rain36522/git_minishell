@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:26:03 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/06 13:19:13 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/06 18:03:31 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ char	*replace_dollar(char *str, int state, t_data *data)
 		state = 0;
 	}
 	finish_dollar(&list, data);
+	str = ft_free_str(str);
 	return (list.str);
 }
 
