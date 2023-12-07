@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 10:30:34 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 10:41:20 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ char	**unset_cmd(char **env, char **acmd)
 
 	if (!acmd[1])
 	{
-		ft_error_ptr(22, 0, acmd, NULL);
+		acmd = ft_free_array(acmd);
 		return (env);
 	}
 	i = 1;
 	while (acmd[i])
 		env = ft_unset(env, acmd[i]);
+	acmd = ft_free_array(acmd);
 	return (env);
 }

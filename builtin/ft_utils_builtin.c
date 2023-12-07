@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 08:51:57 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 09:35:25 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 10:44:25 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	check_builtin(char *str, int iexit)
 {
 	if (!str)
-		ft_error_int(127, iexit, NULL, NULL);
+		ft_error_int(127, iexit, NULL, NULL)make ;
 	else if (!ft_strncmp(str, "echo", 5))
 		return (1);
 	else if (!ft_strncmp(str, "cd", 3))
