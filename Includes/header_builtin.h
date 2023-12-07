@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 20:35:26 by csil              #+#    #+#             */
-/*   Updated: 2023/12/07 09:18:40 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 09:30:08 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	too_many_args(char *str, char **tab);
 // utils
 int		check_builtin(char *str, int iexit);
 char	*builtin_strformatting(char **array);
-char	**builtin_aformatting(char *str);
+char	**scmd_aformatting(char *str);
+
 
 #endif
