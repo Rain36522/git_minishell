@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/06 09:56:54 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 09:59:00 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,18 @@ static void	ft_put_cmd_in_file(char **array, int i, int fd)
 	ft_put_redir_in_file(array, 2, i, fd);
 	while (array[i] && !(array[i][0] == '|' && array[i][1] == '\0'))
 	{
-		if (ft_is_redir(array[i]) != 0)
+		while (array[i] && ft_is_redir(array[i]) != 0)
 			i += 2;
-		else
-		{
-			if (!array[i])
-				break ;
-			if (k != 0)
-				ft_putstr_fd(" ", fd);
-			ft_putstr_fd(array[i], fd);
-			i ++;
-			k ++;
-		}
+		if (!array[i])
+			break ;
+		if (k != 0)
+			ft_putstr_fd(" ", fd);
+		ft_putstr_fd(array[i], fd);		
+		i ++;
+		k ++;
 	}
-	ft_putstr_fd("\n", fd);
+	if (k)
+		ft_putchar_fd('\n', fd);
 	ft_put_redir_in_file(array, 1, j, fd);
 }
 

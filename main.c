@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/06 17:56:12 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 09:41:18 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **env)
 
 	argv += argc;
 	data.env = dup_env(env);
-	add_history("echo bijour");
+	add_history("<a >a");
 	signal(SIGINT, parent_signal);
 	while (1)
 	{

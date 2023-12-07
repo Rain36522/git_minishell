@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:10:54 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/06 18:03:09 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 09:56:26 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,17 +114,12 @@ void	join_dollar(t_dlist *l, t_data *data)
 {
 	int		equal;
 	int		i;
-	char	*tmp;
 
 	i = 0;
 	if (l->input[l->i] && l->input[l->i] == '$')
-	{
 		l->i++;
-	}
 	if (l->input[l->i] && l->input[l->i] == '?')
-	{
 		if_question_mark(l, data);
-	}
 	else
 	{
 		while (data->env[i])
