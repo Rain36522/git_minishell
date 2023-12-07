@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/04 15:46:57 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 10:29:57 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,12 @@ static char	**ft_cpy_array_big_size(char **env, int iargs)
 	return (array);
 }
 
-char	**export_cmd(char **env, char *scmd)
+char	**export_cmd(char **env, char **acmd)
 {
 	char	**acmd;
 	int		i;
 	int		j;
 
-	acmd = ft_split_minishell(scmd);
-	free(scmd);
-	if (!acmd)
-		ft_error_ptr(12, 1, env, NULL);
 	i = ft_check_arg(acmd);
 	if (!i)
 		return (env);
