@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:22:52 by csil              #+#    #+#             */
-/*   Updated: 2023/12/07 10:49:01 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 14:17:08 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ void	child_process(char **argv, t_data *data, t_pipex l)
 			ft_dup2(&l, l.pipe[l.index * 2 - 2], l.output);
 		else
 			ft_dup2(&l, l.pipe[l.index * 2 - 2], l.pipe[l.index * 2 + 1]);
-		l.cmd_args = ft_split_minishell(argv[l.index + 1]);
+		l.cmd_args = scmd_aformatting(argv[l.index + 1]);
 		if (!l.cmd_args)
 			free_all_exit(&l, 12);
 		close_all_pipes(&l);
-		//ft_make_redir(l.cmd_args);
-		//builtin_checker(&l, data->env, data);
+		ft_make_redir(l.cmd_args);
+		builtin_checker(&l, data->env);
 		l.cmd = create_final_path(&l, l.cmd_path, l.cmd_args[0]);
 		if (!l.cmd)
 			cmd_not_found(&l);

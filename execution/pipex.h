@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 22:31:10 by csil              #+#    #+#             */
-/*   Updated: 2023/12/01 10:31:53 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 11:53:20 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_make_redir(char **array);
 void	set_outfile(int argc, char **argv, t_pipex *list);
 void	create_pipes(t_pipex *list);
 int		pipex(int argc, char **argv, t_data *data);
-void	builtin_checker(t_pipex *list, char **envp, t_data *data);
+void	builtin_checker(t_pipex *list, char **envp);
 void	wait_child_process(t_pipex *list, t_data *data);
 
 #endif

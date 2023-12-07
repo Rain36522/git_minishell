@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 10:46:11 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 14:15:32 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,20 @@ static void	ft_put_cmd_in_file(char **array, int i, int fd)
 	j = i;
 	k = 0;
 	ft_put_redir_in_file(array, 2, i, fd);
-	while (array[i] && !(array[i][0] == '|' && array[i][1] == '\0'))
+	while (array[i] && array[i][0] != '|')
 	{
-		while (array[i] && ft_is_redir(array[i]) != 0)
+		if (array[i] && ft_is_redir(array[i]) != 0)
 			i += 2;
-		if (!array[i])
-			break ;
-		if (k != 0)
-			ft_putstr_fd(" ", fd);
-		ft_putstr_fd(array[i], fd);
-		i ++;
-		k ++;
+		else
+		{
+			if (!array[i])
+				break ;
+			if (k != 0)
+				ft_putstr_fd(" ", fd);
+			ft_putstr_fd(array[i], fd);		
+			i ++;
+			k ++;
+		}
 	}
 	if (k)
 		ft_putchar_fd('\n', fd);
@@ -107,6 +110,8 @@ void	write_cmd_in_file(char *scmd, int fd)
 	i = ft_check_syntax(array);
 	if (i == 0)
 		ft_error_int(201, 1, array, NULL);
+	else if (i == 150)
+		ft_error_int(150, 1, array, NULL);
 	if (!array)
 		ft_error_int(201, 1, array, NULL);
 	ft_put_data(array, fd);

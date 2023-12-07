@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:44:46 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/27 15:43:29 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 11:44:50 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_give_prompte(char **env)
 	free(ptr);
 	if (!str)
 		ft_error_ptr(12, 1, NULL, NULL);
-	ptr = cwd();
+	ptr = cwd(env);
 	if (!str)
 		ft_error_ptr(12, 1, NULL, NULL);
 	str = ft_strjoin_free(str, " 📂 ");

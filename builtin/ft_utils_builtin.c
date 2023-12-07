@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 08:51:57 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 10:44:25 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 14:17:47 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@
 int	check_builtin(char *str, int iexit)
 {
 	if (!str)
-		ft_error_int(127, iexit, NULL, NULL)make ;
+	{
+		ft_error_int(127, iexit, NULL, NULL);
+		return (127);
+	}
 	else if (!ft_strncmp(str, "echo", 5))
 		return (1);
 	else if (!ft_strncmp(str, "cd", 3))
 		return (2);
 	else if (!ft_strncmp(str, "env", 4))
 		return (3);
-	else if (ft_strncmp(str, "export", 7))
+	else if (!ft_strncmp(str, "export", 7))
 		return (4);
 	else if ( !ft_strncmp(str, "unset", 6))
 		return (5);
 	else if (!ft_strncmp(str, "exit", 5))
 		return (6);
-	else
-		return (0);
+	return (0);
 }
 
 char	*builtin_strformatting(char **array)
@@ -63,6 +65,7 @@ char	**scmd_aformatting(char *str)
 	array = ft_split_minishell(str);
 	if (!array)
 		return (NULL);
+	i = 0;
 	while (array[i])
 	{
 		array[i] = from_quotes_to_wrds(array[i]);
@@ -74,6 +77,7 @@ char	**scmd_aformatting(char *str)
 			array = ft_free_array(array);
 			return (NULL);
 		}
+		i ++;
 	}
 	return (array);
 }

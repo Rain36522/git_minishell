@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:51:41 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/06 17:48:04 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 12:51:49 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char	*ft_strdup_remov(char *str, t_acmd	*cmd)
 		i++;
 	}
 	str = ft_free_str(str);
-	ft_printf("dup : %s\n", dup);
 	return (dup);
 }
 

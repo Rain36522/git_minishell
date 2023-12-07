@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 20:44:24 by csil              #+#    #+#             */
-/*   Updated: 2023/12/05 14:33:58 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 13:14:52 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	free_all_exit(t_pipex *list, int nbr)
 		list->cmd_args = ft_free_array(list->cmd_args);
 	if (list->cmd)
 		list->cmd = ft_free_str(list->cmd);
-	if (list->argv)
-		list->argv = ft_free_array(list->argv);
+	// if (list->argv)
+	// 	list->argv = ft_free_array(list->argv);
 	if (nbr == 0)
 		return ;
 	else

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 10:50:42 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 14:16:24 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **env)
 
 	argv += argc;
 	data.env = dup_env(env);
-	add_history("<a >a");
+	add_history("echo bijour > a | cat -e >b | wc -c");
 	signal(SIGINT, parent_signal);
 	while (1)
 	{
@@ -80,10 +80,12 @@ int	main(int argc, char **argv, char **env)
 		cmd_data = get_cmd(prompt, &data);
 		if (cmd_data)
 		{
-			// env = execute(cmd_data, &data);
-			// // if (cmd_data->array)
-			// // 	ft_free_array(cmd_data->array);
-			ft_free_array(cmd_data->array);
+			ft_put_array(cmd_data->array);
+			ft_printf("start exec\n");
+			env = execute(cmd_data, &data);
+			if (cmd_data->array)
+				ft_free_array(cmd_data->array);
+			// // ft_free_array(cmd_data->array);
 			free_list_and_null(cmd_data);
 		}
 		if (prompt)

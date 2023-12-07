@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 10:11:16 by csil              #+#    #+#             */
-/*   Updated: 2023/12/01 13:57:08 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 12:50:03 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,25 @@
 // If that goes in one of those conditions, it should not
 // "return" to the callong child process
 // It should stop
-void	builtin_checker(t_pipex *list, char **envp, t_data *data)
+void	builtin_checker(t_pipex *list, char **envp)
 {
-	char	*str;
+	int		i;
 
-	str = ft_acmd_to_scmd(list->cmd_args);
-	if (!str)
-	{
-		ft_error_int(127, 1, NULL, NULL);
-	}
-	if (!ft_strncmp(str, "echo ", 5) || !ft_strncmp(str, "echo", 5))
-		echo_cmd(str, envp, data);
-	else if (!ft_strncmp(str, "cd ", 3) || !ft_strncmp(str, "cd", 3))
-		init_cmd(str, envp);
-	else if (!ft_strncmp(str, "env ", 4) || !ft_strncmp(str, "env", 4))
-		env_cmd(str, envp);
-	else if (!ft_strncmp(str, "export ", 7) || !ft_strncmp(str, "export", 7))
-	{
-		export_cmd(envp, str);
-	}
-	else if (!ft_strncmp(str, "unset ", 8) || !ft_strncmp(str, "unset ", 8))
-		unset_cmd(envp, str);
-	else if (!ft_strncmp(str, "exit ", 5) || !ft_strncmp(str, "exit", 5))
-		exit_cmd(str);
+	i = check_builtin(list->cmd_args[0], 0);
+	if (i == 127)
+		free_all_exit(list, 127);
+	else if (i == 1)
+		echo_cmd(list->cmd_args);
+	else if (i == 2)
+		cd_cmd(list->cmd_args, envp);
+	else if (i == 3)
+		env_cmd(list->cmd_args, envp);
+	else if (i == 4)
+		export_cmd(envp, list->cmd_args);
+	else if (i == 5)
+		unset_cmd(envp, list->cmd_args);
+	else if (i == 6)
+		exit_cmd(list->cmd_args);
 	else
 		return ;
 	exit (0);

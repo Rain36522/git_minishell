@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:07 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/07 10:50:16 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 14:17:17 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,30 +88,38 @@ static void	fork_not_builtin(char **tab, t_data *data)
 	}
 }
 
+static char	**ft_make_builtin(char **array, t_data *data)
+{
+	int		i;
+
+	i = check_builtin(array[0], 0);
+	if (i == 1)
+		echo_cmd(array);
+	else if (i == 2)
+		cd_cmd(array, data->env);
+	else if (i == 3)
+		env_cmd(array, data->env);
+	else if (i == 4)
+		export_cmd(data->env, array);
+	else if (i == 5)
+		unset_cmd(data->env, array);
+	else if (i == 6)
+		exit_cmd(array);
+	return (data->env);
+
+}
+
 char	**single_cmd(char *str, t_data *data)
 {
 	char	**tmp;
 
-	tmp = NULL;
-	if (!str)
-		ft_error_int(127, 1, NULL, NULL);
-	else if (!ft_strncmp(str, "echo ", 5) || !ft_strncmp(str, "echo", 5))
-		echo_cmd(str, data->env, data);
-	else if (!ft_strncmp(str, "cd ", 3) || !ft_strncmp(str, "cd", 3))
-		init_cmd(str, data->env);
-	else if (!ft_strncmp(str, "env", 4))
-		env_cmd(str, data->env);
-	else if (!ft_strncmp(str, "export ", 7) || !ft_strncmp(str, "export", 7))
-		data->env = export_cmd(data->env, str);
-	//else if (ft_strncmp(str, "unset ", 6) || !ft_strncmp(str, "unset", 6))
-	//	envp = unset_cmd(str);
-	else if (!ft_strncmp(str, "exit ", 5) || !ft_strncmp(str, "exit", 5))
-		exit_cmd(str);
-	else
-	{
-		tmp = ft_split (str, ' ');
-		if (!tmp)
+	tmp = scmd_aformatting(str);
+	if (!tmp)
 			ft_error_int(12, 0, NULL, str);
+	if (check_builtin(tmp[0], 0) > 0 && check_builtin(tmp[0], 0) != 127)
+		return (ft_make_builtin(tmp, data));
+	else if (check_builtin(tmp[0], 0) == 0)
+	{
 		fork_not_builtin(tmp, data);
 		// if (tmp)
 		// 	tmp = ft_free_array(tmp);

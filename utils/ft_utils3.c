@@ -65,7 +65,7 @@ void	ft_print_pipe_out(int fd_in)
 		i = read(fd_in, buf, BUFFER_SIZE);
 		if (i < 0)
 			break ;
-		ft_putstr_fd(buf, 1);
+		write(1, buf, i);
 		j = 0;
 		while (j <= BUFFER_SIZE && i == BUFFER_SIZE)
 			buf[j++] = '\0';

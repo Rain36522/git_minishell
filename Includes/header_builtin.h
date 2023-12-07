@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 20:35:26 by csil              #+#    #+#             */
-/*   Updated: 2023/12/07 09:30:08 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 13:06:15 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ typedef struct s_data
 }				t_data;
 # endif
 
+char	*cwd(char **env);
+char	*find_hostname(char **env);
+
 // echo command
 void	echo_cmd(char **tab);
 
@@ -32,7 +35,7 @@ void	echo_cmd(char **tab);
 void	env_cmd(char **tab, char **envp);
 
 // Unset cmd
-char	**unset_cmd(char **env, char *scmd);
+char	**unset_cmd(char **env, char **acmd);
 
 // cd command
 char	*simple_cd(char **envp);
@@ -41,7 +44,7 @@ void	cd_cmd(char **tab_cmd, char **envp);
 void	init_cmd(char **tab, char **envp);
 
 // export command
-char	**export_cmd(char **env, char *scmd);
+char	**export_cmd(char **env, char **acmd);
 char	**ft_put_export(char **array, char **afree);
 char	**ft_change_env(char *str, char **env);
 int		ft_strcmp_egal(char *s1, char *s2);

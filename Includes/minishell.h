@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/06 16:19:32 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 11:31:42 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ typedef struct s_acmds
 	int		fd_pipe[2];
 	int		isize;
 }	t_acmd;
-
-char	*cwd(void);
-char	*find_hostname(char **env);
 
 // This funtion is for giving error message, exit programm
 // or return NULL value needed

@@ -6,13 +6,13 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/12/07 10:58:18 by pudry            ###   ########.fr        #
+#    Updated: 2023/12/07 12:50:57 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS = -lreadline -L$(HOME)/.brew/opt/readline/lib -fsanitize=address
+FLAGS = -lreadline -L$(HOME)/.brew/opt/readline/lib -Wall -Wextra -fsanitize=address
 LIBFTPRINTF = ft_printf/libftprintf.a 
 
 BLUE = \\033[1;34m
@@ -39,9 +39,13 @@ TEXT_2   = "			              |   |  ${GREEN}C:\\> Compilation SUCCESS           
 TEXT_3   = "			              |   |  ${GREEN}C:\\> Starting minishell in 3 seconds   ${WHITE}|    |\033[F"
 TEXT_4   = "			              |   |  ${GREEN}C:\\> Starting minishell in 2 seconds   ${WHITE}|    |\033[F"
 TEXT_5   = "			              |   |  ${GREEN}C:\\> Starting minishell in 1 seconds   ${WHITE}|    |\033[F"
-TEXT_6   = "			              |   |  ${GREEN}C:\\> Starting minishell in 0 seconds   ${WHITE}|    |"
+TEXT_6   = "			              |   |  ${RED}C:\\> Segmentation fault                ${WHITE}|    |\033[F"
+EMPTY   = " 			              |   |  ${WHITE}                                       ${WHITE}|    |\033[F"
+REBOOT   = "			              |   |  ${RED}C:\\> REBOOT                            ${WHITE}|    |\033[F"
+TEXT_7   = "			              |   |  ${GREEN}C:\\> Starting minishell                ${WHITE}|    |"
+TEXT_8   = "			              |   |  ${GREEN}C:\\> Starting minishell \033[1mSUCCESS\033[0m        ${WHITE}|    |\033[F"
 
-SRC_BUILT_2 = cd_cmd.c cwd.c env_cmd.c exit_cmd_2.c export_cmd2.c username.c check_quotes.c echo_cmd.c exit_cmd.c export_cmd.c unset_cmd.c
+SRC_BUILT_2 = cd_cmd.c cwd.c env_cmd.c exit_cmd_2.c export_cmd2.c username.c check_quotes.c echo_cmd.c exit_cmd.c export_cmd.c unset_cmd.c ft_utils_builtin.c
 SRC_BUILT = $(addprefix builtin/,$(SRC_BUILT_2))
 
 SRC_UTILS = main.c utils/ft_utils.c utils/ft_utils2.c utils/ft_utils3.c utils/ft_utils4.c utils/signaux.c
@@ -89,7 +93,65 @@ all : header
 # 	@echo $(TEXT_5)
 # 	@sleep 1.0
 # 	@echo $(TEXT_6)
-# 	@sleep 0.3
+# 	@sleep 1.0
+# 	@echo $(EMPTY)
+# 	@sleep 0.4
+# 	@echo $(REBOOT)
+# 	@sleep 0.4
+# 	@echo $(EMPTY)
+# 	@sleep 0.4
+# 	@echo $(REBOOT)
+# 	@sleep 0.4
+# 	@echo $(EMPTY)
+# 	@sleep 0.4
+# 	@echo $(REBOOT)
+# 	@sleep 0.4
+# 	@echo $(EMPTY)
+# 	@sleep 0.4
+# 	@echo $(REBOOT)
+# 	@echo $(EMPTY)
+# 	@echo "\033[F\033[F"
+# 	@echo $(EMPTY)
+# 	@echo "\033[F\033[F"
+# 	@echo $(EMPTY)
+# 	@echo "\033[F\033[F"
+# 	@echo $(EMPTY)
+# 	@sleep 2.0
+# 	@echo $(TEXT_1)
+# 	@echo $(COMPIL_1)
+# 	@echo "\033[F"
+# 	@sleep 1.0
+# 	@echo $(COMPIL_2)
+# 	@sleep 0.2
+# 	@echo $(COMPIL_3)
+# 	@sleep 0.2
+# 	@echo $(COMPIL_4)
+# 	@sleep 0.2
+# 	@echo $(COMPIL_5)
+# 	@echo $(COMPIL_6)
+# 	@sleep 0.2
+# 	@echo $(COMPIL_7)
+# 	@echo $(COMPIL_8)
+# 	@sleep 0.2
+# 	@echo $(COMPIL_9)
+# 	@sleep 1.2
+# 	@echo $(COMPIL_10)
+# 	@echo $(TEXT_2)
+# 	@echo $(TEXT_3)
+# 	@sleep 1.0
+# 	@echo $(TEXT_4)
+# 	@sleep 1.0
+# 	@echo $(TEXT_5)
+# 	@sleep 0.7
+# 	@echo $(EMPTY)
+# 	@echo "\033[F\033[F"
+# 	@echo $(EMPTY)
+# 	@echo "\033[F\033[F"
+# 	@echo $(EMPTY)
+# 	@echo "\033[F\033[F"
+# 	@echo $(EMPTY)
+# 	@sleep 0.5
+# 	@echo $(TEXT_8)
 # 	@make go_down
 
 norm :

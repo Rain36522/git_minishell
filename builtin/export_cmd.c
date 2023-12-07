@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 10:29:57 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 11:46:21 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static char	**ft_cpy_array_big_size(char **env, int iargs)
 
 char	**export_cmd(char **env, char **acmd)
 {
-	char	**acmd;
 	int		i;
 	int		j;
 
