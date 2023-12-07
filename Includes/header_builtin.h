@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 20:35:26 by csil              #+#    #+#             */
-/*   Updated: 2023/12/01 13:56:20 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/07 09:18:40 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,10 @@ int		ft_strcmp_egal(char *s1, char *s2);
 void	exit_cmd(char *str);
 void	numeric_argument_required(char *str, char **tab);
 void	too_many_args(char *str, char **tab);
+
+// utils
+int		check_builtin(char *str, int iexit);
+char	*builtin_strformatting(char **array);
+char	**builtin_aformatting(char *str);
 
 #endif
