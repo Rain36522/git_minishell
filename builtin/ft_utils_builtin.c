@@ -32,6 +32,8 @@ int	check_builtin(char *str, int iexit)
 		return (5);
 	else if (!ft_strncmp(str, "exit", 5))
 		return (6);
+	else if (!ft_strncmp(str, "pwd", 4))
+		return (7);
 	return (0);
 }
 

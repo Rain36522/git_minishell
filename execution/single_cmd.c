@@ -68,6 +68,7 @@ void	not_builtin(char **tab, char **envp)
 		no_final_path(tab, paths, final_path);
 	if (execve(final_path, tab, envp) == -1)
 	{
+		ft_putstr_fd("71\n", 2);
 		ft_free_array(envp);
 		ft_error_int(150, 1, NULL, final_path);
 	}
@@ -75,6 +76,9 @@ void	not_builtin(char **tab, char **envp)
 
 static void	fork_not_builtin(char **tab, t_data *data)
 {
+	int	i;
+
+	i = 0;
 	data->pid = fork();
 	if (data->pid < 0)
 		ft_error_ptr(9, 1, tab, NULL);
@@ -82,9 +86,9 @@ static void	fork_not_builtin(char **tab, t_data *data)
 		not_builtin(tab, data->env);
 	else
 	{
-		waitpid(data->pid, &data->iexit, 0);
-		if (WEXITSTATUS(data->iexit) != 0)
-			ft_error_child(WEXITSTATUS(data->iexit), tab, NULL, NULL);
+		waitpid(data->pid, &i, 0);
+		if (WEXITSTATUS(i) != 0)
+			ft_error_child(i, tab, NULL, NULL);
 	}
 }
 
@@ -105,6 +109,8 @@ static char	**ft_make_builtin(char **array, t_data *data)
 		unset_cmd(data->env, array);
 	else if (i == 6)
 		exit_cmd(array);
+	else if (i == 7)
+		printf ("%s\n", cwd(data->env));
 	return (data->env);
 
 }

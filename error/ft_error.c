@@ -38,7 +38,6 @@ void	*ft_error_ptr(int icode, int iexit, char **array, char *str)
 
 void	*ft_error_child(int icode, char **array, char *str, char *str2)
 {
-	ft_printf("icode : %i\n");
 	if (array)
 		ft_free_array(array);
 	if (str)

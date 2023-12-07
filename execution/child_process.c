@@ -34,7 +34,7 @@ void	wait_child_process(t_pipex *list, t_data *data)
 		}
 		else if (WIFSIGNALED(data->iexit))
 		{
-			list->exit_value = -WTERMSIG(data->iexit);
+			list->exit_value = WTERMSIG(data->iexit);
 		}
 		else
 			list->exit_value = data->iexit;
