@@ -6,12 +6,11 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/04 15:47:06 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:21:25 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/header_builtin.h"
-
 
 char	**ft_change_env(char *str, char **env)
 {

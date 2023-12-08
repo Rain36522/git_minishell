@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 20:35:26 by csil              #+#    #+#             */
-/*   Updated: 2023/12/07 17:23:58 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:12:59 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef struct s_data
 }				t_data;
 # endif
 
-char	*cwd(char **env);
+char	*cwd(char **env, char **array);
+void	pwd(char **env, char **array);
 char	*find_hostname(char **env);
 
 // echo command

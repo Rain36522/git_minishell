@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 08:51:57 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 14:17:47 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:22:39 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_builtin(char *str, int iexit)
 		return (3);
 	else if (!ft_strncmp(str, "export", 7))
 		return (4);
-	else if ( !ft_strncmp(str, "unset", 6))
+	else if (!ft_strncmp(str, "unset", 6))
 		return (5);
 	else if (!ft_strncmp(str, "exit", 5))
 		return (6);

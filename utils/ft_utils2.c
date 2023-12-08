@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:01:00 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/06 10:22:24 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:20:11 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,23 @@ int	ft_str_end_quotes(char *str, int i)
 	return (i);
 }
 
-void	ft_put_array(char **array)
-{
-	int		i;
+// void	ft_put_array(char **array)
+// {
+// 	int		i;
 
-	i = 0;
-	if (!array)
-		exit(0);
-	ft_putstr_fd("array : \n", 2);
-	ft_putstr_fd("---------------------------------------------\n", 2);
-	while (array[i])
-	{
-		ft_putstr_fd(array[i], 2);
-		ft_putstr_fd("\n", 2);
-		ft_putstr_fd("-----------------------------------------\n", 2);
-		i ++;
-	}
-}
-
+// 	i = 0;
+// 	if (!array)
+// 		exit(0);
+// 	ft_putstr_fd("array : \n", 2);
+// 	ft_putstr_fd("---------------------------------------------\n", 2);
+// 	while (array[i])
+// 	{
+// 		ft_putstr_fd(array[i], 2);
+// 		ft_putstr_fd("\n", 2);
+// 		ft_putstr_fd("-----------------------------------------\n", 2);
+// 		i ++;
+// 	}
+// }
 t_lst	*ft_add_end_lst_lst(t_lst *lst, t_lst *ptr)
 {
 	t_lst	*mem_lst;

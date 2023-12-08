@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/08 08:45:12 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:18:57 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	ft_put_cmd_in_file(char **array, int i, int fd)
 				break ;
 			if (k != 0)
 				ft_putstr_fd(" ", fd);
-			ft_putstr_fd(array[i], fd);		
+			ft_putstr_fd(array[i], fd);
 			i ++;
 			k ++;
 		}

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 14:33:50 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/01 14:04:40 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:21:56 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	tab_size(char **tab)
 	return (i);
 }
 
-static void	 exit_classic(char **tab)
+static void	exit_classic(char **tab)
 {
 	tab = ft_free_array(tab);
 	exit (1);

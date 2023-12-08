@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:10:29 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 15:10:15 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:18:46 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ int	ft_check_syntax(char **array)
 	}
 	if (ft_check_redir_pipe(array[0]) > 0 && ft_check_redir_pipe(array[0]) < 5 \
 				&& i == 2)
-			return (150);
+		return (150);
 	return (1);
 }

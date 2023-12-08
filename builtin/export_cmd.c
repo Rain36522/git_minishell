@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/08 08:29:24 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:22:27 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	ft_check_arg(char **acmd)
 			return (ft_error_int(201, 0, acmd, NULL));
 		while (acmd[i][j] && ft_isdigit(acmd[i][j]))
 			j ++;
-		if(!acmd[i][j] || acmd[i][j] == '=')
+		if (!acmd[i][j] || acmd[i][j] == '=')
 			return (ft_error_int(201, 0, acmd, NULL));
 		j = 0;
 		while (acmd[i][j] && ft_isalnum(acmd[i][j]))
@@ -108,11 +108,9 @@ char	**export_cmd(char **env, char **acmd)
 	if (!env)
 		ft_error_int(12, 1, acmd, NULL);
 	i = 1;
-	while(acmd[i])
+	while (acmd[i])
 		env = ft_change_env(acmd[i ++], env);
 	free(*acmd);
 	acmd = ft_free_ptr_ptr(acmd);
 	return (env);
 }
-
-

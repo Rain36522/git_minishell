@@ -97,12 +97,8 @@ char	*ft_acmd_to_scmd(char **acmd)
 	int		i;
 	char	*scmd;
 
-	ft_put_array(acmd);
 	if (!acmd || ! *acmd)
-	{
-		ft_putstr_fd("NULL\n", 2);
 		return (NULL);
-	}
 	i = 1;
 	scmd = acmd[0];
 	while (acmd[i] && scmd)

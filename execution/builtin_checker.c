@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 10:11:16 by csil              #+#    #+#             */
-/*   Updated: 2023/12/07 12:50:03 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:13:07 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	builtin_checker(t_pipex *list, char **envp)
 		unset_cmd(envp, list->cmd_args);
 	else if (i == 6)
 		exit_cmd(list->cmd_args);
+	else if (i == 7)
+		pwd(envp, list->cmd_args);
 	else
 		return ;
 	exit (0);

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:07 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/07 16:52:56 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:20:00 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int	fork_not_builtin(char **tab, t_data *data)
 			return (1);
 		}	
 	}
-	return (0);	
+	return (0);
 }
 
 static t_data	*ft_make_builtin(char **array, t_data *data)
@@ -114,7 +114,7 @@ static t_data	*ft_make_builtin(char **array, t_data *data)
 	else if (i == 6)
 		exit_cmd(array);
 	else if (i == 7)
-		cwd(data->env);
+		pwd(data->env, array);
 	return (data);
 }
 
@@ -124,14 +124,14 @@ t_data	*single_cmd(char *str, t_data *data)
 
 	tmp = scmd_aformatting(str);
 	if (!tmp)
-			ft_error_int(12, 0, NULL, str);
+		ft_error_int(12, 0, NULL, str);
 	if (check_builtin(tmp[0], 0) > 0 && check_builtin(tmp[0], 0) != 127)
 		return (ft_make_builtin(tmp, data));
 	else if (check_builtin(tmp[0], 0) == 0)
 	{
 		data->iexit = fork_not_builtin(tmp, data);
-		// if (tmp)
-		// 	tmp = ft_free_array(tmp);
+		if (tmp)
+			tmp = ft_free_array(tmp);
 	}
 	return (data);
 }

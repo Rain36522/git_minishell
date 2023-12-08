@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:19:01 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/01 14:04:49 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:22:50 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	echo_cmd(char **tab)
 	if (n == 0)
 		printf ("\n");
 	tab = ft_free_array(tab);
-} 
+}
+
 /*int	main(int argc, char **argv)
 {
 	(void) argc;
