@@ -6,13 +6,13 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/12/08 09:30:05 by pudry            ###   ########.fr        #
+#    Updated: 2023/12/08 10:03:44 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-FLAGS = -lreadline -L$(HOME)/.brew/opt/readline/lib -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -lreadline -L$(HOME)/.brew/opt/readline/lib -Wall -Wextra -Werror
 LIBFTPRINTF = ft_printf/libftprintf.a 
 
 BLUE = \\033[1;34m

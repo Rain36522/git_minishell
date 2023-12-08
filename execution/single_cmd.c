@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:07 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/08 09:28:28 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 10:03:14 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	fork_not_builtin(char **tab, t_data *data)
 		waitpid(data->pid, &i, 0);
 		if (WEXITSTATUS(i) != 0)
 		{
-			ft_error_child(i, tab, NULL, NULL);
+			ft_error_child(i, NULL, NULL, NULL);
 			return (1);
 		}	
 	}
