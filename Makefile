@@ -6,7 +6,7 @@
 #    By: pudry <pudry@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 09:01:54 by pudry             #+#    #+#              #
-#    Updated: 2023/12/08 09:20:38 by pudry            ###   ########.fr        #
+#    Updated: 2023/12/08 09:30:05 by pudry            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ REBOOT   = "			              |   |  ${RED}C:\\> REBOOT                          
 TEXT_7   = "			              |   |  ${GREEN}C:\\> Starting minishell                ${WHITE}|    |"
 TEXT_8   = "			              |   |  ${GREEN}C:\\> Starting minishell \033[1mSUCCESS\033[0m        ${WHITE}|    |\033[F"
 
-SRC_BUILT_2 = cd_cmd.c cwd.c env_cmd.c exit_cmd_2.c export_cmd2.c username.c check_quotes.c echo_cmd.c exit_cmd.c export_cmd.c unset_cmd.c ft_utils_builtin.c
+SRC_BUILT_2 = cd_cmd.c cwd.c env_cmd.c exit_cmd_2.c export_cmd2.c username.c check_quotes.c echo_cmd.c exit_cmd.c export_cmd.c \
+				unset_cmd.c ft_utils_builtin.c
 SRC_BUILT = $(addprefix builtin/,$(SRC_BUILT_2))
 
 SRC_UTILS = main.c utils/ft_utils.c utils/ft_utils2.c utils/ft_utils3.c utils/ft_utils4.c utils/signaux.c
@@ -59,7 +60,7 @@ SRC_CMD = $(addprefix get_cmd/,$(SRC_CMD_2))
 
 SRC_GNL = gnl/get_next_line_utils.c gnl/get_next_line.c
 
-SRC_MUL_PIPE_2 = child_process.c execute_cmd.c handle_error.c pipex.c ft_make_redir.c single_cmd.c builtin_checker.c
+SRC_MUL_PIPE_2 = child_process.c execute_cmd.c handle_error.c pipex.c ft_make_redir.c single_cmd.c single_cmd2.c builtin_checker.c
 SRC_MUL_PIPE = $(addprefix execution/,$(SRC_MUL_PIPE_2))
 
 all : header

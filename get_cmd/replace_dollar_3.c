@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:12:01 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/05 14:28:39 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:33:19 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,46 @@ void	check_join(t_dlist *list, char *str)
 		}
 		ft_error_ptr(12, 1, NULL, NULL);
 	}
+}
+
+void	if_question_mark(t_dlist *l, t_data *data)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = ft_itoa(data->imem_exit);
+	while (tmp[i])
+	{
+		l->str = dollar_join_char(l->str, tmp[i]);
+		i++;
+	}
+	tmp = ft_free_str(tmp);
+	l->i++;
+}
+
+char	*dollar_join_char(char *str, char c)
+{
+	int		len;
+	int		i;
+	char	*new;
+
+	len = 0;
+	if (str)
+		len = ft_strlen(str);
+	i = 0;
+	new = malloc(sizeof(char) * len + 2);
+	if (!new)
+		ft_error_ptr(12, 1, NULL, str);
+	while (str && str[i])
+	{
+		new[i] = str[i];
+		i++;
+	}
+	new[i] = c;
+	new[i + 1] = '\0';
+	if (str)
+		free(str);
+	str = NULL;
+	return (new);
 }

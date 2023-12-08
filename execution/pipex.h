@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 22:31:10 by csil              #+#    #+#             */
-/*   Updated: 2023/12/07 17:24:10 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:34:37 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_pipex
 
 # ifndef S_DATA
 #  define S_DATA
+
 typedef struct s_data
 {
 	char			**env;

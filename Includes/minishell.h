@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:21:32 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 17:24:07 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:34:49 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 # ifndef S_DATA
 #  define S_DATA
+
 typedef struct s_data
 {
 	char			**env;
@@ -133,6 +134,7 @@ int		ft_array_len(char **a);
 // output
 int		pipex(int argc, char **argv, t_data *data);
 t_data	*single_cmd(char *str, t_data *data);
+void	no_final_path(char **tab, char **paths, char *final_path);
 
 // Temp
 void	ft_put_array(char **array);
@@ -148,6 +150,8 @@ void	join_char(t_dlist *l, char c);
 void	list_init(t_dlist *list, char *str, int state);
 void	state_1(t_dlist *l);
 char	*replace_dollar(char *str, int state, t_data *data);
+void	if_question_mark(t_dlist *l, t_data *data);
+char	*dollar_join_char(char *str, char c);
 
 // free the str and put him null
 void	free_str_and_null(char *str);

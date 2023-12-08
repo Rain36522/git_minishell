@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 20:35:26 by csil              #+#    #+#             */
-/*   Updated: 2023/12/08 09:12:59 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:34:43 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # ifndef S_DATA
 #  define S_DATA
+
 typedef struct s_data
 {
 	char			**env;

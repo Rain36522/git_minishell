@@ -1,40 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   single_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 18:22:39 by pudry             #+#    #+#             */
-/*   Updated: 2023/11/22 15:25:50 by pudry            ###   ########.fr       */
+/*   Created: 2023/12/08 09:28:16 by pudry             #+#    #+#             */
+/*   Updated: 2023/12/08 09:28:45 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		i = 1;
+#include "../Includes/minishell.h"
 
-#include "Includes/minishell.h"
-#include <stdio.h>
-# include <signal.h>
-
-void	sig_ctrl_c()
+void	no_final_path(char **tab, char **paths, char *final_path)
 {
-	printf("signal\n");
-	write(0, "\n", 1);
-	i = 0;
-}
-
-
-int	main(void)
-{
-	char	*str;
-
-	signal(SIGINT, sig_ctrl_c);
-
-	while (i)
-	{
-		str = readline("> ");
-		printf("str : %s\n", str);
-	}
-	printf("function exit\n");
-	return (0);	
+	ft_putstr_fd(tab[0], 2);
+	ft_free_array(paths);
+	ft_error_int(127, 0, tab, final_path);
 }

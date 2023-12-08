@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:07 by cduffaut          #+#    #+#             */
-/*   Updated: 2023/12/08 09:20:00 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 09:28:28 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ char	*join_path(char **paths, char **args, int i)
 		i++;
 	}
 	return (NULL);
-}
-
-static void	no_final_path(char **tab, char **paths, char *final_path)
-{
-	ft_putstr_fd(tab[0], 2);
-	ft_free_array(paths);
-	ft_error_int(127, 0, tab, final_path);
 }
 
 void	not_builtin(char **tab, char **envp)
