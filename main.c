@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/08 09:18:27 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 11:02:11 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	execute(t_acmd *cmd_data, t_data *data)
 	if (cmd_data->array[1])
 	{
 		data->iexit = pipex(cmd_data->isize, cmd_data->array, data);
-		ft_print_pipe_out(cmd_data->fd_pipe[0]);
+		close(cmd_data->fd_pipe[0]);
 	}
 	else
 	{

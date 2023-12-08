@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:22:52 by csil              #+#    #+#             */
-/*   Updated: 2023/12/07 14:17:08 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 11:01:08 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	child_process(char **argv, t_data *data, t_pipex l)
 		if (l.index == 0)
 			ft_dup2(&l, l.input, l.pipe[l.index * 2 + 1]);
 		else if (l.index == (l.cmd_nbr - 1))
-			ft_dup2(&l, l.pipe[l.index * 2 - 2], l.output);
+			ft_dup2(&l, l.pipe[l.index * 2 - 2], 1);
 		else
 			ft_dup2(&l, l.pipe[l.index * 2 - 2], l.pipe[l.index * 2 + 1]);
 		l.cmd_args = scmd_aformatting(argv[l.index + 1]);
