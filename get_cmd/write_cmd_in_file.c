@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:00:04 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 14:15:32 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 08:45:12 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,13 @@ static int	ft_is_redir(char *s)
 
 static void	ft_put_redir_in_file(char **array, int itype, int i, int fd)
 {
-	while (array[i] && !(array[i][0] == '|' && array[i][1] == '\0'))
+	int	j;
+
+	if (itype == 2)
+		j = 1;
+	else
+		j = -1;
+	while (i >= 0 && array[i] && !(array[i][0] == '|' && array[i][1] == '\0'))
 	{
 		if (ft_is_redir(array[i]) == itype)
 		{
@@ -41,9 +47,10 @@ static void	ft_put_redir_in_file(char **array, int itype, int i, int fd)
 			ft_putstr_fd(" ", fd);
 			ft_putstr_fd(array[i + 1], fd);
 			ft_putstr_fd("\n", fd);
-			i ++;
+			if (j > 0)
+				i += j;
 		}
-		i ++;
+		i += j;
 	}
 }
 
@@ -52,7 +59,6 @@ static void	ft_put_cmd_in_file(char **array, int i, int fd)
 	int	j;
 	int	k;
 
-	j = i;
 	k = 0;
 	ft_put_redir_in_file(array, 2, i, fd);
 	while (array[i] && array[i][0] != '|')
@@ -72,6 +78,7 @@ static void	ft_put_cmd_in_file(char **array, int i, int fd)
 	}
 	if (k)
 		ft_putchar_fd('\n', fd);
+	j = i - 1;
 	ft_put_redir_in_file(array, 1, j, fd);
 }
 

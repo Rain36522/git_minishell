@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:43 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 17:34:25 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 08:40:36 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int argc, char **argv, char **env)
 	data = (t_data){};
 	argv += argc;
 	data.env = dup_env(env);
+	add_history("cat Makefile >a >b >c");
 	signal(SIGINT, parent_signal);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)

@@ -6,7 +6,7 @@
 /*   By: pudry <pudry@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:57:36 by pudry             #+#    #+#             */
-/*   Updated: 2023/12/07 16:11:04 by pudry            ###   ########.fr       */
+/*   Updated: 2023/12/08 08:29:24 by pudry            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int	ft_strcmp_egal(char *s1, char *s2)
 	i = 0;
 	while (s1[i] && s1[i] == s2[i] && s1[i] != '=')
 		i ++;
-	if ((s1[i] == '=' && s2[i] == '=') || (!s1 && !s2))
+	if ((s1[i] == '=' && s2[i] == '=') || (!s1[i] && !s2[i]))
+		return (1);
+	else if ((!s1[i] && s2[i] == '=') || (s1[i] == '=' && !s2[i]))
 		return (1);
 	return (0);
 }
@@ -47,9 +49,16 @@ static int	ft_check_arg(char **acmd)
 	while (acmd[i])
 	{
 		j = 0;
+		if (acmd[i][0] == '=')
+			return (ft_error_int(201, 0, acmd, NULL));
 		while (acmd[i][j] && ft_isdigit(acmd[i][j]))
 			j ++;
-		if(!acmd[i][j])
+		if(!acmd[i][j] || acmd[i][j] == '=')
+			return (ft_error_int(201, 0, acmd, NULL));
+		j = 0;
+		while (acmd[i][j] && ft_isalnum(acmd[i][j]))
+			j ++;
+		if (acmd[i][j] && acmd[i][j] != '=')
 			return (ft_error_int(201, 0, acmd, NULL));
 		i ++;
 	}
